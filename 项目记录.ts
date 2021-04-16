@@ -12,8 +12,13 @@
   4.commitlint
     npm i -D @commitlint/config-conventional @commitlint/cli
     "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"    提交前检查 commit 标题
+  5.别名
+    paths.js
+    craco.config.js webpack.alias
+  6.less
+    npm i -D craco-less
 
-3.视图结构 路由 style 
+3.结构 视图 路由 样式 
 4. 数据结构 store mock 连通mock数据
 5.antd layout 
  */

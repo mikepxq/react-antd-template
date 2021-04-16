@@ -24,5 +24,6 @@ module.exports = {
   plugins: ["react", "@typescript-eslint", "prettier"],
   rules: {
     "prettier/prettier": ["error", prettier], //同步规则
+    "@typescript-eslint/explicit-module-boundary-types": ["warn"], //同步规则到本地运行环境
   },
 };
