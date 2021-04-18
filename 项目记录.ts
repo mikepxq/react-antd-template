@@ -26,6 +26,20 @@
 5.antd layout 
  */
 
+/**commitlint
+build
+ci
+chore
+docs
+feat
+fix
+perf
+refactor
+revert
+style
+test
+ */
+
 /**参照
 vite官网--------- https://www.pipipi.net/vite/
  */
