@@ -20,5 +20,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["./src"]
+  "files": ["./src/typings/index.d.ts"],
+  "include": ["./src", "src/views/home/index.tsx"]
 }

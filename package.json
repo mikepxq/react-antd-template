@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "preview": "vite preview",
+    "lint:fix": "eslint --fix --ext  .ts,tsx,js,d.ts src"
   },
   "dependencies": {
     "react": "^17.0.0",

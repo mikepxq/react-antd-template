@@ -20,10 +20,19 @@
     vite.config.ts
   6.less
     npm i -D less
+  7.README.md
 3.搭建项目结构
-  1. 
-4. 数据结构 store mock 连通mock数据
-5.antd layout 
+    1.typings  
+    2.assets
+    3.components
+    4.styles
+    5.views
+    //需要依赖的 数据结构 store mock 连通mock数据
+    6.routes
+    7.store
+    8.api
+      1.mock    
+4.antd layout 
  */
 
 /**commitlint
@@ -41,5 +50,6 @@ test
  */
 
 /**参照
-vite官网--------- https://www.pipipi.net/vite/
+vite官网 ---------https://www.pipipi.net/vite/
+concent官网 ------https://concentjs.github.io/concent-doc/
  */
