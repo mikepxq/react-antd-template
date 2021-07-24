@@ -1,19 +1,21 @@
 {
   "workbench.colorCustomizations": {
-    "activityBar.activeBackground": "#272f57",
-    "activityBar.activeBorder": "#9a4553",
-    "activityBar.background": "#272f57",
-    "activityBar.foreground": "#e7e7e7",
-    "activityBar.inactiveForeground": "#e7e7e799",
-    "activityBarBadge.background": "#9a4553",
+    "activityBar.activeBackground": "#47ccf8",
+    "activityBar.activeBorder": "#d708a4",
+    "activityBar.background": "#47ccf8",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#d708a4",
     "activityBarBadge.foreground": "#e7e7e7",
-    "statusBar.background": "#171c34",
-    "statusBar.foreground": "#e7e7e7",
-    "statusBarItem.hoverBackground": "#272f57",
-    "titleBar.activeBackground": "#171c34",
-    "titleBar.activeForeground": "#e7e7e7",
-    "titleBar.inactiveBackground": "#171c3499",
-    "titleBar.inactiveForeground": "#e7e7e799"
+    "statusBar.background": "#16bef6",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#089fd1",
+    "titleBar.activeBackground": "#16bef6",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#16bef699",
+    "titleBar.inactiveForeground": "#15202b99"
   },
-  "peacock.color": "#171c34"
+  "peacock.color": "#16bef6",
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "cSpell.userWords": ["fetchs", "antd", "commitlint", "craco", "browserslist", "reduxjs", "deving", "mockjs"]
 }

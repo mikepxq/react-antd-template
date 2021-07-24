@@ -1,5 +1,5 @@
-/* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-undef */
 const prettier = require("./.prettierrc.js");
 
 module.exports = {
@@ -21,13 +21,16 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: ["react", "@typescript-eslint", "prettier"],
-
+  plugins: ["react", "react-hooks", "@typescript-eslint", "prettier"],
   rules: {
-    "prettier/prettier": ["error", prettier], //同步规则
-    "@typescript-eslint/explicit-module-boundary-types": "warn", //同步规则到本地运行环境
-    "@typescript-eslint/no-unused-vars": "warn", //同步规则到本地运行环境
-    "@typescript-eslint/no-empty-interface": "warn", //同步规则到本地运行环境
-    "@typescript-eslint/no-empty-function": "warn", //同步规则到本地运行环境
+    "prettier/prettier": ["warn", prettier], //同步规则
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "@typescript-eslint/no-empty-interface": "warn", //空类型
+    "@typescript-eslint/explicit-module-boundary-types": "off", //函数没有返回类型
+    "@typescript-eslint/no-unused-vars": "warn", //没用的变量
+    "react/prop-types": "off", //props 类型验证 过时
+    "@typescript-eslint/no-empty-function": "warn", //空函数
+    "@typescript-eslint/no-explicit-any": "off", //可以 any
   },
 };
