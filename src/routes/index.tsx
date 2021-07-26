@@ -1,7 +1,8 @@
-import Home from "@/views/home";
+import Home from "@/views/home/index";
 import Login from "@/views/login";
 import Page404 from "@/views/page404";
 import ConsoleLayout from "@/console-layout";
+import Demo from "@/views/demo";
 import { useState } from "react";
 import React from "react";
 
@@ -11,16 +12,31 @@ import React from "react";
 export const syncRoutes: RouteItem[] = [
   {
     path: "/",
-    component: Home,
+    component: ConsoleLayout,
     exact: true,
+    redirect: "/home",
+  },
+  {
+    path: "/home",
+    name: "home",
+    exact: true,
+    component: Home,
   },
   {
     path: "/login",
+    name: "login",
     exact: true,
     component: Login,
   },
   {
+    path: "/demo",
+    name: "demo",
+    exact: true,
+    component: Demo,
+  },
+  {
     path: "/404",
+    name: "404",
     exact: true,
     component: Page404,
   },

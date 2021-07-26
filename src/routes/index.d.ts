@@ -10,4 +10,5 @@ interface RouteItem {
   component?: React.FC<RouteProps>;
   redirect?: string;
   exact?: boolean;
+  name?: string;
 }

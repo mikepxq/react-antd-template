@@ -2,4 +2,4 @@
 /** 全局视图props */
 type ViewsProps<T = any> = {
   className?: string;
-} & { [key in keyof T]: any };
+} & { [key in keyof T]: T[key] };

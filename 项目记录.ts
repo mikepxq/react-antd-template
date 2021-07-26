@@ -48,7 +48,9 @@
     npm i -D @types/react-redux
   3.apis
     npm i axios
-4.ui库 antd 
+4.ui库 antd
+  1.antd
+    npm i antd
 5.基础功能
   1.登录 权限管理 路由404 侧边栏
  */

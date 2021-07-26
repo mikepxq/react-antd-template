@@ -1,11 +1,14 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
+import RouteBefore from "./route-before";
 interface Props {
   routes: RouteItem[];
   className?: string;
 }
 const RouteView: React.FC<Props> = (props) => {
   const { routes } = props;
+  const location = useLocation();
+  console.log("[location ]", location);
   //render
   return (
     <Switch>
@@ -14,7 +17,7 @@ const RouteView: React.FC<Props> = (props) => {
           path={route.path}
           exact={route.exact}
           key={`route-${index}`}
-          render={(rProps) => route.component && <route.component {...rProps} className={props.className} />}></Route>
+          render={() => <RouteBefore to={route} className={props.className} />}></Route>
       ))}
     </Switch>
   );
