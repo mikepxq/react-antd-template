@@ -39,7 +39,10 @@
       npm i -D mockjs
       npm i --save-dev @types/mockjs
     4.环境变量
-
+  5.分析大小
+    npm i -D webpack-bundle-analyzer
+  6.环境变量
+    npm i -D cross-env
 3.依赖 项目基础结构 routes store...
   1.routes 
     npm i react-router-dom @types/react-router-dom
@@ -58,6 +61,8 @@
     npm i antd
   2.国际化
     1.import zhCN from 'antd/lib/locale/zh_CN';
+  3.替换 moment
+    npm i -D antd-dayjs-webpack-plugin
 5.全局功能
   1.layout 侧边栏
   npm install --save @ant-design/icons

@@ -27,6 +27,7 @@
     "dev": "craco  start",
     "start": "craco  start",
     "build": "craco  build",
+    "build:alz": "cross-env ANALYZE=true craco  build",
     "lint-fix": "eslint --fix --ext  .ts,tsx,js,d.ts,less,scss src",
     "prepare": "husky install"
   },
@@ -57,7 +58,9 @@
     "@types/react-redux": "^7.1.18",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.28.1",
+    "antd-dayjs-webpack-plugin": "^1.0.6",
     "craco-less": "^1.18.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
@@ -66,7 +69,8 @@
     "lint-staged": "^10.5.4",
     "mockjs": "^1.1.0",
     "prettier": "^2.3.2",
-    "typescript": "^4.3.4"
+    "typescript": "^4.3.4",
+    "webpack-bundle-analyzer": "^4.4.2"
   },
   "lint-staged": {
     "*.{js,tsx,ts}": "eslint --cache --fix"
