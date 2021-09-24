@@ -1,14 +1,16 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { useUser } from "@/store/user";
+import { useIs404 } from "./hooks";
+// import { useUser } from "@/store/user";
 interface Props {
   to: RouteItem;
   // from: RouteItem;
 }
-const RouteBefore: React.FC<ViewsProps<Props>> = (props) => {
+const RouteBefore: React.FC<ViewProps<Props>> = (props) => {
   const { to } = props;
-  const user = useUser();
-  console.log("[user]", user); //!deving 用户添加 角色字段
+  const { is404 } = useIs404();
+  if (is404) return <Redirect to={{ pathname: "/404" }} />;
+  // console.log("[to]", to);
   if (to.redirect) {
     return <Redirect to={{ pathname: to.redirect }} />;
   }

@@ -25,7 +25,7 @@ module.exports = {
   rules: {
     "prettier/prettier": ["warn", prettier], //同步规则
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": "off", //空数组 为初始
     "@typescript-eslint/no-empty-interface": "warn", //空类型
     "@typescript-eslint/explicit-module-boundary-types": "off", //函数没有返回类型
     "@typescript-eslint/no-unused-vars": "warn", //没用的变量

@@ -1,3 +1,4 @@
+import { patternMap } from "@/model";
 import axios from "axios";
 const axiosInstance = axios.create({
   baseURL: "",
@@ -15,7 +16,11 @@ axiosInstance.interceptors.request.use(
 /**响应拦截 */
 axiosInstance.interceptors.response.use(
   (res) => {
+    if (patternMap.mockApi.test(res.config.url || "")) {
+      console.log("[res.data]", res.data);
+    }
     //减少一层级
+
     return res.data;
   },
   (err) => {

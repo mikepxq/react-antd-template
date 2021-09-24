@@ -22,8 +22,8 @@
     "jsx": "react-jsx"
   },
   "files": [
-    "./typing/index.d.ts",
-    "./src/store/index.d.ts",
+    "./typings/index.d.ts",
+    "./typings/antd.d.ts",
     "./src/hooks/react-redux.d.ts"
   ],
   "include": [

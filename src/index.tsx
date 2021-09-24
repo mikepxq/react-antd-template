@@ -3,23 +3,20 @@ import ReactDOM from "react-dom";
 import "@/styles/index.less";
 import App from "./views/App";
 import reportWebVitals from "./reportWebVitals";
-import * as Routes from "@/routes/index";
-import { BrowserRouter as Router } from "react-router-dom";
 import * as ReactRedux from "react-redux";
 import store from "./store";
+import * as Routes from "@/routes/index";
 if (process.env.REACT_APP_MOCK === "true") {
   import("./mock");
 }
 ReactDOM.render(
-  <React.StrictMode>
-    <ReactRedux.Provider store={store}>
-      <Routes.Provider>
-        <Router>
-          <App />
-        </Router>
-      </Routes.Provider>
-    </ReactRedux.Provider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <ReactRedux.Provider store={store}>
+    <Routes.Provider>
+      <App />
+    </Routes.Provider>
+  </ReactRedux.Provider>,
+  // </React.StrictMode>
   document.getElementById("app")
 );
 

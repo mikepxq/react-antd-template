@@ -1,8 +1,10 @@
 import React from "react";
-interface Props {}
-const App: React.FC<ViewsProps> = (props) => {
-  //const {  } = props
+interface Props {
+  [key: string]: any;
+}
+const App: React.FC<ViewProps<Props>> = (props) => {
+  const { className } = props;
   //render
-  return <div>app</div>;
+  return <div className={`${className}`}>app</div>;
 };
 export default App;

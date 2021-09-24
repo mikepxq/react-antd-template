@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, useLocation } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import RouteBefore from "./route-before";
 interface Props {
   routes: RouteItem[];
@@ -7,8 +7,7 @@ interface Props {
 }
 const RouteView: React.FC<Props> = (props) => {
   const { routes } = props;
-  const location = useLocation();
-  console.log("[location ]", location);
+  // console.log("[location ]", location, m);
   //render
   return (
     <Switch>
@@ -17,6 +16,7 @@ const RouteView: React.FC<Props> = (props) => {
           path={route.path}
           exact={route.exact}
           key={`route-${index}`}
+          // bug 能出来，但是报错 嵌套404有问题
           render={() => <RouteBefore to={route} className={props.className} />}></Route>
       ))}
     </Switch>

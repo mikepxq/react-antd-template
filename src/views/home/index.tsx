@@ -6,9 +6,9 @@ import "./style.less";
 import { useRoutes } from "@/routes";
 import { Link } from "react-router-dom";
 
-const Home: React.FC<ViewsProps> = (props) => {
+const Home: React.FC<ViewProps> = (props) => {
   const { className } = props;
-  const { routes } = useRoutes();
+  const { routeList } = useRoutes();
   const user = useUser();
   const { fetchUserInfo } = useUserDispatch();
   //render
@@ -18,7 +18,7 @@ const Home: React.FC<ViewsProps> = (props) => {
         <img src={logo} className="App-logo" alt="logo" />
         <h2>接着开发权限管理</h2>
         <Space>
-          {routes.map((route) => {
+          {routeList.map((route) => {
             return (
               <Link to={route.path} key={route.path}>
                 {route.name}

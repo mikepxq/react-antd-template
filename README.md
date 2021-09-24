@@ -30,3 +30,6 @@ fetchUserInfo()
 reqUserInfo()
 ```
 > 不同层有不同的前缀，这样一下就能知道调用的函数是那里的
+
+## less
+> 为什么使用less？因为antd使用的less。同步ui在动态主题时可以使用全局变量。

@@ -10,10 +10,12 @@
     npm i -D prettier
     npm i -D eslint-plugin-prettier
     npm i -D eslint-config-prettier
+    npm i -D @typescript-eslint/parser
+    npm i -D @typescript-eslint/eslint-plugin
     //
     
   2.提交检查 修复
-    npx husky-init && npm install
+    npx husky-init & npm install
       "lint-staged": {
         "*.{js,tsx,ts}": "eslint --cache --fix"
       }
@@ -39,10 +41,13 @@
     4.环境变量
 
 3.依赖 项目基础结构 routes store...
-  1.routes
+  1.routes 
     npm i react-router-dom @types/react-router-dom
     npm i react-router-dom
     npm i @types/react-router-dom
+  2.栏加载
+    npm i nprogress
+    npm i -D @types/nprogress
   2.store
     npm install @reduxjs/toolkit react-redux
     npm i -D @types/react-redux
@@ -51,6 +56,9 @@
 4.ui库 antd
   1.antd
     npm i antd
-5.基础功能
-  1.登录 权限管理 路由404 侧边栏
+5.全局功能
+  1.layout 侧边栏
+  npm install --save @ant-design/icons
+  
+  2.登录 权限管理 路由404
  */

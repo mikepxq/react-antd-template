@@ -24,5 +24,20 @@ declare type ReqDataUserInfo = {
 declare type ResDataUserInfo = {
   username: string;
 };
+interface TableItem {
+  sn?: number; //序号
+}
 
 /************************************ 全局 end********************************************** */
+/************************************ 权限管理 ********************************************** */
+type ReqDataAuthManageList = {
+  roleName?: string;
+};
+interface AuthManageItem extends TableItem {
+  id: number;
+}
+/** 获取权限管理列表 响应数据 */
+interface ResAuthManageList {
+  list: AuthManageItem[];
+}
+/************************************ 权限管理 end********************************************** */
