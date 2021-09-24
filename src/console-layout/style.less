@@ -14,16 +14,22 @@
         padding: 0 20px;
         display: flex;
         align-items: center;
-        .icon {
-          font-size: 20px;
-          &.collapsed {
-            transform: rotateZ(180deg);
+        justify-content: space-between;
+        .left {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          .icon {
+            font-size: 20px;
+            &.collapsed {
+              transform: rotateZ(180deg);
+            }
           }
-        }
-        .bread-crumbs {
-          margin-left: 10px;
-          [class*="ant-breadcrumb"] {
-            vertical-align: middle;
+          .bread-crumbs {
+            margin-left: 10px;
+            [class*="ant-breadcrumb"] {
+              vertical-align: middle;
+            }
           }
         }
       }
