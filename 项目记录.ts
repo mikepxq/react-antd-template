@@ -56,9 +56,10 @@
 4.ui库 antd
   1.antd
     npm i antd
+  2.国际化
+    1.import zhCN from 'antd/lib/locale/zh_CN';
 5.全局功能
   1.layout 侧边栏
   npm install --save @ant-design/icons
-  
   2.登录 权限管理 路由404
  */

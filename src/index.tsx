@@ -6,16 +6,20 @@ import reportWebVitals from "./reportWebVitals";
 import * as ReactRedux from "react-redux";
 import store from "./store";
 import * as Routes from "@/routes/index";
+import { ConfigProvider } from "antd";
+import zhCN from "antd/lib/locale/zh_CN";
 if (process.env.REACT_APP_MOCK === "true") {
   import("./mock");
 }
 ReactDOM.render(
   // <React.StrictMode>
-  <ReactRedux.Provider store={store}>
-    <Routes.Provider>
-      <App />
-    </Routes.Provider>
-  </ReactRedux.Provider>,
+  <ConfigProvider locale={zhCN}>
+    <ReactRedux.Provider store={store}>
+      <Routes.Provider>
+        <App />
+      </Routes.Provider>
+    </ReactRedux.Provider>
+  </ConfigProvider>,
   // </React.StrictMode>
   document.getElementById("app")
 );
