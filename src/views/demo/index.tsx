@@ -1,19 +1,15 @@
 import ContentMain from "@/console-layout/content-main";
-import React from "react";
-import useModal from "./hooks-modal";
+import React, { Suspense } from "react";
+import { RouteView } from "@/routes";
+import LazySpin from "@/components/lazy-spin";
 // interface Props {}
-const Demo: React.FC<ViewProps> = () => {
-  const DemoButton = useModal();
-
+const Demo: React.FC<ViewProps> = (props) => {
   //render
   return (
     <ContentMain className="demo-page">
-      <DemoButton.Button active={"点击试试"}>点击试试</DemoButton.Button>
-      <DemoButton.Button active={"点击试试1"}>点击试试1</DemoButton.Button>
-      <DemoButton.Button active={"点击试试2"}>点击试试2</DemoButton.Button>
-      <DemoButton.Button active={"点击试试3"}>点击试试3</DemoButton.Button>
-
-      <DemoButton.Modal></DemoButton.Modal>
+      <Suspense fallback={<LazySpin />}>
+        <RouteView routes={props.to?.children || []}></RouteView>
+      </Suspense>
     </ContentMain>
   );
 };

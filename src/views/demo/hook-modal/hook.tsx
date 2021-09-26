@@ -20,7 +20,7 @@ const useModal = () => {
   const _Modal = useRef<React.FC>((props) => {
     return (
       <Modal
-        title="我是一个modal"
+        title="我是一个hook modal"
         visible={isShowRef.current}
         // onOk={() => {}}
         onCancel={() => {

@@ -59,35 +59,52 @@ export const consoleRoute: RouteItem = {
       path: "/console/doing",
       name: "doing",
       isAuth: false,
-      component: react.lazy(async () => {
-        await sleep(2);
-        return import("@/views/doing");
-      }),
+      component: react.lazy(async () => import("@/views/doing")),
       icon: UserOutlined,
     },
     {
-      path: "/console/nested",
-      name: "嵌套",
-      component: react.lazy(() => import("@/views/nested/index")),
+      path: "/console/demo",
+      name: "demo",
+      component: React.lazy(() => import("@/views/demo/index")),
       icon: UserOutlined,
       children: [
         {
-          path: "/console/nested/nested-1",
-          name: "嵌套-1",
-          component: react.lazy(() => import("@/views/nested/nested-1")),
+          path: "/console/demo/hook-modal",
+          name: "hook-modal",
+          component: React.lazy(() => import("@/views/demo/hook-modal/index")),
           icon: UserOutlined,
         },
         {
-          path: "/console/nested/nested-2",
-          name: "嵌套-2",
-          component: react.lazy(async () => {
-            await sleep();
-            return import("@/views/nested/nested-2");
-          }),
+          path: "/console/demo/hook-log",
+          name: "hook-log",
+          component: React.lazy(() => import("@/views/demo/hook-log")),
           icon: UserOutlined,
         },
       ],
     },
+    // {
+    //   path: "/console/nested",
+    //   name: "嵌套",
+    //   component: react.lazy(() => import("@/views/nested/index")),
+    //   icon: UserOutlined,
+    //   children: [
+    //     {
+    //       path: "/console/nested/nested-1",
+    //       name: "嵌套-1",
+    //       component: react.lazy(() => import("@/views/nested/nested-1")),
+    //       icon: UserOutlined,
+    //     },
+    //     {
+    //       path: "/console/nested/nested-2",
+    //       name: "嵌套-2",
+    //       component: react.lazy(async () => {
+    //         await sleep();
+    //         return import("@/views/nested/nested-2");
+    //       }),
+    //       icon: UserOutlined,
+    //     },
+    //   ],
+    // },
     {
       path: "/console/auth-manage",
       name: "权限管理",
@@ -102,7 +119,7 @@ export const consoleRoute: RouteItem = {
 export const asyncRoutes: RouteItem[] = [consoleRoute];
 
 import { createProvider } from "./hooks";
-import { sleep } from "@/utils";
+import React from "react";
 export const Provider = createProvider([...syncRoutes, ...asyncRoutes, defaultRoute]);
 export { useRoutes, useRoutesFn, useIs404 } from "./hooks";
 
