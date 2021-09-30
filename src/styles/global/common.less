@@ -1,10 +1,18 @@
 //common
-#body{
-
+#body {
   .position-center {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+  // 整个滚动条
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  // — 滚动条上的滚动滑块.
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
   }
 }

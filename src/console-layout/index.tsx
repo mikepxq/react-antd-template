@@ -14,7 +14,7 @@ const ConsoleLayout: React.FC<ViewProps> = (props) => {
       {/*  */}
       <Aside collapsed={collapsed} routes={props.to?.children} />
       {/* 容器 */}
-      <Layout.Content className="content">
+      <Layout.Content className="container">
         {/*  */}
         <ContainerHeader
           routes={props.to?.children}
