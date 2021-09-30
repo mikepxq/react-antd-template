@@ -121,6 +121,6 @@ export const asyncRoutes: RouteItem[] = [consoleRoute];
 import { createProvider } from "./hooks";
 import React from "react";
 export const Provider = createProvider([...syncRoutes, ...asyncRoutes, defaultRoute]);
-export { useRoutes, useRoutesFn, useIs404 } from "./hooks";
+export { useRoutes, useRoutesAction, useIs404 } from "./hooks";
 
 export { default as RouteView } from "./route-view";

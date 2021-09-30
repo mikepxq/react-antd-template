@@ -90,7 +90,7 @@ export const useRoutes = (): TypeUseRoutes => {
   return React.useContext(RoutesContext) as TypeUseRoutes;
 };
 
-export const useRoutesFn = () => {
+export const useRoutesAction = () => {
   return React.useContext(SetRoutesContext);
 };
 
