@@ -1,5 +1,5 @@
 import Home from "@/views/home/index";
-import Login from "@/views/login";
+import Login from "@/views/login/index";
 import Page404 from "@/views/page404";
 import ConsoleLayout from "@/console-layout";
 // import Demo from "@/views/demo";

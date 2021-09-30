@@ -41,3 +41,13 @@ interface ResAuthManageList {
   list: AuthManageItem[];
 }
 /************************************ 权限管理 end********************************************** */
+/************************************ 用户登录 ********************************************** */
+type ReqDataLogin = {
+  username: string;
+  password: string;
+};
+interface ResDataLogin {
+  username: string;
+  password: string;
+}
+/************************************ 用户登录 end ********************************************** */
