@@ -99,7 +99,7 @@ export const useIs404 = () => {
   //没有就是404 直接访问子类路由
   return { is404: !routeMap[location.pathname] };
 };
-export const useGetPathnameRoute = () => {
+export const useCurrentRoute = () => {
   const { routeMap } = React.useContext(RoutesContext) as TypeUseRoutes;
   //没有就是404 直接访问子类路由
   return { currentRoute: routeMap[location.pathname] };

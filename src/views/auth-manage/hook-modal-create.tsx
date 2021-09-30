@@ -28,7 +28,6 @@ const useModalCreate = () => {
   const _Modal = useRef<React.FC<ViewProps<ModalProps>>>(() => {
     // props;/
     // const { key } = props;
-    console.log("[isShowRef.current]", isShowRef.current);
     return (
       <Modal
         title="添加角色"

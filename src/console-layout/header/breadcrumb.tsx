@@ -1,4 +1,4 @@
-import { useGetPathnameRoute } from "@/routes/hooks";
+import { useCurrentRoute } from "@/routes/hooks";
 import { Breadcrumb } from "antd";
 
 import React from "react";
@@ -7,7 +7,7 @@ interface Props {
   [key: string]: any;
 }
 const TopNavBreadcrumb: React.FC<ViewProps<Props>> = () => {
-  const { currentRoute } = useGetPathnameRoute(); //当前路由
+  const { currentRoute } = useCurrentRoute(); //当前路由
   currentRoute.breadCrumbRoutes = currentRoute.breadCrumbRoutes || [];
   //render
   return (

@@ -1,5 +1,6 @@
+import { useCurrentRoute } from "@/routes/hooks";
 import { useActionsConsoleLayout, useConsoleLayout } from "@/store/console-layout";
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 interface Props {
   [key: string]: any;
@@ -11,6 +12,10 @@ const TagNav: React.FC<ViewProps<Props>> = (props) => {
   const history = useHistory();
   const { visitedList } = useConsoleLayout();
   const { setVisitedMap } = useActionsConsoleLayout();
+  const { currentRoute } = useCurrentRoute();
+  useEffect(() => {
+    setVisitedMap({ name: currentRoute.name as string, path: currentRoute.path });
+  }, [currentRoute]);
   //render
   return (
     <nav className={`tag-nav ${className}`}>

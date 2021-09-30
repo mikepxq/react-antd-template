@@ -4,8 +4,7 @@ const { Sider } = Layout;
 import { UploadOutlined } from "@ant-design/icons";
 import "./style.less";
 import { useHistory } from "react-router-dom";
-import { useGetPathnameRoute } from "@/routes/hooks";
-import { useActionsConsoleLayout } from "@/store/console-layout";
+import { useCurrentRoute } from "@/routes/hooks";
 
 interface Props {
   collapsed: boolean;
@@ -16,11 +15,10 @@ interface Props {
 const Aside: React.FC<ViewProps<Props>> = (props) => {
   const { collapsed, routes = [] } = props;
   // //路径 面包屑 列表
-  const { currentRoute } = useGetPathnameRoute();
+  const { currentRoute } = useCurrentRoute();
   const breadCrumbRoutePathList = currentRoute.breadCrumbRoutes?.map((route) => route.path);
 
   const history = useHistory();
-  const { setVisitedMap } = useActionsConsoleLayout();
   const getSideMenu = (routes: RouteItem[] = []) => {
     return routes
       .filter((route) => !route.isHidden) //筛选不能显示的
@@ -45,7 +43,6 @@ const Aside: React.FC<ViewProps<Props>> = (props) => {
             key={route.path}
             icon={<UploadOutlined />}
             onClick={() => {
-              setVisitedMap({ path: route.path, name: route.name as string });
               history.push(route.path);
               props.onChange && props.onChange(route);
             }}>
