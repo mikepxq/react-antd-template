@@ -9,5 +9,5 @@ export const reqAuthManageList: ApiFn<ReqDataAuthManageList, ResAuthManageList> 
 /************************************ 权限管理 end********************************************** */
 
 /************************************ 用户登录 ********************************************** */
-export const reqLogin: ApiFn<ReqDataLogin, ResDataLogin> = (data) => requestPost("/api/user/login", data);
+export const reqLogin: ApiFn<ReqDataLogin, ResDataLogin> = (data) => requestPost("/mock/api/user/login", data);
 /************************************ 用户登录 end********************************************** */

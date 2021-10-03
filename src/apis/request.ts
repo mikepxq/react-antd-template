@@ -1,5 +1,7 @@
 import { patternMap } from "@/model";
+import { sleep } from "@/utils";
 import axios from "axios";
+import { ErrorMiddleware } from "./error";
 const axiosInstance = axios.create({
   baseURL: "",
   timeout: 10000,
@@ -15,14 +17,13 @@ axiosInstance.interceptors.request.use(
 );
 /**响应拦截 */
 axiosInstance.interceptors.response.use(
-  (res) => {
+  async (res) => {
     if (patternMap.mockApi.test(res.config.url || "")) {
-      console.log("[res.data]", res.data);
+      await sleep(); //模拟加载时间
+      console.log(`[${res.config.url}]`, "[res.data]", res.data);
     }
     //减少一层级
-    // deving error
-
-    return res.data;
+    return ErrorMiddleware(res.data as ApiRes) as any; //取消axios的检查
   },
   (err) => {
     console.log("err :>> ", err);
@@ -31,10 +32,10 @@ axiosInstance.interceptors.response.use(
      * 就不用 Promise.catch()去捕获错误，因为当错误时，不捕获，不会执行接着的程序。
      * 比如：refForm.value.validate().catch(() => {});
      */
-
-    return Promise.resolve({
+    return ErrorMiddleware({
       code: 7000,
       message: "网络错误",
+      data: undefined,
     });
   }
 );

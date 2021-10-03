@@ -10,9 +10,9 @@ const StepList = [
   { title: "面包屑", description: "容器顶部面包屑" },
   { title: "访问记录tag", description: "明天 tag 状态 需要svg" },
   { title: "容器", description: "统一容器" },
-  { title: "deving", description: "top nav user menu" },
-  { title: "deving", description: "本地后端服务器跑起来" },
   { title: "deving登录页", description: "使用异步动态路由，完成权限管理" },
+  { title: "deving", description: "top nav user menu" },
+  // { title: "deving", description: "本地后端服务器跑起来" },
 ];
 const Doing: React.FC<ViewProps<Props>> = (props) => {
   const { className } = props;

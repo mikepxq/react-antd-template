@@ -1,4 +1,4 @@
-import { reqUserInfo } from "@/apis";
+import { reqLogin, reqUserInfo } from "@/apis";
 import { useAppDispatch, useSelector } from "@/hooks";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -30,6 +30,14 @@ export const useUserDispatch = () => {
   return {
     fetchUserInfo: async (data = { id: 0 }) => {
       const res = await reqUserInfo(data);
+      if (res.code == 200) {
+        dispatch(slice.actions.setUserInfo(res.data));
+      }
+      //留给页面使用
+      return res;
+    },
+    fetchLogin: async (data: ReqDataLogin) => {
+      const res = await reqLogin(data);
       if (res.code == 200) {
         dispatch(slice.actions.setUserInfo(res.data));
       }

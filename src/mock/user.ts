@@ -6,3 +6,6 @@ const user = {
 export const getUserInfo = () => {
   return resFn(user);
 };
+export const reqLogin = () => {
+  return resFn(user);
+};

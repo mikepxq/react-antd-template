@@ -5,21 +5,23 @@ interface Props extends InputProps {
   name?: string; //其他再添加
 }
 /** 默认去除前后空格 */
-const AppInput: React.FC<ViewProps<Props>> = (props) => {
-  const { className = "", onChange, autoComplete, name } = props;
+const AppInputPassword: React.FC<ViewProps<Props>> = (props) => {
+  const { className = "", autoComplete, name, onChange } = props;
   //render
   return (
     <>
       {/* 阻拦浏览器回显 */}
-      {autoComplete == "off" && <input name={name} style={{ position: "fixed", top: -100 }} />}
-      <Input
+      {autoComplete == "off" && (
+        <input type="password" autoComplete={autoComplete} name={name} style={{ position: "fixed", top: -100 }} />
+      )}
+      <Input.Password
         {...props}
         className={className}
         onChange={(e) => {
           e.target.value = e.target.value.trim();
           onChange && onChange(e);
-        }}></Input>
+        }}></Input.Password>
     </>
   );
 };
-export default AppInput;
+export default AppInputPassword;
