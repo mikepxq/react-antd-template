@@ -24,7 +24,7 @@
   "files": [
     "./typings/index.d.ts",
     "./typings/antd.d.ts",
-    "./src/hooks/react-redux.d.ts"
+    "src/store-hooks/react-redux.d.ts"
   ],
   "include": [
     "src"

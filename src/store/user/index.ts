@@ -1,5 +1,5 @@
 import { reqLogin, reqUserInfo } from "@/apis";
-import { useAppDispatch, useSelector } from "@/hooks";
+import { useAppDispatch, useSelector } from "@/store-hooks";
 import { createSlice } from "@reduxjs/toolkit";
 
 type State = {
