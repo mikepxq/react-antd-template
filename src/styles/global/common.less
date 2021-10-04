@@ -15,4 +15,14 @@
     background: #888;
     border-radius: 10px;
   }
+  .clear {
+    &::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+  }
+  .fr {
+    float: right;
+  }
 }

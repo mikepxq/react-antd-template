@@ -80,6 +80,12 @@ export const consoleRoute: RouteItem = {
           component: React.lazy(() => import("@/views/demo/hook-log")),
           icon: UserOutlined,
         },
+        {
+          path: "/console/demo/vs-version",
+          name: "vs-version",
+          component: React.lazy(() => import("@/views/demo/vs-version/index")),
+          icon: UserOutlined,
+        },
       ],
     },
     // {
