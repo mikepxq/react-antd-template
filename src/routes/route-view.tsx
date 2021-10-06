@@ -2,12 +2,14 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import RouteBefore from "./route-before";
 interface Props {
-  routes: RouteItem[];
+  routes?: RouteItem[];
+  to?: RouteItem;
   className?: string;
 }
 const RouteView: React.FC<Props> = (props) => {
-  const { routes } = props;
-  // console.log("[location ]", location, m);
+  let { routes } = props;
+  //兼容语法 两者传一
+  routes = routes || props.to?.children || [];
   //render
   return (
     <Switch>

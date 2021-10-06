@@ -1,6 +1,6 @@
 import AppInput from "@/components/app-input";
 import { patternMap } from "@/model";
-import { Button, Card, Col, Form, Row, Space } from "antd";
+import { Button, Card, Col, Form, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import "./index.less";
 /**
@@ -61,6 +61,7 @@ const VsVersion: React.FC<ViewProps<Props>> = (props) => {
     validator();
   }, []);
   const validator = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const _form = await form.validateFields().catch(() => {});
     if (!_form) return;
     const isLargeWithStart = getIsLargeWithStart(_form.startVersion, _form.endVersion);

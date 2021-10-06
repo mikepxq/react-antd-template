@@ -2,12 +2,14 @@ import { reqLogin, reqUserInfo } from "@/apis";
 import { useAppDispatch, useSelector } from "@/store-hooks";
 import { createSlice } from "@reduxjs/toolkit";
 
-type State = {
-  username: string;
-};
 const initialState = {
-  username: "test",
+  username: "",
+  authList: [] as string[],
+  get isLogin() {
+    return Boolean(this.username);
+  },
 };
+type State = typeof initialState;
 
 export const slice = createSlice({
   name: "user",

@@ -123,10 +123,11 @@ export const consoleRoute: RouteItem = {
  * 异步动态响应式路由
  */
 export const asyncRoutes: RouteItem[] = [consoleRoute];
-
+//
 import { createProvider } from "./hooks";
 import React from "react";
-export const Provider = createProvider([...syncRoutes, ...asyncRoutes, defaultRoute]);
+//asyncRoutes defaultRoute
+export const Provider = createProvider([...syncRoutes]);
 export { useRoutes, useRoutesAction, useIs404 } from "./hooks";
 
 export { default as RouteView } from "./route-view";

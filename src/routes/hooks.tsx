@@ -1,5 +1,6 @@
 import { cloneDeep } from "lodash";
 import React, { useState } from "react";
+import RouteView from "./route-view";
 
 class ModelRoutes {
   static routeMap: Record<string, RouteItem> = {};
@@ -39,6 +40,7 @@ class ModelRoutes {
       }
       ModelRoutes.addRouteToMap(route); //3.路径映射路由，方便后期查找
       if (route.children) {
+        route.component = route.component || RouteView; //如果没有组件就透传
         //4.获得重构后的子路由
         route.children = ModelRoutes.getRouteTreeList(route.children, [], route);
         routeTreeList.push(route); //5.添加到要返回的变量中
