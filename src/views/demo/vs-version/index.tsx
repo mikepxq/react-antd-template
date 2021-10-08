@@ -20,12 +20,11 @@ const getIsLargeWithStart = (start: string, end: string) => {
   const startList = getVersionSplit(start),
     endList = getVersionSplit(end),
     len = startList.length > endList.length ? startList.length : endList.length;
-  let isLargeWithStart = undefined; //
+  let isLargeWithStart = undefined; //默认相等
   // console.log("[]", startList, endList);
   for (let i = 0; i < len; i++) {
     if (Number(startList[i] || 0) == Number(endList[i] || 0)) continue; //一样大的就比较下一个
     if (isLargeWithStart !== undefined) break; //已经有结果，不用再比较
-    // console.log("[]", Number(startList[i] || 0), Number(endList[i] || 0));
     isLargeWithStart = Number(startList[i] || 0) > Number(endList[i] || 0);
   }
   return isLargeWithStart;

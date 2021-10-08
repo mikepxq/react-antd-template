@@ -23,5 +23,15 @@
   },
   "peacock.color": "#16bef6",
   "typescript.tsdk": "node_modules\\typescript\\lib",
-  "cSpell.userWords": ["fetchs", "antd", "commitlint", "craco", "browserslist", "reduxjs", "deving", "mockjs"]
+  "cSpell.userWords": [
+    "fetchs",
+    "antd",
+    "commitlint",
+    "craco",
+    "nprogress",
+    "browserslist",
+    "reduxjs",
+    "deving",
+    "mockjs"
+  ]
 }

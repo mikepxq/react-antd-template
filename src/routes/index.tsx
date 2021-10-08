@@ -13,7 +13,6 @@ import { UserOutlined } from "@ant-design/icons";
 export const syncRoutes: RouteItem[] = [
   {
     path: "/",
-    component: ConsoleLayout,
     exact: true,
     redirect: "/console",
   },
@@ -127,7 +126,6 @@ export const asyncRoutes: RouteItem[] = [consoleRoute];
 import { createProvider } from "./hooks";
 import React from "react";
 //asyncRoutes defaultRoute
-export const Provider = createProvider([...syncRoutes]);
+export const Provider = createProvider([...syncRoutes, defaultRoute]);
 export { useRoutes, useRoutesAction, useIs404 } from "./hooks";
-
 export { default as RouteView } from "./route-view";
