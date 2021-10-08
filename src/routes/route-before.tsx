@@ -18,7 +18,7 @@ const RouteBefore: React.FC<ViewProps<Props>> = (props) => {
   /**1.直接进入的 */
   useEffect(() => {
     //如果是白名单 并且有组件直接显示页面
-    if (whitelist.includes(to.path) && to.component) {
+    if ((whitelist.includes(to.path) && to.component) || (isLogin && to.component)) {
       NProgress.done();
     }
   }, []);
@@ -40,7 +40,9 @@ const RouteBefore: React.FC<ViewProps<Props>> = (props) => {
   const { is404 } = useIs404();
 
   //根据条件 返回视图层
-  if (to.redirect && whitelist.includes(to.redirect)) return <Redirect to={{ pathname: to.redirect }} />;
+  if ((to.redirect && isLogin) || (to.redirect && whitelist.includes(to.redirect))) {
+    return <Redirect to={{ pathname: to.redirect }} />;
+  }
   if (!to.component || isToLogin) return <></>;
   // console.log("[is404]", is404);
   if (is404) return <Redirect to={{ pathname: "/404" }} />;

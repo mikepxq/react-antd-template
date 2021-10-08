@@ -3,7 +3,7 @@ import { useAppDispatch, useSelector } from "@/store-hooks";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  username: "",
+  username: "a",
   authList: [] as string[],
   get isLogin() {
     return Boolean(this.username);

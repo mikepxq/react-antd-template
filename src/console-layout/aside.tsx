@@ -29,7 +29,7 @@ const Aside: React.FC<ViewProps<Props>> = (props) => {
             <Menu.SubMenu
               key={route.path}
               icon={<UploadOutlined />}
-              title={route.name}
+              title={route.title || route.name}
               onTitleClick={() => {
                 props.onChange && props.onChange(route);
               }}>
@@ -46,7 +46,7 @@ const Aside: React.FC<ViewProps<Props>> = (props) => {
               history.push(route.path);
               props.onChange && props.onChange(route);
             }}>
-            {route.name}
+            {route.title || route.name}
           </Menu.Item>
         );
       });

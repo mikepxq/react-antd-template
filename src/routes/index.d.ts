@@ -19,4 +19,5 @@ interface RouteItem {
   icon?: any;
   isAuth?: boolean; //是否参与权限选项。如果父路由是true 子类默认是,除非isAuth=false时。
   isHidden?: boolean; //侧边栏是否隐藏
+  title?: string;
 }

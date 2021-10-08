@@ -112,7 +112,8 @@ export const consoleRoute: RouteItem = {
     // },
     {
       path: "/console/auth-manage",
-      name: "权限管理",
+      name: "auth-manage",
+      title: "权限管理",
       component: react.lazy(() => import("@/views/auth-manage/index")),
       icon: UserOutlined,
     },
@@ -126,6 +127,6 @@ export const asyncRoutes: RouteItem[] = [consoleRoute];
 import { createProvider } from "./hooks";
 import React from "react";
 //asyncRoutes defaultRoute
-export const Provider = createProvider([...syncRoutes, defaultRoute]);
+export const Provider = createProvider([...syncRoutes, ...asyncRoutes, defaultRoute]);
 export { useRoutes, useRoutesAction, useIs404 } from "./hooks";
 export { default as RouteView } from "./route-view";
