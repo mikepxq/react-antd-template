@@ -11,7 +11,7 @@ const AppInput: React.FC<ViewProps<Props>> = (props) => {
   return (
     <>
       {/* 阻拦浏览器回显 */}
-      {autoComplete == "off" && <input name={name} style={{ position: "fixed", top: -100 }} />}
+      {autoComplete == "off" && <input tabIndex={-1} name={name} style={{ position: "fixed", top: -100 }} />}
       <Input
         {...props}
         className={className}

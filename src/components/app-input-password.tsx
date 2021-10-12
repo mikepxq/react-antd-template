@@ -12,7 +12,13 @@ const AppInputPassword: React.FC<ViewProps<Props>> = (props) => {
     <>
       {/* 阻拦浏览器回显 */}
       {autoComplete == "off" && (
-        <input type="password" autoComplete={autoComplete} name={name} style={{ position: "fixed", top: -100 }} />
+        <input
+          tabIndex={-1}
+          type="password"
+          autoComplete={autoComplete}
+          name={name}
+          style={{ position: "fixed", top: -100 }}
+        />
       )}
       <Input.Password
         {...props}

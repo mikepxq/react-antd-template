@@ -12,9 +12,11 @@ interface Props {
 const whitelist = ["/", "/home", "/404", "/login"];
 const RouteBefore: React.FC<ViewProps<Props>> = (props) => {
   const { to } = props;
-  console.log("[to]", to);
+  useEffect(() => {
+    console.log("[to]", to);
+    NProgress.start();
+  }, [to.path]);
 
-  NProgress.start();
   /**1.直接进入的 */
   useEffect(() => {
     //如果是白名单 并且有组件直接显示页面
@@ -25,6 +27,12 @@ const RouteBefore: React.FC<ViewProps<Props>> = (props) => {
 
   /**2.跳转登录页面 */
   const { isLogin } = useUser();
+  //deving 处理直接访问 权限路由
+  useEffect(() => {
+    if (isLogin) {
+      console.log("[on isLogin]");
+    }
+  }, [isLogin]);
   const history = useHistory();
   //路由不在摆明单并且没有登录  或者 重定向路径不在白名单并且没有登录
   const isToLogin =
@@ -44,8 +52,6 @@ const RouteBefore: React.FC<ViewProps<Props>> = (props) => {
     return <Redirect to={{ pathname: to.redirect }} />;
   }
   if (!to.component || isToLogin) return <></>;
-  // console.log("[is404]", is404);
-  if (is404) return <Redirect to={{ pathname: "/404" }} />;
 
   //render
   return <to.component {...props} />;

@@ -3,11 +3,9 @@ import { useAppDispatch, useSelector } from "@/store-hooks";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  username: "a",
-  authList: [] as string[],
-  get isLogin() {
-    return Boolean(this.username);
-  },
+  username: "",
+  authList: undefined as undefined | string[],
+  isLogin: false,
 };
 type State = typeof initialState;
 
@@ -15,8 +13,8 @@ export const slice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUserInfo(state, action) {
-      return { ...state, ...action.payload };
+    setUserInfo(state, { payload }: Action): State {
+      return { ...state, ...payload, isLogin: Boolean(payload.username) };
     },
   },
 });

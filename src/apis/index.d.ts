@@ -48,6 +48,6 @@ type ReqDataLogin = {
 };
 interface ResDataLogin {
   username: string;
-  password: string;
+  authList: string[];
 }
 /************************************ 用户登录 end ********************************************** */
