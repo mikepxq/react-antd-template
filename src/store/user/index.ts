@@ -3,9 +3,9 @@ import { useAppDispatch, useSelector } from "@/store-hooks";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  username: "",
+  username: "d",
   authList: undefined as undefined | string[],
-  isLogin: false,
+  isLogin: true,
 };
 type State = typeof initialState;
 

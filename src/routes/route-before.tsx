@@ -4,12 +4,13 @@ import { useIs404 } from "./hooks";
 import { useUser } from "@/store/user";
 import NProgress from "nprogress";
 import { appNotificationFn } from "@/plugins/antd";
+import { WhitePathList } from "@/routes/index";
 
 interface Props {
   to: RouteItem;
   // from: RouteItem;
 }
-const whitelist = ["/", "/home", "/404", "/login"];
+
 const RouteBefore: React.FC<ViewProps<Props>> = (props) => {
   const { to } = props;
   useEffect(() => {
@@ -20,7 +21,7 @@ const RouteBefore: React.FC<ViewProps<Props>> = (props) => {
   /**1.直接进入的 */
   useEffect(() => {
     //如果是白名单 并且有组件直接显示页面
-    if ((whitelist.includes(to.path) && to.component) || (isLogin && to.component)) {
+    if ((WhitePathList.includes(to.path) && to.component) || (isLogin && to.component)) {
       NProgress.done();
     }
   }, []);
@@ -36,7 +37,7 @@ const RouteBefore: React.FC<ViewProps<Props>> = (props) => {
   const history = useHistory();
   //路由不在摆明单并且没有登录  或者 重定向路径不在白名单并且没有登录
   const isToLogin =
-    (!whitelist.includes(to.path) && !isLogin) || (to.redirect && !whitelist.includes(to.redirect) && !isLogin);
+    (!WhitePathList.includes(to.path) && !isLogin) || (to.redirect && !WhitePathList.includes(to.redirect) && !isLogin);
   useEffect(() => {
     if (!is404 && isToLogin) {
       appNotificationFn.warn({ message: "请登录！" });
@@ -48,7 +49,7 @@ const RouteBefore: React.FC<ViewProps<Props>> = (props) => {
   const { is404 } = useIs404();
 
   //根据条件 返回视图层
-  if ((to.redirect && isLogin) || (to.redirect && whitelist.includes(to.redirect))) {
+  if ((to.redirect && isLogin) || (to.redirect && WhitePathList.includes(to.redirect))) {
     return <Redirect to={{ pathname: to.redirect }} />;
   }
   if (!to.component || isToLogin) return <></>;

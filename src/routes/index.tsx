@@ -117,16 +117,26 @@ export const consoleRoute: RouteItem = {
       component: react.lazy(() => import("@/views/auth-manage/index")),
       icon: UserOutlined,
     },
+    {
+      path: "/console/regular",
+      name: "Regular",
+      title: "正则",
+      component: react.lazy(() => import("@/views/regular/index")),
+      icon: UserOutlined,
+    },
   ],
 };
 /**
  * 异步动态响应式路由
  */
 export const asyncRoutes: RouteItem[] = [consoleRoute];
+export const WhitePathList = syncRoutes.map((item) => item.path);
 //
 import { createProvider } from "./hooks";
 import React from "react";
 //asyncRoutes defaultRoute
-export const Provider = createProvider([...syncRoutes]);
+//[...syncRoutes, ...asyncRoutes, defaultRoute]
+//[...syncRoutes,  defaultRoute]
+export const Provider = createProvider([...syncRoutes, ...asyncRoutes, defaultRoute]);
 export { useRoutes, useRoutesAction, useIs404 } from "./hooks";
 export { default as RouteView } from "./route-view";
