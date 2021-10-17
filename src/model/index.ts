@@ -1,4 +1,5 @@
 /**封装处理元素数据 包括静态变量 */
+export * from "./auth-tree";
 
 /**全局正则 */
 export const patternMap = {
@@ -8,4 +9,3 @@ export const patternMap = {
   alpha_number_: /^[\u4e00-\u9fa5a-zA-Z0-9_]$/,
   appVersion: /^(\d+\.)+\d$/,
 };
-export default {};

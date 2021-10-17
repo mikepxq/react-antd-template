@@ -10,6 +10,7 @@ import "./index.less";
 const Login: React.FC<ViewProps> = (props) => {
   const { className } = props;
   const [form] = Form.useForm<ReqDataLogin>();
+  form.setFieldsValue({ username: "a", password: "a" });
   const [loading, setLoading] = useState(false);
   const { fetchLogin } = useUserDispatch();
   const history = useHistory();

@@ -11,13 +11,14 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     /** */
-    return config;
+    return { ...config, token: localStorage.getItem("token") || "" };
   }
   // (err) => {}
 );
 /**响应拦截 */
 axiosInstance.interceptors.response.use(
   async (res) => {
+    console.log("[res]", res);
     if (patternMap.mockApi.test(res.config.url || "")) {
       await sleep(); //模拟加载时间
       console.log(`[${res.config.url}]`, "[res.data]", res.data);

@@ -22,3 +22,14 @@ export const generatorAuthTreeOptionFromRoutes = (routes: RouteItem[], parent = 
       };
     });
 };
+/** 隐射映射 */
+export const RoleMap = {
+  superAdmin: {
+    text: "超管",
+  },
+  common: {
+    text: "普通会员",
+  },
+};
+/** 角色类型 */
+export type RoleKeys = keyof typeof RoleMap;

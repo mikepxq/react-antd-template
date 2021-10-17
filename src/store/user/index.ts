@@ -1,20 +1,25 @@
 import { reqLogin, reqUserInfo } from "@/apis";
+import { asyncRoutes } from "@/routes";
+import { generatorAuthRouteList } from "@/routes/utils";
 import { useAppDispatch, useSelector } from "@/store-hooks";
 import { createSlice } from "@reduxjs/toolkit";
-
-const initialState = {
-  username: "d",
-  authList: undefined as undefined | string[],
-  isLogin: true,
+type State = {
+  username: string;
+  authList?: string[];
+  token: string;
 };
-type State = typeof initialState;
+const initialState: State = {
+  username: "",
+  authList: undefined,
+  token: localStorage.getItem("token") || "",
+};
 
 export const slice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUserInfo(state, { payload }: Action): State {
-      return { ...state, ...payload, isLogin: Boolean(payload.username) };
+    setUserInfo(state, { payload }: Action<{ username?: string; token?: string; authList?: string[] }>): State {
+      return { ...state, ...payload };
     },
   },
 });
@@ -38,11 +43,18 @@ export const useUserDispatch = () => {
     },
     fetchLogin: async (data: ReqDataLogin) => {
       const res = await reqLogin(data);
-      if (res.code == 200) {
-        dispatch(slice.actions.setUserInfo(res.data));
+      if (res.code != 200) return res; //直接给页面使用
+      localStorage.setItem("token", res.data.token);
+
+      const resUserInfo = await reqUserInfo({ id: res.data.id });
+      if (resUserInfo.code != 200) {
+        dispatch(slice.actions.setUserInfo({ authList: [] })); //[] 不可访问任何权限路由
+        return resUserInfo;
       }
-      //留给页面使用
-      return res;
+      generatorAuthRouteList(resUserInfo.data, asyncRoutes);
+
+      dispatch(slice.actions.setUserInfo({ authList: resUserInfo.data.authList }));
+      return resUserInfo;
     },
   };
 };

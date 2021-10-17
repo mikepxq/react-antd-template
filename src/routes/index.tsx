@@ -137,6 +137,6 @@ import React from "react";
 //asyncRoutes defaultRoute
 //[...syncRoutes, ...asyncRoutes, defaultRoute]
 //[...syncRoutes,  defaultRoute]
-export const Provider = createProvider([...syncRoutes, ...asyncRoutes, defaultRoute]);
+export const Provider = createProvider([...syncRoutes, defaultRoute]);
 export { useRoutes, useRoutesAction, useIs404 } from "./hooks";
 export { default as RouteView } from "./route-view";

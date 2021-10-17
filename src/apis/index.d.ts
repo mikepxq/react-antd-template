@@ -18,11 +18,16 @@ interface ApiData {
 }
 
 /************************************ 全局 ********************************************** */
+
 declare type ReqDataUserInfo = {
   id: string | number;
 };
 declare type ResDataUserInfo = {
   username: string;
+  authList: string[];
+  role: Model.RoleKeys;
+  token: string;
+  id: number;
 };
 interface TableItem {
   sn?: number; //序号
@@ -46,8 +51,6 @@ type ReqDataLogin = {
   username: string;
   password: string;
 };
-interface ResDataLogin {
-  username: string;
-  authList: string[];
-}
+type ResDataLogin = ResDataUserInfo;
+
 /************************************ 用户登录 end ********************************************** */
