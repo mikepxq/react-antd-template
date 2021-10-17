@@ -2,79 +2,86 @@ import { cloneDeep } from "lodash";
 import React, { useState } from "react";
 import RouteView from "./route-view";
 
-class ModelRoutes {
-  static routeMap: Record<string, RouteItem> = {};
-  static routeList: RouteItem[] = [];
-  static getBreadCrumbs(route: RouteItem) {
-    //如果是有层级的路由
-    if (/^\//.test(route.path)) {
-      return route.path
-        .split("/")
-        .slice(1) //第一个是空字符 从第二个开始
-        .map((pathNode) => `/${pathNode}`);
+/**
+ * 重构路由
+ * @param routeList 元素路由数据 修改元数据
+ * @param parent 给子路由绑定父类
+ * @returns
+ */
+/**
+ * 重构路由
+ * @param routeList  元素路由数据 修改元数据
+ * @param routeTreeList 保存路由树状结构
+ * @param parent 给子路由绑定父类
+ * @returns
+ */
+const getRouteTreeList = (routeList: RouteItem[], routeTreeList: RouteItem[] = [], parent?: RouteItem) => {
+  //
+  routeList.forEach((route) => {
+    route.breadCrumbRoutes = [route]; //1 添加当前路由 到 面包屑路由列表
+    route.exact = true; //默认严格匹配
+    if (parent) {
+      route.parent = parent; //2.给子路由绑定父类
+      route.breadCrumbRoutes = parent.breadCrumbRoutes?.concat(route.breadCrumbRoutes); //2.1追加父面包屑到子路由面包屑
     }
-    return []; // 比如 *
-  }
-  static init(routeList: RouteItem[]) {
-    ModelRoutes.routeList = ModelRoutes.getRouteTreeList(cloneDeep(routeList));
-    return ModelRoutes.routeList;
-  }
-  static addRouteToMap(route: RouteItem) {
-    ModelRoutes.routeMap[route.path] = route;
-  }
-  /**
-   * 获得路由隐射
-   * @param routeList 元素路由数据 修改元数据
-   * @param routeMap 路径映射路由，方便后期查找
-   * @param parent 给子路由绑定父类
-   * @returns
-   */
-  static getRouteTreeList(routeList: RouteItem[], routeTreeList: RouteItem[] = [], parent?: RouteItem) {
-    //
-    routeList.forEach((route) => {
-      route.breadCrumbRoutes = [route]; //1 添加当前路由 到 面包屑路由列表
-      route.exact = true; //默认严格匹配
-      if (parent) {
-        route.parent = parent; //2.给子路由绑定父类
-        route.breadCrumbRoutes = parent.breadCrumbRoutes?.concat(route.breadCrumbRoutes); //2.1追加父面包屑到子路由面包屑
-      }
-      ModelRoutes.addRouteToMap(route); //3.路径映射路由，方便后期查找
-      if (route.children) {
-        route.component = route.component || RouteView; //如果没有组件就透传
-        //4.获得重构后的子路由
-        route.children = ModelRoutes.getRouteTreeList(route.children, [], route);
-        routeTreeList.push(route); //5.添加到要返回的变量中
-        return routeTreeList.push({
-          ...route,
-          exact: false,
-          isHidden: true,
-          redirect: undefined,
-          isAuth: false,
-          path: `${route.path}/:content`,
-          name: `${route.name}-content`,
-        });
-      }
+    if (route.children) {
+      route.component = route.component || RouteView; //如果没有组件就透传
+      //4.获得重构后的子路由
+      route.children = getRouteTreeList(route.children, [], route);
       routeTreeList.push(route); //5.添加到要返回的变量中
-    });
-    return routeTreeList;
-  }
-}
-
+      return routeTreeList.push({
+        ...route,
+        exact: false,
+        isHidden: true,
+        redirect: undefined,
+        isAuth: false,
+        path: `${route.path}/:content`,
+        name: `${route.name}-content`,
+      });
+    }
+    routeTreeList.push(route); //5.添加到要返回的变量中
+  });
+  return routeTreeList;
+};
+/**
+ * 路由映射
+ * @param routeList
+ * @param map
+ * @returns
+ */
+const getRoutesMap = (routeList: RouteItem[], map: Record<string, RouteItem> = {}) => {
+  routeList.forEach((route) => {
+    if (route.children) {
+      getRoutesMap(route.children, map);
+    }
+    map[route.path] = route;
+  });
+  return map;
+};
+const initRoutes = (routeList: RouteItem[]) => {
+  const list = getRouteTreeList(cloneDeep(routeList));
+  const map = getRoutesMap(list);
+  return {
+    list,
+    map,
+  };
+};
 /*******************************外部使用********************************************** */
 //1.上下文
 const RoutesContext = React.createContext({});
 const SetRoutesContext = React.createContext({});
 
-export const createProvider = (initRoutes: RouteItem[] = []) => {
+export const createProvider = (routeOptionList: RouteItem[] = []) => {
   //2.上下文挂值
   const Provider: React.FC = (props) => {
-    ModelRoutes.init(initRoutes);
-    const [routeList, _setRoutes] = useState<RouteItem[]>(ModelRoutes.routeList);
-    let routeMap: Record<string, RouteItem> = ModelRoutes.routeMap; //不响应式
+    const { list, map } = initRoutes(routeOptionList);
+
+    const [routeList, _setRoutes] = useState<RouteItem[]>(list);
+    const [routeMap, _setRouteMap] = useState<Record<string, RouteItem>>(map);
     const setRoutes = (routeList: RouteItem[]) => {
-      ModelRoutes.init(routeList);
-      _setRoutes(ModelRoutes.routeList);
-      routeMap = ModelRoutes.routeMap;
+      const { list, map } = initRoutes(routeList);
+      _setRoutes(list);
+      _setRouteMap(map);
     };
 
     return (
