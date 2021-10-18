@@ -2,7 +2,11 @@
   "extends": "./paths.config.json",
   "compilerOptions": {
     "target": "es6",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -23,5 +27,7 @@
     "src/store-hooks/react-redux.d.ts",
     "./src/model/index.d.ts"
   ],
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

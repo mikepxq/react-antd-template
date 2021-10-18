@@ -86,7 +86,7 @@ export const createProvider = (routeOptionList: RouteItem[] = []) => {
 
     return (
       <RoutesContext.Provider value={{ routeList, routeMap }}>
-        <SetRoutesContext.Provider value={setRoutes}>{props.children}</SetRoutesContext.Provider>
+        <SetRoutesContext.Provider value={{ setRoutes }}>{props.children}</SetRoutesContext.Provider>
       </RoutesContext.Provider>
     );
   };
@@ -98,9 +98,9 @@ type TypeUseRoutes = { routeList: RouteItem[]; routeMap: Record<string, RouteIte
 export const useRoutes = (): TypeUseRoutes => {
   return React.useContext(RoutesContext) as TypeUseRoutes;
 };
-
-export const useRoutesAction = () => {
-  return React.useContext(SetRoutesContext);
+type UseRoutesAction = { setRoutes: (routeList: RouteItem[]) => void };
+export const useRoutesAction = (): UseRoutesAction => {
+  return React.useContext(SetRoutesContext) as UseRoutesAction;
 };
 
 export const useIs404 = () => {

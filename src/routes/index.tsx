@@ -21,6 +21,10 @@ export const syncRoutes: RouteItem[] = [
     name: "home",
     exact: true,
     component: Home,
+    // component: React.lazy(async () => {
+    //   await sleep();
+    //   return import("@/views/home/index");
+    // }),
   },
   {
     path: "/login",
@@ -134,6 +138,7 @@ export const WhitePathList = syncRoutes.map((item) => item.path);
 //
 import { createProvider } from "./hooks";
 import React from "react";
+import { sleep } from "@/utils";
 //asyncRoutes defaultRoute
 //[...syncRoutes, ...asyncRoutes, defaultRoute]
 //[...syncRoutes,  defaultRoute]

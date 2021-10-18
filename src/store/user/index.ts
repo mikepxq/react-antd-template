@@ -1,5 +1,5 @@
 import { reqLogin, reqUserInfo } from "@/apis";
-import { asyncRoutes } from "@/routes";
+import { asyncRoutes, defaultRoute, syncRoutes, useRoutesAction } from "@/routes";
 import { generatorAuthRouteList } from "@/routes/utils";
 import { useAppDispatch, useSelector } from "@/store-hooks";
 import { createSlice } from "@reduxjs/toolkit";
@@ -32,6 +32,7 @@ export const actions = slice.actions;
 /** hooks 就是运行时 */
 export const useUserDispatch = () => {
   const dispatch = useAppDispatch();
+  const { setRoutes } = useRoutesAction();
   return {
     fetchUserInfo: async (data = { id: 0 }) => {
       const res = await reqUserInfo(data);
@@ -51,8 +52,9 @@ export const useUserDispatch = () => {
         dispatch(slice.actions.setUserInfo({ authList: [] })); //[] 不可访问任何权限路由
         return resUserInfo;
       }
-      generatorAuthRouteList(resUserInfo.data, asyncRoutes);
-
+      const authRoutes = generatorAuthRouteList(resUserInfo.data, asyncRoutes);
+      //
+      setRoutes([...syncRoutes, ...authRoutes, defaultRoute]);
       dispatch(slice.actions.setUserInfo({ authList: resUserInfo.data.authList }));
       return resUserInfo;
     },
