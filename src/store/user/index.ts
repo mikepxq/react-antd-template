@@ -34,8 +34,8 @@ export const useUserDispatch = () => {
   const dispatch = useAppDispatch();
   const { setRoutes } = useRoutesAction();
   return {
-    fetchUserInfo: async (data = { id: 0 }) => {
-      const res = await reqUserInfo(data);
+    fetchUserInfo: async () => {
+      const res = await reqUserInfo();
       if (res.code == 200) {
         dispatch(slice.actions.setUserInfo(res.data));
       }
@@ -47,7 +47,7 @@ export const useUserDispatch = () => {
       if (res.code != 200) return res; //直接给页面使用
       localStorage.setItem("token", res.data.token);
 
-      const resUserInfo = await reqUserInfo({ id: res.data.id });
+      const resUserInfo = await reqUserInfo();
       if (resUserInfo.code != 200) {
         dispatch(slice.actions.setUserInfo({ authList: [] })); //[] 不可访问任何权限路由
         return resUserInfo;

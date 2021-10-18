@@ -138,7 +138,6 @@ export const WhitePathList = syncRoutes.map((item) => item.path);
 //
 import { createProvider } from "./hooks";
 import React from "react";
-import { sleep } from "@/utils";
 //asyncRoutes defaultRoute
 //[...syncRoutes, ...asyncRoutes, defaultRoute]
 //[...syncRoutes,  defaultRoute]

@@ -7,7 +7,6 @@ const LazyLoading: React.FC<ViewProps<Props>> = () => {
   useEffect(() => {
     Nprogress.start();
     return () => {
-      console.log("[1]", 1);
       Nprogress.done();
     };
   }, []);

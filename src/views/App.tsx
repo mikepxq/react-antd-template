@@ -9,19 +9,29 @@ const App: React.FC = () => {
   const { routeList } = useRoutes();
   console.log("[routes]", routeList);
   const [isInitEnd, setIsInitEnd] = useState(false);
-  useUser();
-  const { fetchLogin } = useUserDispatch();
-  const init = () => {};
-  useEffect(() => {}, []);
+  const { token } = useUser();
+  const { fetchUserInfo } = useUserDispatch();
+  const init = async () => {
+    if (!token) setIsInitEnd(true);
+    await fetchUserInfo();
+    setIsInitEnd(true);
+  };
+  useEffect(() => {
+    console.log("[init]");
+    init();
+  }, []);
   return (
     // deving
     <>
-      <div>init</div>
-      <Suspense fallback={<LazyLoading />}>
-        <Router>
-          <RouteView routes={routeList} className="m-page" />
-        </Router>
-      </Suspense>
+      {isInitEnd ? (
+        <Suspense fallback={<LazyLoading />}>
+          <Router>
+            <RouteView routes={routeList} className="m-page" />
+          </Router>
+        </Suspense>
+      ) : (
+        <div>init</div>
+      )}
     </>
   );
 };
