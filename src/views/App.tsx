@@ -11,28 +11,32 @@ const App: React.FC = () => {
   const [isInitEnd, setIsInitEnd] = useState(false);
   const { token } = useUser();
   const { fetchUserInfo } = useUserDispatch();
+  /**初始数据 */
   const init = async () => {
+    //0. 暂不处理没登录的
     if (!token) setIsInitEnd(true);
+    //1. 获取用户信息（动态权限） 生成路由
     await fetchUserInfo();
     setIsInitEnd(true);
   };
+  //初始
   useEffect(() => {
-    console.log("[init]");
     init();
   }, []);
+  const [isLazyEnd, setIsLazyEnd] = useState(true); //默认不栏加载
+
+  useEffect(() => {
+    if (!isInitEnd || !isLazyEnd) return;
+    //此时初始完，按需引入完
+    const initDom = document.getElementById("init");
+    initDom?.classList.add("initEnd");
+  }, [isInitEnd, isLazyEnd]);
   return (
-    // deving
-    <>
-      {isInitEnd ? (
-        <Suspense fallback={<LazyLoading />}>
-          <Router>
-            <RouteView routes={routeList} className="m-page" />
-          </Router>
-        </Suspense>
-      ) : (
-        <div>init</div>
-      )}
-    </>
+    <Suspense fallback={<LazyLoading onStart={() => setIsLazyEnd(false)} />}>
+      <Router>
+        <RouteView routes={routeList} className="m-page" />
+      </Router>
+    </Suspense>
   );
 };
 export default App;

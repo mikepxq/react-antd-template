@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import "@/styles/index.less";
 import App from "./views/App";
@@ -8,16 +8,20 @@ import store from "./store";
 import * as Routes from "@/routes/index";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/lib/locale/zh_CN";
-if (process.env.REACT_APP_MOCK === "true") {
-  import("./mock");
-}
+
+/**模拟直接访问，获取初始全局数据 */
+const MockEnter: React.FC = () => {
+  const [mockEnd, setMockEnd] = useState(false);
+  useEffect(() => {
+    import("./mock").then(() => setMockEnd(true));
+  }, []);
+  return <>{mockEnd && <App />}</>;
+};
 ReactDOM.render(
   // <React.StrictMode>
   <ConfigProvider locale={zhCN}>
     <ReactRedux.Provider store={store}>
-      <Routes.Provider>
-        <App />
-      </Routes.Provider>
+      <Routes.Provider>{process.env.REACT_APP_MOCK === "true" ? <MockEnter /> : <App />}</Routes.Provider>
     </ReactRedux.Provider>
   </ConfigProvider>,
   // </React.StrictMode>
