@@ -33,12 +33,21 @@ export const actions = slice.actions;
 export const useUserDispatch = () => {
   const dispatch = useAppDispatch();
   const { setRoutes } = useRoutesAction();
+  const resetRoutes = (userInfo: ResDataUserInfo) => {
+    const authRoutes = generatorAuthRouteList(userInfo, asyncRoutes);
+    setRoutes([...syncRoutes, ...authRoutes, defaultRoute]);
+  };
+
   return {
     fetchUserInfo: async () => {
       const res = await reqUserInfo();
-      if (res.code == 200) {
-        dispatch(slice.actions.setUserInfo(res.data));
+      if (res.code != 200) {
+        dispatch(slice.actions.setUserInfo({ authList: [] })); //不为undefined说明加载过， [] 不可访问任何权限路由
+        return res;
       }
+      resetRoutes(res.data);
+      dispatch(slice.actions.setUserInfo(res.data));
+      console.log("[a]");
       //留给页面使用
       return res;
     },
@@ -49,12 +58,10 @@ export const useUserDispatch = () => {
 
       const resUserInfo = await reqUserInfo();
       if (resUserInfo.code != 200) {
-        dispatch(slice.actions.setUserInfo({ authList: [] })); //[] 不可访问任何权限路由
+        dispatch(slice.actions.setUserInfo({ authList: [] })); //不为undefined说明加载过， [] 不可访问任何权限路由
         return resUserInfo;
       }
-      const authRoutes = generatorAuthRouteList(resUserInfo.data, asyncRoutes);
-      //
-      setRoutes([...syncRoutes, ...authRoutes, defaultRoute]);
+      resetRoutes(resUserInfo.data);
       dispatch(slice.actions.setUserInfo({ authList: resUserInfo.data.authList }));
       return resUserInfo;
     },

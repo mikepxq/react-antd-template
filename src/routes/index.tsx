@@ -1,12 +1,11 @@
-import Home from "@/views/home/index";
 import Login from "@/views/login/index";
 import Page404 from "@/views/page404";
 import ConsoleLayout from "@/console-layout";
 // import Demo from "@/views/demo";
 import react from "react";
-
 import { UserOutlined } from "@ant-design/icons";
-
+import { sleep } from "@/utils";
+// import Home from "@/views/home";
 /**
  * 同步路由
  */
@@ -20,11 +19,12 @@ export const syncRoutes: RouteItem[] = [
     path: "/home",
     name: "home",
     exact: true,
-    component: Home,
-    // component: React.lazy(async () => {
-    //   await sleep();
-    //   return import("@/views/home/index");
-    // }),
+    // component: Home,
+    //测试 首屏优化
+    component: React.lazy(async () => {
+      await sleep(5);
+      return import("@/views/home/index");
+    }),
   },
   {
     path: "/login",
@@ -138,6 +138,7 @@ export const WhitePathList = syncRoutes.map((item) => item.path);
 //
 import { createProvider } from "./hooks";
 import React from "react";
+
 //asyncRoutes defaultRoute
 //[...syncRoutes, ...asyncRoutes, defaultRoute]
 //[...syncRoutes,  defaultRoute]
