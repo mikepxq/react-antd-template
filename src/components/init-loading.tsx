@@ -5,7 +5,7 @@ interface Props {
   onStart?: () => void;
   onDone?: () => void;
 }
-const LazyLoading: React.FC<ViewProps<Props>> = () => {
+const InitLoading: React.FC<ViewProps<Props>> = () => {
   const [isLazyEnd, setIsLazyEnd] = useState(true); //默认同步
   useEffect(() => {
     if (isLazyEnd) return;
@@ -28,4 +28,4 @@ const LazyLoading: React.FC<ViewProps<Props>> = () => {
     document.body
   );
 };
-export default LazyLoading;
+export default InitLoading;

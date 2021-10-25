@@ -1,9 +1,8 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { RouteView, useRoutes } from "@/routes";
 import { BrowserRouter as Router } from "react-router-dom";
-import LazyLoading from "@/components/lazy-loading";
 import { useUser, useUserDispatch } from "@/store/user";
-import { Button } from "antd";
+import InitLoading from "@/components/init-loading";
 
 // 权限 动态路由
 const App: React.FC = () => {
@@ -19,7 +18,6 @@ const App: React.FC = () => {
     //1. 获取用户信息（动态权限） 生成路由
     await fetchUserInfo();
     //同步取消屏保
-
     setIsInitEnd(true);
   };
   //初始
@@ -27,24 +25,15 @@ const App: React.FC = () => {
     init();
   }, []);
   useEffect(() => {
-    init();
     if (!isInitEnd) return;
-    console.log("[2]");
     document.getElementById("init")?.classList.add("initEnd");
   }, [isInitEnd]);
 
   return (
     <>
-      <Button
-        style={{ position: "fixed", zIndex: 1000 }}
-        onClick={() => {
-          document.getElementById("init")?.classList.remove("initEnd");
-        }}>
-        测试
-      </Button>
       {/* 路由初始完 避免异步动态路由直接404 */}
       {isInitEnd && (
-        <Suspense fallback={<LazyLoading />}>
+        <Suspense fallback={<InitLoading />}>
           <Router>
             <RouteView routes={routeList} className="m-page" />
           </Router>
