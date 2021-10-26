@@ -11,15 +11,13 @@ export const generatorAuthTreeOptionFromRoutes = (routes: RouteItem[], parent = 
     .map((route) => {
       const _map = {
         isAuth: route.isAuth === undefined ? parent.isAuth : route.isAuth, //透传父类权限 ，如果有设置用自己的
+        key: parent.key ? `${parent.key}/${route.name}` : route.name,
+        title: route.title || route.name || "",
       } as AuthTreeItem;
       if (route.children) {
         _map.children = generatorAuthTreeOptionFromRoutes(route.children, _map);
       }
-      return {
-        ..._map,
-        key: route.path,
-        title: route.name,
-      };
+      return _map;
     });
 };
 /** 隐射映射 */

@@ -47,7 +47,6 @@ export const useUserDispatch = () => {
       }
       resetRoutes(res.data);
       dispatch(slice.actions.setUserInfo(res.data));
-      console.log("[a]");
       //留给页面使用
       return res;
     },

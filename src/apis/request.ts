@@ -1,4 +1,5 @@
 import { patternMap } from "@/model";
+import { MockApiSleepTime } from "@/model/config";
 import { sleep } from "@/utils";
 import axios from "axios";
 import { ErrorMiddleware } from "./error";
@@ -18,10 +19,10 @@ axiosInstance.interceptors.request.use(
 /**响应拦截 */
 axiosInstance.interceptors.response.use(
   async (res) => {
-    console.log("[res]", res);
+    // console.log("[res]", res);
     if (patternMap.mockApi.test(res.config.url || "")) {
-      await sleep(); //模拟加载时间
-      console.log(`[${res.config.url}]`, "[res.data]", res.data);
+      await sleep(MockApiSleepTime); //模拟加载时间
+      // console.log(`[${res.config.url}]`, "[res.data]", res.data);
     }
     //减少一层级
     return ErrorMiddleware(res.data as ApiRes) as any; //取消axios的检查

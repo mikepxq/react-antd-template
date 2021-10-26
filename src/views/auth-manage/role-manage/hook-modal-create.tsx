@@ -1,12 +1,15 @@
 import { Button, Form, Modal } from "antd";
 import React, { useRef, useState } from "react";
-import FormItemAuthTree from "./components/form-item-auth-tree";
+import FormItemAuthTree from "../components/form-item-auth-tree";
 
 interface ButtonProps {
   [key: string]: any;
 }
 interface ModalProps {
   [key: string]: any;
+}
+interface FormProps {
+  authTree: Antd.TreeCheckedKeys;
 }
 
 const useModalCreate = () => {
@@ -24,7 +27,7 @@ const useModalCreate = () => {
       </Button>
     );
   });
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<FormProps>();
   const _Modal = useRef<React.FC<ViewProps<ModalProps>>>(() => {
     // props;/
     // const { key } = props;
@@ -34,9 +37,13 @@ const useModalCreate = () => {
         visible={isShowRef.current}
         onCancel={() => {
           setIsShow((isShowRef.current = false));
+        }}
+        onOk={() => {
+          const _form = form.getFieldsValue();
+          console.log("[]", _form);
         }}>
         <Form form={form}>
-          <FormItemAuthTree />
+          <FormItemAuthTree name="authTree" />
         </Form>
       </Modal>
     );

@@ -5,13 +5,26 @@ import { generatorAuthTreeOptionFromRoutes } from "@/model/auth-tree";
 
 interface FormOptionAuthTreeProps {
   [key: string]: any;
+  value?: Antd.TreeCheckedKeys;
+  onChange?: (value: Antd.TreeCheckedKeys) => void;
 }
 const FormOptionAuthTree: React.FC<ViewProps<FormOptionAuthTreeProps>> = (props) => {
-  const { className = "" } = props;
+  const { className = "", value = { checkedKeys: [] }, onChange } = props;
   const { routeList } = useRoutes();
   const [treeOption] = useState(generatorAuthTreeOptionFromRoutes(routeList)); //不会每次只需
-  console.log("[treeOption]", treeOption);
-  return <Tree checkable className={className} treeData={treeOption}></Tree>;
+
+  return (
+    <Tree
+      checkedKeys={value.checkedKeys}
+      checkable
+      className={className}
+      treeData={treeOption}
+      //  React.Key[] antd 不兼容
+      onCheck={(checkedKeys: any = [], info: Antd.CheckInfo) => {
+        //tip 什么时候不是数组
+        onChange && onChange({ checkedKeys, halfCheckedKeys: info.halfCheckedKeys || [] });
+      }}></Tree>
+  );
 };
 
 interface Props extends FormProps {
