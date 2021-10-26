@@ -4,7 +4,7 @@ import ConsoleLayout from "@/console-layout";
 // import Demo from "@/views/demo";
 import react from "react";
 import { UserOutlined } from "@ant-design/icons";
-import { sleep } from "@/utils";
+// import { sleep } from "@/utils";
 // import Home from "@/views/home";
 /**
  * 同步路由
@@ -22,7 +22,7 @@ export const syncRoutes: RouteItem[] = [
     // component: Home,
     //测试 首屏优化
     component: React.lazy(async () => {
-      await sleep(5);
+      // await sleep(5);
       return import("@/views/home/index");
     }),
   },

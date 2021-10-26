@@ -28,8 +28,8 @@ const RouteBefore: React.FC<ViewProps<Props>> = (props) => {
     if (to.redirect) return history.replace(to.redirect);
     NProgress.done();
   }, [to.path]);
-
-  if (!to.component) return <></>;
+  //404 防止渲染节点路由
+  if (!to.component || is404) return <></>;
 
   //render
   return <to.component {...props} />;

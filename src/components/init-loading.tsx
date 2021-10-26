@@ -9,7 +9,8 @@ const InitLoading: React.FC<ViewProps<Props>> = () => {
   const [isLazyEnd, setIsLazyEnd] = useState(true); //默认同步
   useEffect(() => {
     if (isLazyEnd) return;
-    console.log("[11111]");
+    //https://zh-hans.reactjs.org/docs/hooks-reference.html#timing-of-effects
+    //isInitEnd 之后处理
     document.getElementById("init")?.classList.remove("initEnd");
   }, [isLazyEnd]);
   useEffect(() => {
