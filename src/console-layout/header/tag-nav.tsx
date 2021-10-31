@@ -2,6 +2,7 @@ import { useCurrentRoute } from "@/router/hooks";
 import { useActionsConsoleLayout, useConsoleLayout } from "@/store/console-layout";
 import React, { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { Tag } from "antd";
 interface Props {
   [key: string]: any;
 }
@@ -19,38 +20,32 @@ const TagNav: React.FC<ViewProps<Props>> = (props) => {
   //render
   return (
     <nav className={`tag-nav ${className}`}>
-      <a className="item " href="/">
-        首页
-      </a>
+      <Tag onClick={() => history.push("/")}> 首页</Tag>
+
       {/* deving */}
       {visitedList.map((route, index) => {
         return (
-          <a className={`item ${location.pathname == route.path ? "active" : ""}`} key={`${route.path}`}>
-            <span
-              onClick={() => {
-                history.push(route.path);
-              }}>
-              {route.name}
-            </span>
-            {/* 从0后的可以删除 */}
-            {index > 0 && (
-              <i
-                className="icon"
-                onClick={() => {
-                  setVisitedMap({ ...route, isDelete: true });
-                  //如果是最后一个，跳转到上一个
-                  if (location.pathname == visitedList[visitedList.length - 1].path) {
-                    return history.push(visitedList[visitedList.length - 2].path); //当前还没删除
-                  }
-                  //如果是当前，跳转到最后一个
-                  if (location.pathname == route.path) {
-                    history.push(visitedList[visitedList.length - 1].path);
-                  }
-                }}>
-                x
-              </i>
-            )}
-          </a>
+          <Tag
+            onClick={() => {
+              history.push(route.path);
+            }}
+            className={`item ${location.pathname == route.path ? "active" : ""}`}
+            key={`${route.path}`}
+            closable={index > 0}
+            onClose={(e) => {
+              e.preventDefault();
+              setVisitedMap({ ...route, isDelete: true });
+              //如果是最后一个，跳转到上一个
+              if (location.pathname == visitedList[visitedList.length - 1].path) {
+                return history.push(visitedList[visitedList.length - 2].path); //当前还没删除
+              }
+              //如果是当前，跳转到最后一个
+              if (location.pathname == route.path) {
+                history.push(visitedList[visitedList.length - 1].path);
+              }
+            }}>
+            {route.title || route.name}
+          </Tag>
         );
       })}
     </nav>

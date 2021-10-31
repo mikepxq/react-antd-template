@@ -1,6 +1,6 @@
 import { useAppDispatch, useSelector } from "@/store-hooks";
 import { createSlice } from "@reduxjs/toolkit";
-type VisitedRouteItem = { path: string; name: string; isDelete?: boolean };
+type VisitedRouteItem = { path: string; title?: string; name: string; isDelete?: boolean };
 const initialState = {
   visitedMap: {} as Record<string, VisitedRouteItem>,
 };
