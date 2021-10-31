@@ -2,7 +2,7 @@ import { MenuFoldOutlined } from "@ant-design/icons";
 import React from "react";
 import TagNav from "./tag-nav";
 import TopNavBreadcrumb from "./breadcrumb";
-import UserMenu from "./user-menu";
+import UserDropdownMenu from "./user-dropdown-menu";
 
 interface Props {
   [key: string]: any;
@@ -25,7 +25,7 @@ const ContainerHeader: React.FC<ViewProps<Props>> = (props) => {
           <TopNavBreadcrumb></TopNavBreadcrumb>
         </div>
         <div className="right">
-          <UserMenu />
+          <UserDropdownMenu />
         </div>
       </section>
 
