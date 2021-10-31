@@ -17,9 +17,9 @@ const TopNavBreadcrumb: React.FC<ViewProps<Props>> = () => {
           return (
             <Breadcrumb.Item key={`${route.path}-index`}>
               {(currentRoute.breadCrumbRoutes as []).length - 1 != index ? (
-                <a href={route.path}>{route.name}</a>
+                <a href={route.path}>{route.title || route.name}</a>
               ) : (
-                route.name
+                route.title || route.name
               )}
             </Breadcrumb.Item>
           );
