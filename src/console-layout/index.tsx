@@ -2,7 +2,7 @@ import React, { Suspense, useState } from "react";
 import { Layout } from "antd";
 import Aside from "./aside";
 import ContainerHeader from "./header";
-import { RouteView } from "@/routes";
+import { RouterView } from "@/router";
 import LazySpin from "@/components/lazy-spin";
 
 const ConsoleLayout: React.FC<ViewProps> = (props) => {
@@ -25,7 +25,7 @@ const ConsoleLayout: React.FC<ViewProps> = (props) => {
         />
         {/* 主内容区 */}
         <Suspense fallback={<LazySpin />}>
-          <RouteView routes={props.to?.children || []}></RouteView>
+          <RouterView routes={props.to?.children || []}></RouterView>
         </Suspense>
       </Layout.Content>
     </Layout>

@@ -5,7 +5,7 @@ import App from "./views/App";
 import reportWebVitals from "./reportWebVitals";
 import * as ReactRedux from "react-redux";
 import store from "./store";
-import * as Routes from "@/routes/index";
+import * as Routes from "@/router/index";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/lib/locale/zh_CN";
 

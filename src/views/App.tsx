@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { RouteView, useRoutes } from "@/routes";
+import { RouterView, useRoutes } from "@/router";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useUser, useUserDispatch } from "@/store/user";
 import InitLoading from "@/components/init-loading";
@@ -35,7 +35,7 @@ const App: React.FC = () => {
       {isInitEnd && (
         <Suspense fallback={<InitLoading />}>
           <Router>
-            <RouteView routes={routeList} className="m-page" />
+            <RouterView routes={routeList} className="m-page" />
           </Router>
         </Suspense>
       )}

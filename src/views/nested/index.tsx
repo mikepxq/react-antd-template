@@ -1,5 +1,5 @@
 import LazySpin from "@/components/lazy-spin";
-import { RouteView } from "@/routes";
+import { RouterView } from "@/router";
 import React, { Suspense } from "react";
 interface Props {
   [key: string]: any;
@@ -11,7 +11,7 @@ const Nested: React.FC<ViewProps<Props>> = (props) => {
     <div>
       Nested
       <Suspense fallback={<LazySpin />}>
-        <RouteView routes={props.to?.children as []} className={className}></RouteView>
+        <RouterView routes={props.to?.children as []} className={className}></RouterView>
       </Suspense>
     </div>
   );

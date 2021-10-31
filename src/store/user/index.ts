@@ -1,6 +1,6 @@
 import { reqLogin, reqUserInfo } from "@/apis";
-import { asyncRoutes, defaultRoute, syncRoutes, useRoutesAction } from "@/routes";
-import { generatorAuthRouteList } from "@/routes/utils";
+import { asyncRoutes, defaultRoute, syncRoutes, useRoutesAction } from "@/router";
+import { generatorAuthRouteList } from "@/router/utils";
 import { useAppDispatch, useSelector } from "@/store-hooks";
 import { createSlice } from "@reduxjs/toolkit";
 type State = {

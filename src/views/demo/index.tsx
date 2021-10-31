@@ -1,6 +1,6 @@
 import ContentMain from "@/console-layout/content-main";
 import React, { Suspense } from "react";
-import { RouteView } from "@/routes";
+import { RouterView } from "@/router";
 import LazySpin from "@/components/lazy-spin";
 // interface Props {}
 const Demo: React.FC<ViewProps> = (props) => {
@@ -8,7 +8,7 @@ const Demo: React.FC<ViewProps> = (props) => {
   return (
     <ContentMain className="demo-page">
       <Suspense fallback={<LazySpin />}>
-        <RouteView routes={props.to?.children || []}></RouteView>
+        <RouterView routes={props.to?.children || []}></RouterView>
       </Suspense>
     </ContentMain>
   );

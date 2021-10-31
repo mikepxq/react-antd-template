@@ -1,6 +1,6 @@
 import { cloneDeep } from "lodash";
 import React, { useState } from "react";
-import RouteView from "./route-view";
+import RouteView from "./router-view";
 
 /**
  * 重构路由

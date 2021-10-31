@@ -1,4 +1,4 @@
-import { useCurrentRoute } from "@/routes/hooks";
+import { useCurrentRoute } from "@/router/hooks";
 import { useActionsConsoleLayout, useConsoleLayout } from "@/store/console-layout";
 import React, { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";

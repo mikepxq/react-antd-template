@@ -4,7 +4,7 @@ const { Sider } = Layout;
 import { UploadOutlined } from "@ant-design/icons";
 import "./style.less";
 import { useHistory } from "react-router-dom";
-import { useCurrentRoute } from "@/routes/hooks";
+import { useCurrentRoute } from "@/router/hooks";
 
 interface Props {
   collapsed: boolean;

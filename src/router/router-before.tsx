@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useIs404 } from "./hooks";
 import { useUser } from "@/store/user";
 import NProgress from "nprogress";
-import { WhitePathList } from "@/routes/index";
+import { WhitePathList } from "@/router/index";
 
 interface Props {
   to: RouteItem;

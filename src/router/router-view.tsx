@@ -1,12 +1,12 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import RouteBefore from "./route-before";
+import RouteBefore from "./router-before";
 interface Props {
   routes?: RouteItem[];
   to?: RouteItem;
   className?: string;
 }
-const RouteView: React.FC<Props> = (props) => {
+const RouterView: React.FC<Props> = (props) => {
   let { routes } = props;
   //兼容语法 两者传一
   routes = routes || props.to?.children || [];
@@ -24,4 +24,4 @@ const RouteView: React.FC<Props> = (props) => {
     </Switch>
   );
 };
-export default RouteView;
+export default RouterView;

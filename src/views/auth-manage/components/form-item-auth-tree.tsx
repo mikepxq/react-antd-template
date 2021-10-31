@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Tree, Form, FormProps } from "antd";
-import { useRoutes } from "@/routes";
+import { useRoutes } from "@/router";
 import { generatorAuthTreeOptionFromRoutes } from "@/model/auth-tree";
 
 interface FormOptionAuthTreeProps {

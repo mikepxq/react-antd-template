@@ -3,7 +3,7 @@ import logo from "@/assets/logo.svg";
 import { useUser, useUserDispatch } from "@/store/user";
 import { Button, Space } from "antd";
 import "./style.less";
-import { useRoutes } from "@/routes";
+import { useRoutes } from "@/router";
 import { Link } from "react-router-dom";
 
 const Home: React.FC<ViewProps> = (props) => {

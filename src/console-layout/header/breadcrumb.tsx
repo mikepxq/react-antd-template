@@ -1,4 +1,4 @@
-import { useCurrentRoute } from "@/routes/hooks";
+import { useCurrentRoute } from "@/router/hooks";
 import { Breadcrumb } from "antd";
 
 import React from "react";

@@ -1,8 +1,8 @@
 import Login from "@/views/login/index";
 import Page404 from "@/views/page404";
 import ConsoleLayout from "@/console-layout";
-// import Demo from "@/views/demo";
-import react from "react";
+import React from "react";
+
 import { UserOutlined } from "@ant-design/icons";
 // import { sleep } from "@/utils";
 // import Home from "@/views/home";
@@ -62,7 +62,7 @@ export const consoleRoute: RouteItem = {
       path: "/console/doing",
       name: "doing",
       isAuth: false,
-      component: react.lazy(async () => import("@/views/doing")),
+      component: React.lazy(async () => import("@/views/doing")),
       icon: UserOutlined,
     },
     {
@@ -118,7 +118,7 @@ export const consoleRoute: RouteItem = {
       path: "/console/auth-manage",
       name: "auth-manage",
       title: "权限管理",
-      component: react.lazy(() => import("@/views/auth-manage/index")),
+      component: React.lazy(() => import("@/views/auth-manage/index")),
       icon: UserOutlined,
       redirect: "/console/auth-manage/role-manage",
       children: [
@@ -126,7 +126,7 @@ export const consoleRoute: RouteItem = {
           path: "/console/auth-manage/role-manage",
           name: "role-manage",
           title: "角色管理",
-          component: react.lazy(() => import("@/views/auth-manage/role-manage/index")),
+          component: React.lazy(() => import("@/views/auth-manage/role-manage/index")),
           icon: UserOutlined,
         },
       ],
@@ -135,7 +135,7 @@ export const consoleRoute: RouteItem = {
       path: "/console/regular",
       name: "Regular",
       title: "正则",
-      component: react.lazy(() => import("@/views/regular/index")),
+      component: React.lazy(() => import("@/views/regular/index")),
       icon: UserOutlined,
     },
   ],
@@ -147,11 +147,10 @@ export const asyncRoutes: RouteItem[] = [consoleRoute];
 export const WhitePathList = syncRoutes.map((item) => item.path);
 //
 import { createProvider } from "./hooks";
-import React from "react";
 
 //asyncRoutes defaultRoute
-//[...syncRoutes, ...asyncRoutes, defaultRoute]
-//[...syncRoutes,  defaultRoute]
+//[..syncRoutes, ..asyncRoutes, defaultRoute]
+//[..syncRoutes,  defaultRoute]
 export const Provider = createProvider([...syncRoutes, defaultRoute]);
 export { useRoutes, useRoutesAction, useIs404 } from "./hooks";
-export { default as RouteView } from "./route-view";
+export { default as RouterView } from "./router-view";
