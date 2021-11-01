@@ -1,4 +1,5 @@
-import { Button, Form, Modal } from "antd";
+import AppInput from "@/components/app-input";
+import { Button, Form, Input, Modal } from "antd";
 import React, { useRef, useState } from "react";
 import FormItemAuthTree from "../components/form-item-auth-tree";
 
@@ -11,9 +12,13 @@ interface ModalProps {
 interface FormProps {
   authTree: Antd.TreeCheckedKeys;
 }
+const layout = {
+  labelCol: { span: 5 },
+  wrapperCol: { span: 19 },
+};
 
 const useModalCreate = () => {
-  const isShowRef = useRef(false);
+  const isShowRef = useRef(true);
   const [, setIsShow] = useState(isShowRef.current);
   const _Button = useRef<React.FC<ViewProps<ButtonProps>>>((props) => {
     return (
@@ -42,8 +47,14 @@ const useModalCreate = () => {
           const _form = form.getFieldsValue();
           console.log("[]", _form);
         }}>
-        <Form form={form}>
+        <Form form={form} {...layout}>
+          <Form.Item name="roleName" label="角色名称" rules={[{ required: true }]}>
+            <AppInput placeholder="请输入角色名称" />
+          </Form.Item>
           <FormItemAuthTree name="authTree" />
+          <Form.Item name="remark" label="备注">
+            <Input.TextArea placeholder="最多输入100位字符" maxLength={100} />
+          </Form.Item>
         </Form>
       </Modal>
     );
