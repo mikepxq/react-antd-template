@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, Table } from "antd";
+import { Button, Form, Space, Table } from "antd";
 import AppInput from "@/components/app-input";
 import useModalCreate from "./hook-modal-create";
 import ContentMain from "@/console-layout/content-main";
@@ -28,13 +28,38 @@ const AuthManage: React.FC<ViewProps<Props>> = (props) => {
   const [form] = Form.useForm();
   const ModalCreate = useModalCreate();
 
-  const columns: Antd.TableColumnsType<AuthManageItem> = [
+  let columns: Antd.TableColumnsType<AuthManageItem> = [
     {
       key: "sn",
       dataIndex: "sn",
       title: "序号",
     },
+    {
+      key: "roleName",
+      dataIndex: "roleName",
+      title: "角色名称",
+    },
+    {
+      key: "remark",
+      dataIndex: "remark",
+      title: "备注",
+    },
+    {
+      key: "actions",
+      dataIndex: "actions",
+      title: "操作",
+      width: 300,
+      render() {
+        //text, item
+        return (
+          <Space>
+            <Button>编辑</Button>
+          </Space>
+        );
+      },
+    },
   ];
+  columns = columns.map((item) => ({ ...item, align: "center" }));
   //render
   return (
     <ContentMain className={className}>

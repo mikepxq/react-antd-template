@@ -12,7 +12,8 @@ const StepList = [
   { title: "容器", description: "统一容器" },
   { title: "deving登录页", description: "使用异步动态路由，完成权限管理。路由组件 默认组件 route-view" },
   { title: "deving", description: "top nav user menu" },
-  // { title: "deving", description: "本地后端服务器跑起来" },
+  { title: "deving", description: "本地后端服务器跑起来" },
+  { title: "deving", description: "github demo 页面" },
 ];
 const Doing: React.FC<ViewProps<Props>> = (props) => {
   const { className } = props;

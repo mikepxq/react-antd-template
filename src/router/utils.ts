@@ -6,13 +6,12 @@
  * @param _RouteList
  * @returns
  */
-const filterRouteList = (authList: string[], routeList: RouteItem[], _RouteList: RouteItem[] = []) => {
-  routeList.forEach((route) => {
-    if (!authList.includes(route.path)) return;
-    if (route.children) filterRouteList(authList, routeList, route.children);
-    _RouteList.push(route);
+const filterRouteList = (authList: string[], routeList: RouteItem[]) => {
+  return routeList.filter((route) => {
+    if (!authList.includes(route.path)) return false;
+    if (route.children) route.children = filterRouteList(authList, route.children);
+    return true;
   });
-  return _RouteList;
 };
 /**
  * 生成权限路由

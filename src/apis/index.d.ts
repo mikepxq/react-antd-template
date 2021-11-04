@@ -14,11 +14,14 @@ type ApiRes<T = any> = {
   message?: string;
 };
 interface ApiData {
-  [key: string]: number | string | [];
+  [key: string]: number | string | any[];
 }
 
 /************************************ 全局 ********************************************** */
-
+interface TableItem {
+  sn?: number; //序号
+}
+/**获取用户信息 */
 declare type ReqDataUserInfo = {
   id: string | number;
 };
@@ -29,28 +32,43 @@ declare type ResDataUserInfo = {
   token: string;
   id: number;
 };
-interface TableItem {
-  sn?: number; //序号
-}
 
-/************************************ 全局 end********************************************** */
-/************************************ 权限管理 ********************************************** */
-type ReqDataAuthManageList = {
-  roleName?: string;
-};
-interface AuthManageItem extends TableItem {
-  id: number;
-}
-/** 获取权限管理列表 响应数据 */
-interface ResAuthManageList {
-  list: AuthManageItem[];
-}
-/************************************ 权限管理 end********************************************** */
-/************************************ 用户登录 ********************************************** */
+/**用户登录 */
 type ReqDataLogin = {
   username: string;
   password: string;
 };
 type ResDataLogin = ResDataUserInfo;
 
-/************************************ 用户登录 end ********************************************** */
+/************************************ 全局 end********************************************** */
+
+/************************************ 权限管理 ********************************************** */
+type ReqDataAuthManageList = {
+  roleName?: string;
+};
+interface AuthManageItem extends TableItem {
+  id: number;
+  roleName: string;
+  checkedKeys: string[];
+  halfCheckedKeys: string[];
+  remark?: string;
+}
+/** 获取权限管理列表 响应数据 */
+interface ResAuthManageList {
+  list: AuthManageItem[];
+}
+interface FormDataRoleCreate {
+  roleName: string;
+  authTree?: {
+    checkedKeys: string[];
+    halfCheckedKeys: string[];
+  };
+  remark?: string;
+}
+type ReqDataRoleCreate = {
+  roleName: string;
+  checkedKeys: string[];
+  halfCheckedKeys: string[];
+  remark?: string;
+};
+/************************************ 权限管理 end********************************************** */

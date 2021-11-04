@@ -54,15 +54,11 @@ export const useUserDispatch = () => {
       const res = await reqLogin(data);
       if (res.code != 200) return res; //直接给页面使用
       localStorage.setItem("token", res.data.token);
-
-      const resUserInfo = await reqUserInfo();
-      if (resUserInfo.code != 200) {
-        dispatch(slice.actions.setUserInfo({ authList: [] })); //不为undefined说明加载过， [] 不可访问任何权限路由
-        return resUserInfo;
-      }
-      resetRoutes(resUserInfo.data);
-      dispatch(slice.actions.setUserInfo({ authList: resUserInfo.data.authList }));
-      return resUserInfo;
+      localStorage.setItem("userId", String(res.data.id));
+      // !deving
+      resetRoutes(res.data);
+      dispatch(slice.actions.setUserInfo({ authList: res.data.authList }));
+      return res;
     },
   };
 };

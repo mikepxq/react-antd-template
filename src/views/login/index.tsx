@@ -1,16 +1,22 @@
 import AppInput from "@/components/app-input";
 import AppInputPassword from "@/components/app-input-password";
-import { appMessage } from "@/plugins/antd";
+import { appMessage, appNotification } from "@/plugins/antd";
 import { useUserDispatch } from "@/store/user";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./index.less";
+const testDataList = [
+  { username: "superAdmin", password: "superAdmin" },
+  { username: "common", password: "common" },
+];
 const Login: React.FC<ViewProps> = (props) => {
   const { className } = props;
   const [form] = Form.useForm<ReqDataLogin>();
-  form.setFieldsValue({ username: "a", password: "a" });
+  useEffect(() => {
+    form.setFieldsValue({ username: testDataList[0].username, password: testDataList[0].password });
+  }, []);
   const [loading, setLoading] = useState(false);
   const { fetchLogin } = useUserDispatch();
   const history = useHistory();
@@ -21,7 +27,8 @@ const Login: React.FC<ViewProps> = (props) => {
     setLoading(true);
     const res = await fetchLogin(_form);
     setLoading(false);
-    if (res.code != 200) appMessage.error(res.message || "登录失败");
+    if (res.code != 200) return appMessage.error(res.message || "登录失败");
+    appNotification.success({ message: "登录成功" });
     history.push("/");
   };
   //render
@@ -42,6 +49,12 @@ const Login: React.FC<ViewProps> = (props) => {
             </Button>
           </Form.Item>
         </Form>
+        <footer>
+          <p>测试用户数据</p>
+          {testDataList.map((item, index) => (
+            <Button key={`${item.password}-${index}`}>{item.username}</Button>
+          ))}
+        </footer>
       </div>
     </div>
   );

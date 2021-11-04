@@ -13,7 +13,7 @@ const notificationFn = (type: NotificationType, option: NotificationArgsProps) =
   notification[type](option);
 };
 /** 封装 antd notification 去重提示 */
-export const appNotificationFn = {
+export const appNotification = {
   /**兼容antd 但主要为直接的文案 */
   success: (content: NotificationArgsProps) => notificationFn("success", content),
   warn: (content: NotificationArgsProps) => notificationFn("warn", content),

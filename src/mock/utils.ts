@@ -1,15 +1,15 @@
 interface ReqFn {
-  <Res>(data?: Res, code?: number, msg?: string): {
+  <Res>(data?: Res, code?: number, message?: string): {
     code: number;
     data: Res;
-    msg: string;
+    message: string;
   };
 }
 /** 封装返回 */
-export const resFn: ReqFn = (data: any = null, code = 200, msg = "ok") => {
+export const resFn: ReqFn = (data: any = null, code = 200, message = "ok") => {
   return {
     code,
     data,
-    msg,
+    message,
   };
 };
