@@ -9,3 +9,10 @@ export const sleep = (time = 2) => {
     }, time * 1000);
   });
 };
+
+/**
+ * 去除模板字符串第一个换行
+ * @param str
+ * @returns
+ */
+export const removeFirstLineOfTemplateString = (str: string) => str.replace(/\n/, "");
