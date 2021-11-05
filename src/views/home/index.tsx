@@ -28,7 +28,7 @@ const Home: React.FC<ViewProps> = (props) => {
         </Space>
         <Button
           onClick={() => {
-            fetchUserInfo();
+            fetchUserInfo({ id: user.id });
           }}>
           获取用户
         </Button>

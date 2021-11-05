@@ -7,11 +7,13 @@ type State = {
   username: string;
   authList?: string[];
   token: string;
+  id: string;
 };
 const initialState: State = {
   username: "",
   authList: undefined,
   token: localStorage.getItem("token") || "",
+  id: localStorage.getItem("userId") || "",
 };
 
 export const slice = createSlice({
@@ -34,13 +36,13 @@ export const useUserDispatch = () => {
   const dispatch = useAppDispatch();
   const { setRoutes } = useRoutesAction();
   const resetRoutes = (userInfo: ResDataUserInfo) => {
-    const authRoutes = generatorAuthRouteList(userInfo, asyncRoutes);
+    const authRoutes = generatorAuthRouteList(userInfo, [...asyncRoutes]);
     setRoutes([...syncRoutes, ...authRoutes, defaultRoute]);
   };
 
   return {
-    fetchUserInfo: async () => {
-      const res = await reqUserInfo();
+    fetchUserInfo: async (data: ReqDataUserInfo) => {
+      const res = await reqUserInfo(data);
       if (res.code != 200) {
         dispatch(slice.actions.setUserInfo({ authList: [] })); //不为undefined说明加载过， [] 不可访问任何权限路由
         return res;
@@ -55,9 +57,8 @@ export const useUserDispatch = () => {
       if (res.code != 200) return res; //直接给页面使用
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userId", String(res.data.id));
-      // !deving
       resetRoutes(res.data);
-      dispatch(slice.actions.setUserInfo({ authList: res.data.authList }));
+      dispatch(slice.actions.setUserInfo(res.data));
       return res;
     },
   };

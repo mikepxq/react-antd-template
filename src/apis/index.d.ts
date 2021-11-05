@@ -28,7 +28,7 @@ declare type ReqDataUserInfo = {
 declare type ResDataUserInfo = {
   username: string;
   authList: string[];
-  role: Model.RoleKeys;
+  roleName: Model.RoleKeys;
   token: string;
   id: number;
 };

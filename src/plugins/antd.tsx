@@ -3,7 +3,6 @@ import { message, notification } from "antd";
 import { ArgsProps } from "node_modules/antd/lib/message/index.d";
 import { ArgsProps as NotificationArgsProps } from "node_modules/antd/lib/notification/index.d";
 type NotificationType = "error" | "info" | "warning" | "warn" | "success";
-// deving
 const messageFn = (type: MessageType, option?: JointContent) => {
   message.destroy();
   message[type](option);

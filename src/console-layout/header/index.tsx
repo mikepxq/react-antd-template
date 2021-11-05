@@ -5,7 +5,6 @@ import TopNavBreadcrumb from "./breadcrumb";
 import UserDropdownMenu from "./user-dropdown-menu";
 
 interface Props {
-  [key: string]: any;
   collapsed?: boolean;
   onChangeCollapsed?: (collapsed: boolean) => void;
 }

@@ -17,7 +17,6 @@ const ConsoleLayout: React.FC<ViewProps> = (props) => {
       <Layout.Content className="container">
         {/*  */}
         <ContainerHeader
-          routes={props.to?.children}
           collapsed={collapsed}
           onChangeCollapsed={(v) => {
             setCollapsed(v);

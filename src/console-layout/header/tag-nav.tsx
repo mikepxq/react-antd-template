@@ -21,8 +21,6 @@ const TagNav: React.FC<ViewProps<Props>> = (props) => {
   return (
     <nav className={`tag-nav ${className}`}>
       <Tag onClick={() => history.push("/")}> 首页</Tag>
-
-      {/* deving */}
       {visitedList.map((route, index) => {
         return (
           <Tag

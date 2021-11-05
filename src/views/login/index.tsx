@@ -3,7 +3,7 @@ import AppInputPassword from "@/components/app-input-password";
 import { appMessage, appNotification } from "@/plugins/antd";
 import { useUserDispatch } from "@/store/user";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Form } from "antd";
+import { Button, Form, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./index.less";
@@ -51,9 +51,20 @@ const Login: React.FC<ViewProps> = (props) => {
         </Form>
         <footer>
           <p>测试用户数据</p>
-          {testDataList.map((item, index) => (
-            <Button key={`${item.password}-${index}`}>{item.username}</Button>
-          ))}
+          <Space>
+            {testDataList.map((item, index) => (
+              <Button
+                key={`${item.password}-${index}`}
+                onClick={() => {
+                  form.setFieldsValue({
+                    username: item.username,
+                    password: item.password,
+                  });
+                }}>
+                {item.username}
+              </Button>
+            ))}
+          </Space>
         </footer>
       </div>
     </div>
