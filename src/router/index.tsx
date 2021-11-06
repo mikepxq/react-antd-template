@@ -138,6 +138,29 @@ export const consoleRoute: RouteItem = {
       component: React.lazy(() => import("@/views/regular/index")),
       icon: UserOutlined,
     },
+    {
+      path: "/console/article",
+      name: "ArticleManage",
+      title: "文章管理",
+      component: React.lazy(() => import("@/views/article-manage/index")),
+      icon: UserOutlined,
+      children: [
+        {
+          path: "/console/article/list",
+          name: "ArticleCreate",
+          title: "文章列表",
+          component: React.lazy(() => import("@/views/article-manage/list")),
+          icon: UserOutlined,
+        },
+        {
+          path: "/console/article/create",
+          name: "ArticleCreate",
+          title: "新建文章",
+          component: React.lazy(() => import("@/views/article-manage/create")),
+          icon: UserOutlined,
+        },
+      ],
+    },
   ],
 };
 /**

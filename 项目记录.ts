@@ -67,4 +67,7 @@
   1.layout 侧边栏
   npm install --save @ant-design/icons
   2.登录 权限管理 路由404
+6.具体功能
+  1.markdown
+  npm install --save @toast-ui/react-editor
  */

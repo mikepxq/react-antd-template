@@ -33,6 +33,7 @@
     "reduxjs",
     "deving",
     "mockjs",
-    "Sider"
+    "Sider",
+    "toastui"
   ]
 }
