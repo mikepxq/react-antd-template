@@ -8,6 +8,8 @@ import store from "./store";
 import * as Routes from "@/router/index";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/lib/locale/zh_CN";
+import { initSvgIcons } from "./icons";
+initSvgIcons();
 
 /**模拟直接访问，获取初始全局数据 */
 const MockEnter: React.FC = () => {

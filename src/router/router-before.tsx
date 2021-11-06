@@ -20,6 +20,7 @@ const RouteBefore: React.FC<ViewProps<Props>> = (props) => {
     NProgress.start();
     //1.如果有重定向路由
     if (to.redirect) {
+      NProgress.done();
       //1.1. 在白名单内 直接重定向
       if (WhitePathList.includes(to.redirect)) return history.replace(to.redirect);
       //1.2.有重定向 并且 已经获取权限数据 仍然没有路由
@@ -27,7 +28,7 @@ const RouteBefore: React.FC<ViewProps<Props>> = (props) => {
       //1.3 如果有重定向 并且 没有登录 去登录
       if (!authList) return history.push("/login");
       //1.4
-      if (to.redirect) return history.replace(to.redirect);
+      return history.replace(to.redirect);
     }
 
     NProgress.done();

@@ -69,5 +69,9 @@
   2.登录 权限管理 路由404
 6.具体功能
   1.markdown
-  npm install --save @toast-ui/react-editor
+    npm install --save @toast-ui/react-editor
+  2. svg icons
+    1.npm i @types/webpack-env @types/node -D
+    2.craco.config.js 处理引用的svg
+    npm i svg-sprite-loader -D
  */

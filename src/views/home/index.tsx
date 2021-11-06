@@ -1,10 +1,10 @@
 import React from "react";
-import logo from "@/assets/logo.svg";
 import { useUser, useUserDispatch } from "@/store/user";
 import { Button, Space } from "antd";
 import "./style.less";
 import { useRoutes } from "@/router";
 import { Link } from "react-router-dom";
+import SvgIcon from "@/components/svg-icon";
 
 const Home: React.FC<ViewProps> = (props) => {
   const { className } = props;
@@ -15,7 +15,9 @@ const Home: React.FC<ViewProps> = (props) => {
   return (
     <div className={`${className} home__page`}>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        test svg icons
+        <SvgIcon iconName="logo" />
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <h2>接着开发权限管理</h2>
         <Space>
           {routeList.map((route) => {

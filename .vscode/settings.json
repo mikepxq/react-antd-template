@@ -34,6 +34,7 @@
     "deving",
     "mockjs",
     "Sider",
-    "toastui"
+    "toastui",
+    "reqSvgs"
   ]
 }

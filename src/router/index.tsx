@@ -54,6 +54,7 @@ export const defaultRoute: RouteItem = {
 export const consoleRoute: RouteItem = {
   path: "/console",
   name: "console",
+  title: "控制台",
   component: ConsoleLayout,
   isAuth: true,
   redirect: "/console/auth-manage",
@@ -147,7 +148,7 @@ export const consoleRoute: RouteItem = {
       children: [
         {
           path: "/console/article/list",
-          name: "ArticleCreate",
+          name: "ArticleList",
           title: "文章列表",
           component: React.lazy(() => import("@/views/article-manage/list")),
           icon: UserOutlined,

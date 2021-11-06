@@ -20,6 +20,18 @@ module.exports = {
       remove: [] /* An array of plugin constructor's names (i.e. "StyleLintPlugin", "ESLintWebpackPlugin" ) */,
     },
     configure: (webpackConfig, { env, paths }) => {
+      /**统一处理 svg icons */
+      //https://juejin.cn/post/6844903517564436493
+      webpackConfig.module.rules.push({
+        test: /\.(svg)$/,
+        loader: "svg-sprite-loader",
+        exclude: [/node_modules/],
+        include: [path.resolve("./src/icons/svg")],
+        options: {
+          // extract: true,
+          symbolId: "icon-[name]",
+        },
+      });
       /**分析包大小 */
       if (process.env.ANALYZE == "true") {
         //https://www.npmjs.com/package/webpack-bundle-analyzer

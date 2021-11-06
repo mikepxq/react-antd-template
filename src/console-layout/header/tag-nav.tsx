@@ -15,12 +15,15 @@ const TagNav: React.FC<ViewProps<Props>> = (props) => {
   const { setVisitedMap } = useActionsConsoleLayout();
   const { currentRoute } = useCurrentRoute();
   useEffect(() => {
-    setVisitedMap({ name: currentRoute.name as string, path: currentRoute.path });
+    if (currentRoute.redirect) return; //忽视 重定向路由
+    setVisitedMap({ name: currentRoute.name as string, title: currentRoute.title, path: currentRoute.path });
   }, [currentRoute]);
   //render
   return (
     <nav className={`tag-nav ${className}`}>
-      <Tag onClick={() => history.push("/")}> 首页</Tag>
+      <Tag className="item" onClick={() => history.push("/")}>
+        首页
+      </Tag>
       {visitedList.map((route, index) => {
         return (
           <Tag
