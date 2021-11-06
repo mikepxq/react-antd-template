@@ -1,9 +1,9 @@
 import { resFn } from "./utils";
-interface RoleItem extends AuthManageItem {
+interface MockRoleItem extends RoleItem {
   isShow?: boolean;
 }
 let listIndex = 2;
-const list: RoleItem[] = [
+const list: MockRoleItem[] = [
   {
     id: 0,
     roleName: "superAdmin",

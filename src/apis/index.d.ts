@@ -46,7 +46,7 @@ type ResDataLogin = ResDataUserInfo;
 type ReqDataAuthManageList = {
   roleName?: string;
 };
-interface AuthManageItem extends TableItem {
+interface RoleItem extends TableItem {
   id: number;
   roleName: string;
   checkedKeys: string[];
@@ -55,7 +55,7 @@ interface AuthManageItem extends TableItem {
 }
 /** 获取权限管理列表 响应数据 */
 interface ResAuthManageList {
-  list: AuthManageItem[];
+  list: RoleItem[];
 }
 interface FormDataRoleCreate {
   roleName: string;

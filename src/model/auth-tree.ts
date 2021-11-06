@@ -11,8 +11,7 @@ export const generatorAuthTreeOptionFromRoutes = (routes: RouteItem[], parent = 
     .map((route) => {
       const _map = {
         isAuth: route.isAuth === undefined ? parent.isAuth : route.isAuth, //透传父类权限 ，如果有设置用自己的
-        //！bug需要修复
-        key: parent.key ? `/${parent.key}/${route.name}` : route.name,
+        key: route.path,
         title: route.title || route.name || "",
       } as AuthTreeItem;
       if (route.children) {

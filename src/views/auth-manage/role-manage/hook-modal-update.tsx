@@ -7,6 +7,7 @@ import FormItemAuthTree from "../components/form-item-auth-tree";
 
 interface ButtonProps {
   [key: string]: any;
+  item: RoleItem;
 }
 interface ModalProps {
   [key: string]: any;
@@ -17,7 +18,7 @@ const layout = {
   wrapperCol: { span: 19 },
 };
 
-const useModalCreate = () => {
+const useModalUpdate = () => {
   const isShowRef = useRef(false);
   const [, setIsShow] = useState(isShowRef.current);
   const _Button = useRef<React.FC<ViewProps<ButtonProps>>>((props) => {
@@ -25,8 +26,17 @@ const useModalCreate = () => {
       <Button
         type="primary"
         onClick={() => {
+          const { item } = props;
           setIsShow((isShowRef.current = !isShowRef.current)); //触发更新
           console.log("[]", isShowRef.current);
+          form.setFieldsValue({
+            roleName: item.roleName,
+            remark: item.remark,
+            authTree: {
+              halfCheckedKeys: item.halfCheckedKeys,
+              checkedKeys: item.checkedKeys,
+            },
+          });
         }}>
         {props.children}
       </Button>
@@ -42,7 +52,7 @@ const useModalCreate = () => {
 
     return (
       <Modal
-        title="添加角色"
+        title="编辑角色"
         visible={isShowRef.current}
         confirmLoading={loading}
         onCancel={() => {
@@ -78,4 +88,4 @@ const useModalCreate = () => {
     Modal: _Modal.current,
   };
 };
-export default useModalCreate;
+export default useModalUpdate;
