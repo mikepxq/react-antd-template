@@ -71,4 +71,13 @@ type ReqDataRoleCreate = {
   halfCheckedKeys: string[];
   remark?: string;
 };
+//
+
+interface UserItem extends TableItem {
+  id: number;
+  username: string;
+}
+interface FormDataUserCreate {
+  username: string;
+}
 /************************************ 权限管理 end********************************************** */

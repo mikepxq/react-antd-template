@@ -130,6 +130,13 @@ export const consoleRoute: RouteItem = {
           component: React.lazy(() => import("@/views/auth-manage/role-manage/index")),
           icon: UserOutlined,
         },
+        {
+          path: "/console/auth-manage/user-manage",
+          name: "UserManage",
+          title: "用户管理",
+          component: React.lazy(() => import("@/views/auth-manage/user-manage/index")),
+          icon: UserOutlined,
+        },
       ],
     },
     {
