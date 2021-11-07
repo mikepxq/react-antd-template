@@ -76,8 +76,12 @@ const AuthManage: React.FC<ViewProps<Props>> = (props) => {
           <ModalCreate.Button>添加角色</ModalCreate.Button>
         </nav>
       </header>
-      <Table dataSource={res.list} columns={columns} rowKey="id" style={{ marginTop: 10 }}></Table>
-      <ModalCreate.Modal></ModalCreate.Modal>
+      {/* TODO分页器 */}
+      <Table dataSource={res.list} columns={columns} rowKey="id" style={{ marginTop: 10 }} pagination={{}}></Table>
+      <ModalCreate.Modal
+        onOk={() => {
+          getList();
+        }}></ModalCreate.Modal>
       <ModalUpdate.Modal></ModalUpdate.Modal>
     </ContentMain>
   );

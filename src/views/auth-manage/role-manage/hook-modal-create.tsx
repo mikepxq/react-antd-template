@@ -10,6 +10,7 @@ interface ButtonProps {
 }
 interface ModalProps {
   [key: string]: any;
+  onOk?: () => void;
 }
 
 const layout = {
@@ -26,17 +27,16 @@ const useModalCreate = () => {
         type="primary"
         onClick={() => {
           setIsShow((isShowRef.current = !isShowRef.current)); //触发更新
-          console.log("[]", isShowRef.current);
+          // console.log("[]", isShowRef.current);
         }}>
         {props.children}
       </Button>
     );
   });
   const [form] = Form.useForm<FormDataRoleCreate>();
-
-  const _Modal = useRef<React.FC<ViewProps<ModalProps>>>(() => {
-    // props;/
-    // const { key } = props;
+  const _Modal = useRef<React.FC<ViewProps<ModalProps>>>((props) => {
+    // props
+    const { onOk } = props;
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [loading, setLoading] = useState(false);
 
@@ -49,7 +49,7 @@ const useModalCreate = () => {
           setIsShow((isShowRef.current = false));
         }}
         onOk={async () => {
-          const _form = form.getFieldsValue();
+          const _form = await form.validateFields().catch((e) => e);
           if (!_form || loading) return;
           setLoading(true);
           const res = await reqRoleCreate({
@@ -60,6 +60,9 @@ const useModalCreate = () => {
           });
           setLoading(false);
           if (res.code != 200) return appMessage.error(res.message || "添加失败！");
+          appMessage.success(res.message || "添加成功！");
+          setIsShow((isShowRef.current = false));
+          onOk && onOk();
         }}>
         <Form form={form} {...layout}>
           <Form.Item name="roleName" label="角色名称" rules={[{ required: true }]}>

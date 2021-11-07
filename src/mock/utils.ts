@@ -6,7 +6,7 @@ interface ReqFn {
   };
 }
 /** 封装返回 */
-export const resFn: ReqFn = (data: any = null, code = 200, message = "ok") => {
+export const resFn: ReqFn = (data: any = null, code = 200, message = "mock api ok") => {
   return {
     code,
     data,

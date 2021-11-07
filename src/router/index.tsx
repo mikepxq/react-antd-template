@@ -167,6 +167,13 @@ export const consoleRoute: RouteItem = {
           component: React.lazy(() => import("@/views/article-manage/create")),
           icon: UserOutlined,
         },
+        {
+          path: "/console/article/update",
+          name: "ArticleUpdate",
+          title: "编辑文章",
+          component: React.lazy(() => import("@/views/article-manage/update")),
+          icon: UserOutlined,
+        },
       ],
     },
   ],
