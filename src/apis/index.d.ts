@@ -4,8 +4,14 @@
 /** 页面请求 */
 type DispatchFn<Req = any, Res = any> = (payload: string, options?: Req) => ApiRes<Res> | Promise<ApiRes<Res>>;
 
-/** 接口格式 */
-type ApiFn<Req = any, Res = any> = (data?: Req) => Promise<ApiRes<Res>>;
+/**
+ * 接口格式
+ *
+ * 传入参数统一 json map 格式
+ *
+ *
+ */
+type ApiFn<Req = Record<any, any>, Res = any> = (data?: InterfaceToType<Req>) => Promise<ApiRes<Res>>;
 
 /**接口统一响应结构 */
 type ApiRes<T = any> = {
@@ -16,36 +22,39 @@ type ApiRes<T = any> = {
 interface ApiData {
   [key: string]: number | string | any[];
 }
+/** 接口转类型 */
+type InterfaceToType<Interface> = { [key in keyof Interface]: Interface[key] };
 
 /************************************ 全局 ********************************************** */
 interface TableItem {
   sn?: number; //序号
 }
+/************************************ 全局 end********************************************** */
+
+/************************************ 用户操作 ********************************************** */
 /**获取用户信息 */
-declare type ReqDataUserInfo = {
+interface ReqDataUserInfo {
   id: string | number;
-};
-declare type ResDataUserInfo = {
+}
+interface ResDataUserInfo {
   username: string;
   authList: string[];
   roleName: Model.RoleKeys;
   token: string;
   id: number;
-};
+}
 
 /**用户登录 */
-type ReqDataLogin = {
+interface ReqDataLogin {
   username: string;
   password: string;
-};
+}
 type ResDataLogin = ResDataUserInfo;
-
-/************************************ 全局 end********************************************** */
-
+/************************************ 用户操作 end********************************************** */
 /************************************ 权限管理 ********************************************** */
-type ReqDataAuthManageList = {
+interface ReqDataAuthManageList {
   roleName?: string;
-};
+}
 interface RoleItem extends TableItem {
   id: number;
   roleName: string;
@@ -65,12 +74,12 @@ interface FormDataRoleCreate {
   };
   remark?: string;
 }
-type ReqDataRoleCreate = {
+interface ReqDataRoleCreate {
   roleName: string;
   checkedKeys: string[];
   halfCheckedKeys: string[];
   remark?: string;
-};
+}
 //
 
 interface UserItem extends TableItem {
