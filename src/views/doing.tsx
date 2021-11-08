@@ -10,8 +10,9 @@ const StepList = [
   { title: "面包屑", description: "容器顶部面包屑" },
   { title: "访问记录tag", description: "明天 tag 状态 需要svg" },
   { title: "容器", description: "统一容器" },
-  { title: "deving登录页", description: "使用异步动态路由，完成权限管理。路由组件 默认组件 route-view" },
-  { title: "deving", description: "top nav user menu" },
+  { title: "登录页", description: "使用异步动态路由，完成权限管理。路由组件 默认组件 route-view" },
+  { title: " user menu", description: "top nav user menu" },
+  { title: "tag", description: "tag hover" },
   { title: "deving", description: "本地后端服务器跑起来" },
   { title: "deving", description: "github demo 页面" },
 ];
@@ -21,7 +22,7 @@ const Doing: React.FC<ViewProps<Props>> = (props) => {
   return (
     <ContentMain className={className}>
       <h2>项目记录</h2>
-      <Steps direction="vertical" current={4}>
+      <Steps direction="vertical" current={7}>
         {StepList.map((item, index) => {
           return <Step title={item.title} description={item.description} key={`${item.title}-${index}`}></Step>;
         })}

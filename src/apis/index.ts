@@ -9,6 +9,6 @@ export const reqLogin: ApiFn<ReqDataLogin, ResDataLogin> = (data) => requestPost
 
 /************************************ 权限管理 ********************************************** */
 export const reqAuthManageList: ApiFn<ReqDataAuthManageList, ResAuthManageList> = (data) =>
-  requestGet("/mock/api/role/list", data);
+  requestPost("/mock/api/role/list", data);
 export const reqRoleCreate: ApiFn<ReqDataRoleCreate> = (data) => requestPost("/mock/api/role/create", data);
 /************************************ 权限管理 end********************************************** */

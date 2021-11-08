@@ -16,3 +16,11 @@ export const sleep = (time = 2) => {
  * @returns
  */
 export const removeFirstLineOfTemplateString = (str: string) => str.replace(/\n/, "");
+
+/**
+ * 获得序列号
+ * @param page
+ * @param index
+ */
+export const getTableSN = (page: ReqPageData, index: number) =>
+  (Number(page.current) - 1) * Number(page.pageSize) + index + 1;

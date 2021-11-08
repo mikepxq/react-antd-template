@@ -29,6 +29,13 @@ type InterfaceToType<Interface> = { [key in keyof Interface]: Interface[key] };
 interface TableItem {
   sn?: number; //序号
 }
+interface ReqPageData {
+  current?: number;
+  pageSize?: number;
+}
+interface ResPageData {
+  total: number;
+}
 /************************************ 全局 end********************************************** */
 
 /************************************ 用户操作 ********************************************** */
@@ -52,9 +59,12 @@ interface ReqDataLogin {
 type ResDataLogin = ResDataUserInfo;
 /************************************ 用户操作 end********************************************** */
 /************************************ 权限管理 ********************************************** */
-interface ReqDataAuthManageList {
+
+interface FormDataAuthManageList {
   roleName?: string;
 }
+
+type ReqDataAuthManageList = FormDataAuthManageList;
 interface RoleItem extends TableItem {
   id: number;
   roleName: string;
@@ -63,7 +73,7 @@ interface RoleItem extends TableItem {
   remark?: string;
 }
 /** 获取权限管理列表 响应数据 */
-interface ResAuthManageList {
+interface ResAuthManageList extends ResPageData {
   list: RoleItem[];
 }
 interface FormDataRoleCreate {

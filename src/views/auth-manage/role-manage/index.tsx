@@ -1,52 +1,49 @@
 import React, { useEffect, useState } from "react";
-import { Form, Space, Table } from "antd";
+import { Button, Form, Space } from "antd";
 import AppInput from "@/components/app-input";
 import useModalCreate from "./hook-modal-create";
 import ContentMain from "@/console-layout/content-main";
 import { reqAuthManageList } from "@/apis";
 import { appMessage } from "@/plugins/antd";
 import useModalUpdate from "./hook-modal-update";
+import AppTable from "@/components/app-table";
+import { getTableSN } from "@/utils";
 interface Props {
   [key: string]: any;
 }
 const AuthManage: React.FC<ViewProps<Props>> = (props) => {
   const { className = "" } = props;
+  //1.res
   const [res, setRes] = useState({
     list: [] as RoleItem[],
+    total: 0,
   });
+  const [loading, setLoading] = useState(false);
   const getList = async () => {
-    const res = await reqAuthManageList();
+    const _form = await form.validateFields().catch(() => undefined);
+    if (loading || !_form) return;
+    setLoading(true);
+    const res = await reqAuthManageList({ ...page, ..._form });
+    setLoading(false);
     if (res.code != 200) return appMessage.error(res.message || "加载数据失败！");
-    appMessage.success(res.message || "加载数据成功！");
-    res.data.list = res.data.list.map((item, index) => ({ ...item, sn: index + 1 }));
-    setRes({
-      list: res.data.list,
-    });
+    // appMessage.success(res.message || "加载数据成功！");//列表一般不提示
+    res.data.list = res.data.list.map((item, index) => ({ ...item, sn: getTableSN(page, index) }));
+    setRes({ list: res.data.list, total: res.data.total });
   };
+  //2.page
+  const [page, setPage] = useState<ReqPageData>({ current: 1, pageSize: 10 });
   useEffect(() => {
     getList();
-  }, []);
-  const [form] = Form.useForm();
+  }, [page]);
+  //3.form
+  const [form] = Form.useForm<FormDataAuthManageList>();
   const ModalCreate = useModalCreate();
   const ModalUpdate = useModalUpdate();
 
   let columns: Antd.TableColumnsType<RoleItem> = [
-    {
-      key: "sn",
-      dataIndex: "sn",
-      title: "序号",
-      width: 100,
-    },
-    {
-      key: "roleName",
-      dataIndex: "roleName",
-      title: "角色名称",
-    },
-    {
-      key: "remark",
-      dataIndex: "remark",
-      title: "备注",
-    },
+    { key: "sn", title: "序号", width: 100 },
+    { key: "roleName", title: "角色名称" },
+    { key: "remark", title: "备注" },
     {
       key: "actions",
       dataIndex: "actions",
@@ -62,7 +59,7 @@ const AuthManage: React.FC<ViewProps<Props>> = (props) => {
       },
     },
   ];
-  columns = columns.map((item) => ({ ...item, align: "center" }));
+  columns = columns.map((item) => ({ ...item, align: "center", dataIndex: item.key }));
   //render
   return (
     <ContentMain className={className}>
@@ -71,13 +68,41 @@ const AuthManage: React.FC<ViewProps<Props>> = (props) => {
           <Form.Item label="角色名称" name="roleName">
             <AppInput placeholder="请输入角色名称" />
           </Form.Item>
+          <Form.Item>
+            <Space>
+              <Button
+                type="primary"
+                onClick={() => {
+                  if (page.current == 1) return getList();
+                  setPage({ ...page, current: 1 });
+                }}>
+                查询
+              </Button>
+              <Button
+                onClick={() => {
+                  form.resetFields();
+                  getList();
+                }}>
+                重置
+              </Button>
+            </Space>
+          </Form.Item>
         </Form>
         <nav style={{ marginTop: 10 }}>
           <ModalCreate.Button>添加角色</ModalCreate.Button>
         </nav>
       </header>
-      {/* TODO分页器 */}
-      <Table dataSource={res.list} columns={columns} rowKey="id" style={{ marginTop: 10 }} pagination={{}}></Table>
+
+      <AppTable
+        dataSource={res.list}
+        columns={columns}
+        rowKey="id"
+        style={{ marginTop: 10 }}
+        loading={loading}
+        pagination={{ total: res.total }}
+        onChange={({ current, pageSize }) => {
+          setPage({ current, pageSize });
+        }}></AppTable>
       <ModalCreate.Modal
         onOk={() => {
           getList();
