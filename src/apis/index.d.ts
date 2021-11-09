@@ -36,6 +36,10 @@ interface ReqPageData {
 interface ResPageData {
   total: number;
 }
+interface OptionItem {
+  text: string;
+  value: number;
+}
 /************************************ 全局 end********************************************** */
 
 /************************************ 用户操作 ********************************************** */
@@ -95,10 +99,22 @@ interface ReqDataRoleCreate {
 interface UserItem extends TableItem {
   id: number;
   username: string;
+  roleId: number;
+  roleName?: string;
 }
 interface FormDataUserCreate {
   username: string;
+  roleId: number;
 }
+type ReqDataUserCreate = FormDataUserCreate;
+interface FormDataUserList {
+  username?: string;
+}
+interface ReqDataUserList extends FormDataUserList, ReqPageData {}
+interface ResDataUserList extends ResPageData {
+  list: UserItem[];
+}
+
 /************************************ 权限管理 end********************************************** */
 /************************************ 文章管理 ********************************************** */
 /**热度 */

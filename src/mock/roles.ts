@@ -37,6 +37,13 @@ export const roleCreate = (req: any) => {
   return resFn();
 };
 /** 获取用户信息 */
-export const getRoleInfo = (roleName: string) => {
-  return list.filter((item) => item.roleName === roleName)[0] || { halfCheckedKeys: [], checkedKeys: [] };
+export const getRoleInfo = (roleId: number) => {
+  return list.filter((item) => item.id === roleId)[0] || { halfCheckedKeys: [], checkedKeys: [] };
+};
+
+export const getOptionList = () => {
+  const _list = list
+    .filter((item) => item.isShow !== false)
+    .map((item) => ({ text: item.roleName || "", value: item.id }));
+  return resFn<OptionItem[]>(_list);
 };

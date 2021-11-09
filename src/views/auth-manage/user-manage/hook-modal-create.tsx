@@ -1,5 +1,6 @@
-import { reqRoleCreate } from "@/apis";
+import { reqUserCreate } from "@/apis";
 import AppInput from "@/components/app-input";
+import FormRoleOption from "@/components/form-role-option";
 import { appMessage } from "@/plugins/antd";
 import { Button, Form, Input, Modal } from "antd";
 import React, { useRef, useState } from "react";
@@ -9,7 +10,7 @@ interface ButtonProps {
   [key: string]: any;
 }
 interface ModalProps {
-  [key: string]: any;
+  onOk?: () => void;
 }
 
 const layout = {
@@ -26,17 +27,15 @@ const useModalCreate = () => {
         type="primary"
         onClick={() => {
           setIsShow((isShowRef.current = !isShowRef.current)); //触发更新
-          console.log("[]", isShowRef.current);
         }}>
         {props.children}
       </Button>
     );
   });
-  const [form] = Form.useForm<FormDataRoleCreate>();
+  const [form] = Form.useForm<FormDataUserCreate>();
 
-  const _Modal = useRef<React.FC<ViewProps<ModalProps>>>(() => {
-    // props;/
-    // const { key } = props;
+  const _Modal = useRef<React.FC<ViewProps<ModalProps>>>((props) => {
+    const { onOk } = props;
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [loading, setLoading] = useState(false);
 
@@ -49,26 +48,28 @@ const useModalCreate = () => {
           setIsShow((isShowRef.current = false));
         }}
         onOk={async () => {
-          const _form = form.getFieldsValue();
+          const _form = await form.validateFields().catch(() => undefined);
           if (!_form || loading) return;
           setLoading(true);
-          const res = await reqRoleCreate({
-            roleName: _form.roleName,
-            checkedKeys: _form.authTree?.checkedKeys || [],
-            halfCheckedKeys: _form.authTree?.halfCheckedKeys || [],
-            remark: _form.remark,
-          });
+          // TODO 完成 新增 mock 接口
+          console.log("[_form]", _form);
+          const res = await reqUserCreate(_form);
           setLoading(false);
           if (res.code != 200) return appMessage.error(res.message || "添加失败！");
+          appMessage.success(res.message || "添加成功！");
+          setIsShow((isShowRef.current = false));
+          onOk && onOk();
         }}>
         <Form form={form} {...layout}>
-          <Form.Item name="roleName" label="角色名称" rules={[{ required: true }]}>
-            <AppInput placeholder="请输入角色名称" />
+          <Form.Item name="username" label="用户名称" rules={[{ required: true }]}>
+            <AppInput placeholder="请输入用户名称" />
           </Form.Item>
-          <Form.Item name="remark" label="备注">
+          <Form.Item name="roleId" label="所属角色" rules={[{ required: true, message: "请选择所属角色" }]}>
+            <FormRoleOption />
+          </Form.Item>
+          {/* <Form.Item name="remark" label="备注">
             <Input.TextArea placeholder="最多输入100位字符" maxLength={100} />
-          </Form.Item>
-          <FormItemAuthTree name="authTree" />
+          </Form.Item> */}
         </Form>
       </Modal>
     );
