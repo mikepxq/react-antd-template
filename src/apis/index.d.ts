@@ -125,4 +125,11 @@ interface ArticleItem extends TableItem {
   hot: HotNumber;
   // author: string;
 }
+interface FormDataArticleList {
+  name?: string; //
+}
+interface ReqDataArticleList extends FormDataArticleList, ReqPageData {}
+interface ResDataArticleList extends ResPageData {
+  list: ArticleItem[];
+}
 /************************************ 文章管理 end********************************************** */

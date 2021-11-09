@@ -8,10 +8,12 @@ const AppTable: React.FC<ViewProps<Props>> = (props) => {
   useEffect(() => {
     if (!props.pagination) return;
     setPagination({
+      ...props.pagination,
       showQuickJumper: true,
-      showTotal: () => props.pagination && `共 ${props.pagination.total || ""} 条`,
+      showTotal: () => props.pagination && `共 ${String(props.pagination.total) || ""} 条`,
     });
   }, [props.pagination]);
+  console.log("[pagination]", pagination);
   //render
   return <Table {...props} pagination={pagination}></Table>;
 };

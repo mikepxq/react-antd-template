@@ -13,10 +13,7 @@ interface Props {
 }
 const AuthManage: React.FC<ViewProps<Props>> = (props) => {
   const { className = "" } = props;
-  const [res, setRes] = useState({
-    list: [] as UserItem[],
-    total: 0,
-  });
+  const [res, setRes] = useState({ list: [] as UserItem[], total: 0 });
   const [loading, setLoading] = useState(false);
   const getList = async () => {
     const _form = await form.validateFields().catch(() => undefined);
