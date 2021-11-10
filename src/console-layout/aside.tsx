@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, Layout } from "antd";
 const { Sider } = Layout;
 import { UploadOutlined } from "@ant-design/icons";
 import "./style.less";
 import { useHistory } from "react-router-dom";
 import { useCurrentRoute } from "@/router/hooks";
+import { getKeyListValueTrueInMap } from "@/utils";
 
 interface Props {
   collapsed: boolean;
@@ -16,8 +17,17 @@ const Aside: React.FC<ViewProps<Props>> = (props) => {
   const { collapsed, routes = [] } = props;
   // //路径 面包屑 列表
   const { currentRoute } = useCurrentRoute();
-  const breadCrumbRoutePathList = currentRoute.breadCrumbRoutes?.map((route) => route.path);
-
+  const [openKeysMap, setOpenKeysMap] = useState<Record<string, boolean>>({});
+  const [selectedKeyList, setSelectedKeyList] = useState<string[]>([]);
+  //
+  useEffect(() => {
+    if (!currentRoute.breadCrumbRoutes) return;
+    const _pathList = currentRoute.breadCrumbRoutes.map((route) => route.path);
+    setSelectedKeyList(_pathList);
+    const _map: Record<string, boolean> = {};
+    _pathList.forEach((path) => (_map[path] = true)); //默认当前路由展开
+    setOpenKeysMap({ ...openKeysMap, ..._map });
+  }, [currentRoute]);
   const history = useHistory();
   const getSideMenu = (routes: RouteItem[] = []) => {
     return routes
@@ -31,6 +41,7 @@ const Aside: React.FC<ViewProps<Props>> = (props) => {
               icon={<UploadOutlined />}
               title={route.title || route.name}
               onTitleClick={() => {
+                setOpenKeysMap({ ...openKeysMap, [route.path]: !openKeysMap[route.path] });
                 props.onChange && props.onChange(route);
               }}>
               {getSideMenu(route.children)}
@@ -59,8 +70,8 @@ const Aside: React.FC<ViewProps<Props>> = (props) => {
         className="m-menu"
         theme="dark"
         mode="inline"
-        defaultOpenKeys={breadCrumbRoutePathList}
-        defaultSelectedKeys={breadCrumbRoutePathList}>
+        openKeys={getKeyListValueTrueInMap(openKeysMap)}
+        selectedKeys={selectedKeyList}>
         {getSideMenu(routes)}
       </Menu>
     </Sider>

@@ -24,3 +24,12 @@ export const removeFirstLineOfTemplateString = (str: string) => str.replace(/\n/
  */
 export const getTableSN = (page: ReqPageData, index: number) =>
   (Number(page.current) - 1) * Number(page.pageSize) + index + 1;
+/**
+ * 获得key列表  map中值为真
+ * @param map
+ * @returns
+ */
+export const getKeyListValueTrueInMap = (map: Record<string, boolean>): string[] =>
+  Object.entries(map)
+    .filter(([, v]) => v)
+    .map(([key]) => key);

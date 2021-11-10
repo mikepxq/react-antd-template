@@ -1,5 +1,6 @@
 import { cloneDeep } from "lodash";
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import RouteView from "./router-view";
 
 /**
@@ -109,6 +110,7 @@ export const useIs404 = () => {
   return { is404: !routeMap[location.pathname] };
 };
 export const useCurrentRoute = () => {
+  const location = useLocation();
   const { routeMap } = React.useContext(RoutesContext) as TypeUseRoutes;
   //没有就是404 直接访问子类路由
   return { currentRoute: routeMap[location.pathname] };
