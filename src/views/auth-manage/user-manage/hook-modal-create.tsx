@@ -2,9 +2,8 @@ import { reqUserCreate } from "@/apis";
 import AppInput from "@/components/app-input";
 import FormRoleOption from "@/components/form-role-option";
 import { appMessage } from "@/plugins/antd";
-import { Button, Form, Input, Modal } from "antd";
+import { Button, Form, Modal } from "antd";
 import React, { useRef, useState } from "react";
-import FormItemAuthTree from "../components/form-item-auth-tree";
 
 interface ButtonProps {
   [key: string]: any;
@@ -51,8 +50,6 @@ const useModalCreate = () => {
           const _form = await form.validateFields().catch(() => undefined);
           if (!_form || loading) return;
           setLoading(true);
-          // TODO 完成 新增 mock 接口
-          console.log("[_form]", _form);
           const res = await reqUserCreate(_form);
           setLoading(false);
           if (res.code != 200) return appMessage.error(res.message || "添加失败！");

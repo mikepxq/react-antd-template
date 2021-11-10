@@ -20,7 +20,6 @@ const FormRoleOption: React.FC<ViewProps<Props>> = (props) => {
     if (isUnMount) return; //避免卸载后渲染
     setLoading(false);
     if (res.code != 200) appMessage.error(res.message || "获取数据失败！");
-    console.log("[res.data]", res.data);
     setList(res.data);
     if (value === undefined) onChange && onChange(res.data[0].value);
   };

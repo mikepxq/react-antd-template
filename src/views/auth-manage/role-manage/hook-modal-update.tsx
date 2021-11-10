@@ -28,7 +28,6 @@ const useModalUpdate = () => {
         onClick={() => {
           const { item } = props;
           setIsShow((isShowRef.current = !isShowRef.current)); //触发更新
-          console.log("[]", isShowRef.current);
           form.setFieldsValue({
             roleName: item.roleName,
             remark: item.remark,

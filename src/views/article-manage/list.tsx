@@ -13,7 +13,7 @@ interface Props {
 }
 const ArticleList: React.FC<ViewProps<Props>> = (props) => {
   const { className = "" } = props;
-  const [res, setRes] = useState({ list: [{ id: 0, name: "TEST", hot: 2 }] as ArticleItem[], total: 0 });
+  const [res, setRes] = useState<ResDataArticleList>({ list: [], total: 0 });
   const [loading, setLoading] = useState(false);
   const getList = async () => {
     const _form = await form.validateFields().catch(() => undefined);
@@ -21,7 +21,8 @@ const ArticleList: React.FC<ViewProps<Props>> = (props) => {
     setLoading(true);
     const res = await reqArticleList({ ...page, ..._form });
     if (res.code != 200) return appMessage.error(res.message || "加载数据失败！");
-    // appMessage.success(res.message || "加载数据成功！");
+    setLoading(false);
+    // appMessage.success(res.message || "加载数据成功！");//加载数据不做提示
     res.data.list = res.data.list.map((item, index) => ({ ...item, sn: getTableSN(page, index) }));
     setRes(res.data);
   };
@@ -34,14 +35,16 @@ const ArticleList: React.FC<ViewProps<Props>> = (props) => {
 
   let columns: Antd.TableColumnsType<ArticleItem> = [
     { key: "sn", title: "序号", width: 100 },
-    { key: "name", title: "文章名称" },
+    { key: "title", title: "标题" },
+    { key: "author", title: "作者" },
     {
       key: "hot",
-      title: "文章名称",
+      title: "热度",
       render(number) {
         return <HotStar number={number} />;
       },
     },
+    { key: "dateTime", title: "时间" },
     {
       key: "actions",
       dataIndex: "actions",

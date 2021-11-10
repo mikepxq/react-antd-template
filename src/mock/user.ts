@@ -38,7 +38,6 @@ export const reqLogin = (req: any) => {
 export const create = (req: any) => {
   const reqBody: ReqDataUserCreate = JSON.parse(req.body);
   const _roleInfo = getRoleInfo(reqBody.roleId);
-  console.log("[reqBody]", reqBody);
   list.push({
     id: index++,
     ...reqBody,

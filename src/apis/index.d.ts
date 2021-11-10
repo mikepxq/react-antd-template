@@ -121,8 +121,11 @@ interface ResDataUserList extends ResPageData {
 type HotNumber = 0 | 1 | 2 | 3 | 4 | 5;
 interface ArticleItem extends TableItem {
   id: number;
-  name: string;
+  title: string;
   hot: HotNumber;
+  author: author;
+  description?: string;
+  dateTime?: string;
   // author: string;
 }
 interface FormDataArticleList {
