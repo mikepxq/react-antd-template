@@ -152,6 +152,7 @@ export const consoleRoute: RouteItem = {
       title: "文章管理",
       component: React.lazy(() => import("@/views/article-manage/index")),
       icon: UserOutlined,
+      isLinkBreadCrumb: false, //是否点击是否跳转
       children: [
         {
           path: "/console/article/list",

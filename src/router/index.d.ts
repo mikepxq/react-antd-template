@@ -14,8 +14,8 @@ interface RouteItem {
   children?: RouteItem[];
   //生成数据
   parent?: RouteItem;
-  breadCrumbs?: string[];
   breadCrumbRoutes?: RouteItem[]; //方便使用
+  isLinkBreadCrumb?: boolean; //是否点击是否跳转
   icon?: any;
   isAuth?: boolean; //是否参与权限选项。如果父路由是true 子类默认是,除非isAuth=false时。
   isHidden?: boolean; //侧边栏是否隐藏
