@@ -7,9 +7,11 @@ interface Props {
   form: Antd.FormInstance;
   onPublish?: () => void;
   onDraft?: () => void;
+  draftLoading?: boolean;
+  publishLoading?: boolean;
 }
 const ArticleCollapseForm: React.FC<ViewProps<Props>> = (props) => {
-  const { className = "", onPublish, onDraft, form } = props;
+  const { className = "", onPublish, onDraft, form, draftLoading, publishLoading } = props;
   const [isOpen, setIsOpen] = useState(true); //默认显示表单
   //render
   return (
@@ -27,11 +29,13 @@ const ArticleCollapseForm: React.FC<ViewProps<Props>> = (props) => {
               <RightOutlined className="arrow" style={{ transform: `rotate(${isOpen ? 90 : 0}deg)` }} />
             </Button>
             <Space className="fr">
-              <Button onClick={onPublish} type="primary">
+              <Button onClick={onPublish} type="primary" loading={publishLoading}>
                 发布
               </Button>
-              {/* TODO 当点击时 */}
-              <Button onClick={onDraft}>草稿</Button>
+
+              <Button onClick={onDraft} loading={draftLoading}>
+                草稿
+              </Button>
             </Space>
           </nav>
         }

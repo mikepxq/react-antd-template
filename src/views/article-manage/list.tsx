@@ -7,6 +7,8 @@ import AppTable from "@/components/app-table";
 import { reqArticleList } from "@/apis";
 import { appMessage } from "@/plugins/antd";
 import { getTableSN } from "@/utils";
+import { useHistory } from "react-router-dom";
+import { PlusOutlined } from "@ant-design/icons";
 
 interface Props {
   [key: string]: any;
@@ -50,17 +52,25 @@ const ArticleList: React.FC<ViewProps<Props>> = (props) => {
       dataIndex: "actions",
       title: "操作",
       width: 300,
-      render() {
+      render(text, item) {
         //text, item
         return (
           <Space>
-            <Button>编辑</Button>
+            <Button
+              type="primary"
+              onClick={() => {
+                history.push(`/console/article/update?id=${item.id}`);
+              }}>
+              编辑
+            </Button>
           </Space>
         );
       },
     },
   ];
   columns = columns.map((item) => ({ ...item, align: "center", dataIndex: item.key }));
+  //
+  const history = useHistory();
   //render
   return (
     <ContentMain className={className}>
@@ -89,9 +99,16 @@ const ArticleList: React.FC<ViewProps<Props>> = (props) => {
             </Space>
           </Form.Item>
         </Form>
-        <nav style={{ marginTop: 10 }}></nav>
+        <nav style={{ marginTop: 10 }}>
+          <Button
+            type="primary"
+            onClick={() => {
+              history.push("/console/article/create");
+            }}>
+            新建文章 <PlusOutlined />
+          </Button>
+        </nav>
       </header>
-      {/* TODO */}
       <AppTable
         loading={loading}
         dataSource={res.list}
