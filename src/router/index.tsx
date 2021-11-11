@@ -152,7 +152,8 @@ export const consoleRoute: RouteItem = {
       title: "文章管理",
       component: React.lazy(() => import("@/views/article-manage/index")),
       icon: UserOutlined,
-      isLinkBreadCrumb: false, //是否点击是否跳转
+      // isLinkBreadCrumb: false, //是否点击是否跳转
+      redirect: "/console/article/list",
       children: [
         {
           path: "/console/article/list",
@@ -167,6 +168,7 @@ export const consoleRoute: RouteItem = {
           title: "新建文章",
           component: React.lazy(() => import("@/views/article-manage/create")),
           icon: UserOutlined,
+          isHidden: true,
         },
         {
           path: "/console/article/update",
@@ -174,6 +176,7 @@ export const consoleRoute: RouteItem = {
           title: "编辑文章",
           component: React.lazy(() => import("@/views/article-manage/update")),
           icon: UserOutlined,
+          isHidden: true,
         },
       ],
     },
