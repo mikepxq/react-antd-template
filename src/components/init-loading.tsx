@@ -24,7 +24,10 @@ const InitLoading: React.FC<ViewProps<Props>> = () => {
   //render
   return ReactDOM.createPortal(
     <div className="init">
-      <div className="content">系统准备中……</div>
+      <div className="content">
+        <h1>系统准备中……</h1>
+        <p>mock api 睡眠时间 1.5s</p>
+      </div>
     </div>,
     document.body
   );
