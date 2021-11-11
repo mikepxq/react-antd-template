@@ -26,7 +26,7 @@ const TopNavBreadcrumb: React.FC<ViewProps<Props>> = () => {
             {route.isLinkBreadCrumb !== false && breadCrumbRoutes.length - 1 != index ? (
               <a
                 onClick={() => {
-                  history.push(route.path);
+                  history.push(route.redirect || route.path);
                 }}>
                 {route.title || route.name}
               </a>
