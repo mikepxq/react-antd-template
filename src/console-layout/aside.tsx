@@ -15,7 +15,7 @@ interface Props {
 }
 const Aside: React.FC<ViewProps<Props>> = (props) => {
   const { collapsed, routes = [] } = props;
-  // //路径 面包屑 列表
+  //路径 面包屑 列表
   const { currentRoute } = useCurrentRoute();
   const [openKeysMap, setOpenKeysMap] = useState<Record<string, boolean>>({});
   const [selectedKeyList, setSelectedKeyList] = useState<string[]>([]);
@@ -28,6 +28,12 @@ const Aside: React.FC<ViewProps<Props>> = (props) => {
     _pathList.forEach((path) => (_map[path] = true)); //默认当前路由展开
     setOpenKeysMap({ ...openKeysMap, ..._map });
   }, [currentRoute]);
+  //
+  const [openKeyList, setOpenKeyList] = useState<string[]>();
+  useEffect(() => {
+    if (collapsed) return setOpenKeyList(undefined); //折叠时使用antd自带交互
+    setOpenKeyList(getKeyListValueTrueInMap(openKeysMap)); //回显折叠是的操作
+  }, [collapsed, openKeysMap]);
   const history = useHistory();
   const getSideMenu = (routes: RouteItem[] = []) => {
     return routes
@@ -66,12 +72,7 @@ const Aside: React.FC<ViewProps<Props>> = (props) => {
   return (
     <Sider className="aside" trigger={null} collapsible collapsed={collapsed}>
       <div className="logo"></div>
-      <Menu
-        className="m-menu"
-        theme="dark"
-        mode="inline"
-        openKeys={getKeyListValueTrueInMap(openKeysMap)}
-        selectedKeys={selectedKeyList}>
+      <Menu className="m-menu" theme="dark" mode="inline" openKeys={openKeyList} selectedKeys={selectedKeyList}>
         {getSideMenu(routes)}
       </Menu>
     </Sider>
