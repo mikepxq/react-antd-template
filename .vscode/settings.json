@@ -35,6 +35,8 @@
     "mockjs",
     "Sider",
     "toastui",
+    "vite",
+    "mikepxq",
     "reqSvgs"
   ]
 }
