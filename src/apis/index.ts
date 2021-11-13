@@ -12,8 +12,8 @@ export const reqLogin: ApiFn<ReqDataLogin, ResDataLogin> = (data) => requestPost
 /************************************ 用户操作 end********************************************** */
 
 /************************************ 权限管理 ********************************************** */
-export const reqAuthManageList: ApiFn<ReqDataAuthManageList, ResAuthManageList> = (data) =>
-  requestPost("/mock/api/role/list", data);
+/** 获取角色列表 */
+export const reqRoleList: ApiFn<ReqDataRoleList, ResDataRoleList> = (data) => requestPost("/mock/api/role/list", data);
 /** 新增角色 */
 export const reqRoleCreate: ApiFn<ReqDataRoleCreate> = (data) => requestPost("/mock/api/role/create", data);
 /** 新增用户 */

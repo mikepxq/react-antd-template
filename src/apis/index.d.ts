@@ -68,7 +68,7 @@ interface FormDataAuthManageList {
   roleName?: string;
 }
 
-type ReqDataAuthManageList = FormDataAuthManageList;
+type ReqDataRoleList = FormDataAuthManageList;
 interface RoleItem extends TableItem {
   id: number;
   roleName: string;
@@ -77,7 +77,7 @@ interface RoleItem extends TableItem {
   remark?: string;
 }
 /** 获取权限管理列表 响应数据 */
-interface ResAuthManageList extends ResPageData {
+interface ResDataRoleList extends ResPageData {
   list: RoleItem[];
 }
 interface FormDataRoleCreate {

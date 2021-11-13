@@ -3,7 +3,7 @@ import { Button, Form, Space } from "antd";
 import AppInput from "@/components/app-input";
 import useModalCreate from "./hook-modal-create";
 import ContentMain from "@/console-layout/content-main";
-import { reqAuthManageList } from "@/apis";
+import { reqRoleList } from "@/apis";
 import { appMessage } from "@/plugins/antd";
 import useModalUpdate from "./hook-modal-update";
 import AppTable from "@/components/app-table";
@@ -30,7 +30,7 @@ const AuthManage: React.FC<ViewProps<Props>> = (props) => {
     const _form = await form.validateFields().catch(() => undefined);
     if (loading || !_form) return;
     setLoading(true);
-    const res = await reqAuthManageList({ ...page, ..._form });
+    const res = await reqRoleList({ ...page, ..._form });
     if (unmount) return;
     setLoading(false);
     if (res.code != 200) return appMessage.error(res.message || "加载数据失败！");

@@ -28,7 +28,7 @@ const list: MockRoleItem[] = [
 
 export const getList = () => {
   const _list = list.filter((item) => item.isShow !== false);
-  return resFn({ list: _list });
+  return resFn<ResDataRoleList>({ list: _list, total: _list.length });
 };
 export const roleCreate = (req: any) => {
   const reqBody = JSON.parse(req.body);
