@@ -22,9 +22,9 @@ export const reqUserCreate: ApiFn<ReqDataUserCreate> = (data) => requestPost("/m
 export const reqUserList: ApiFn<ReqDataUserList, ResDataUserList> = (data) => requestPost("/mock/api/user/list", data);
 /************************************ 权限管理 end********************************************** */
 /************************************ 文章管理 ********************************************** */
-/** 保存草稿 */
-/** 新建文章 */
 /** 获取文章列表 */
 export const reqArticleList: ApiFn<ReqDataArticleList, ResDataArticleList> = (data) =>
   requestPost("/mock/api/article/list", data);
+/** 获取文章详细信息 */
+export const reqArticleInfo: ApiFn<ReqDataArticleInfo> = (data) => requestPost("/mock/api/article/Info", data);
 /************************************ 文章管理 end********************************************** */

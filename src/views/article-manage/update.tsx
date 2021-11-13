@@ -6,6 +6,11 @@ import ContentMain from "@/console-layout/content-main";
 import ArticleCollapseForm from "./components/article-collapse-form";
 import { sleep } from "@/utils";
 import LazySpin from "@/components/lazy-spin";
+import queryString from "query-string";
+import { reqArticleInfo } from "@/apis";
+import { appMessage } from "@/plugins/antd";
+import { useHistory } from "react-router-dom";
+
 interface Props {
   [key: string]: any;
 }
@@ -13,9 +18,21 @@ const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
   const { className = "" } = props;
   //初始数据
   const [isInitEnd, setIsInitEnd] = useState(false);
-  // TODO mock api d.ts
+  const history = useHistory();
+  const [id, setId] = useState<number>();
+  useEffect(() => {
+    const urlValuesMap = queryString.parse(location.search);
+    if (!urlValuesMap.id) {
+      appMessage.warn("请选择文章编辑");
+      history.replace("./list");
+      return;
+    }
+    setId(Number(urlValuesMap.id));
+  }, []);
+  //
   const getArticleInfo = async () => {
-    await sleep();
+    if (!id) return;
+    await reqArticleInfo({ id: id });
     form.setFieldsValue({
       title: "本地测试数据",
       author: "本地测试数据",
@@ -24,7 +41,7 @@ const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
   };
   useEffect(() => {
     getArticleInfo();
-  }, []);
+  }, [id]);
   //
   const EditorRef = React.createRef<Editor>();
   const [draftLoading, setDraftLoading] = useState(false);

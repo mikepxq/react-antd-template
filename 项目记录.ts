@@ -74,4 +74,7 @@
     1.npm i @types/webpack-env @types/node -D
     2.craco.config.js 处理引用的svg
     npm i svg-sprite-loader -D
+    3.退出重置store
+    4.解析路由参数
+    npm i query-string
  */

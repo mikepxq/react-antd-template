@@ -135,4 +135,7 @@ interface ReqDataArticleList extends FormDataArticleList, ReqPageData {}
 interface ResDataArticleList extends ResPageData {
   list: ArticleItem[];
 }
+interface ReqDataArticleInfo {
+  id: number;
+}
 /************************************ 文章管理 end********************************************** */
