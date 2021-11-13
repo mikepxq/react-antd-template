@@ -11,7 +11,14 @@ import { getTableSN } from "@/utils";
 interface Props {
   [key: string]: any;
 }
+let unmount = false;
 const AuthManage: React.FC<ViewProps<Props>> = (props) => {
+  useEffect(() => {
+    unmount = false;
+    return () => {
+      unmount = true;
+    };
+  }, []);
   const { className = "" } = props;
   //1.res
   const [res, setRes] = useState({
@@ -24,6 +31,7 @@ const AuthManage: React.FC<ViewProps<Props>> = (props) => {
     if (loading || !_form) return;
     setLoading(true);
     const res = await reqAuthManageList({ ...page, ..._form });
+    if (unmount) return;
     setLoading(false);
     if (res.code != 200) return appMessage.error(res.message || "加载数据失败！");
     // appMessage.success(res.message || "加载数据成功！");//列表一般不提示

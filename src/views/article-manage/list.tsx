@@ -13,7 +13,14 @@ import { PlusOutlined } from "@ant-design/icons";
 interface Props {
   [key: string]: any;
 }
+let unmount = false;
 const ArticleList: React.FC<ViewProps<Props>> = (props) => {
+  useEffect(() => {
+    unmount = false;
+    return () => {
+      unmount = true;
+    };
+  }, []);
   const { className = "" } = props;
   const [res, setRes] = useState<ResDataArticleList>({ list: [], total: 0 });
   const [loading, setLoading] = useState(false);
@@ -23,6 +30,7 @@ const ArticleList: React.FC<ViewProps<Props>> = (props) => {
     setLoading(true);
     const res = await reqArticleList({ ...page, ..._form });
     if (res.code != 200) return appMessage.error(res.message || "加载数据失败！");
+    if (unmount) return;
     setLoading(false);
     // appMessage.success(res.message || "加载数据成功！");//加载数据不做提示
     res.data.list = res.data.list.map((item, index) => ({ ...item, sn: getTableSN(page, index) }));
