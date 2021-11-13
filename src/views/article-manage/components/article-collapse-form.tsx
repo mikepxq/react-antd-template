@@ -32,7 +32,6 @@ const ArticleCollapseForm: React.FC<ViewProps<Props>> = (props) => {
               <Button onClick={onPublish} type="primary" loading={publishLoading}>
                 发布
               </Button>
-
               <Button onClick={onDraft} loading={draftLoading}>
                 草稿
               </Button>

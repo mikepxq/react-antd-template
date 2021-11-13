@@ -1,4 +1,6 @@
+import { appNotification } from "@/plugins/antd";
 import { RouterHistory } from "@/router";
+import store from "@/store";
 import { useUser } from "@/store/user";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Menu } from "antd";
@@ -15,11 +17,12 @@ interface ListItem {
 const list: ListItem[] = [
   // { title: "用户信息" },
   {
-    title: "登出",
+    title: "退出",
     onclick: () => {
-      //TODO !update store reset
+      store.dispatch({ type: "RESET_STORE" });
       localStorage.clear();
       RouterHistory.replace("/login");
+      appNotification.success({ message: "退出成功，请重新登录！" });
     },
   },
 ];
