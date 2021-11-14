@@ -1,4 +1,4 @@
-import { reqRoleCreate } from "@/apis";
+import { reqRoleUpdate } from "@/apis";
 import AppInput from "@/components/app-input";
 import { appMessage } from "@/plugins/antd";
 import { Button, Form, Input, Modal } from "antd";
@@ -10,7 +10,7 @@ interface ButtonProps {
   item: RoleItem;
 }
 interface ModalProps {
-  [key: string]: any;
+  onOk?: () => void;
 }
 
 const layout = {
@@ -20,6 +20,7 @@ const layout = {
 
 const useModalUpdate = () => {
   const isShowRef = useRef(false);
+  const activeItem = useRef<RoleItem>();
   const [, setIsShow] = useState(isShowRef.current);
   const _Button = useRef<React.FC<ViewProps<ButtonProps>>>((props) => {
     return (
@@ -28,6 +29,7 @@ const useModalUpdate = () => {
         onClick={() => {
           const { item } = props;
           setIsShow((isShowRef.current = !isShowRef.current)); //触发更新
+          activeItem.current = item;
           form.setFieldsValue({
             roleName: item.roleName,
             remark: item.remark,
@@ -43,9 +45,8 @@ const useModalUpdate = () => {
   });
   const [form] = Form.useForm<FormDataRoleCreate>();
 
-  const _Modal = useRef<React.FC<ViewProps<ModalProps>>>(() => {
-    // props;/
-    // const { key } = props;
+  const _Modal = useRef<React.FC<ViewProps<ModalProps>>>((props) => {
+    const { onOk } = props;
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [loading, setLoading] = useState(false);
 
@@ -59,16 +60,20 @@ const useModalUpdate = () => {
         }}
         onOk={async () => {
           const _form = form.getFieldsValue();
-          if (!_form || loading) return;
+          if (!_form || loading || !activeItem.current?.id) return;
           setLoading(true);
-          const res = await reqRoleCreate({
+          const res = await reqRoleUpdate({
+            id: activeItem.current.id,
             roleName: _form.roleName,
             checkedKeys: _form.authTree?.checkedKeys || [],
             halfCheckedKeys: _form.authTree?.halfCheckedKeys || [],
             remark: _form.remark,
           });
           setLoading(false);
-          if (res.code != 200) return appMessage.error(res.message || "添加失败！");
+          if (res.code != 200) return appMessage.error(res.message || "更新失败！");
+          appMessage.success(res.message || "更新成功！");
+          setIsShow((isShowRef.current = false));
+          onOk && onOk();
         }}>
         <Form form={form} {...layout}>
           <Form.Item name="roleName" label="角色名称" rules={[{ required: true }]}>

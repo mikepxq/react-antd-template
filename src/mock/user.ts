@@ -6,8 +6,8 @@ interface MockUserItem extends UserItem {
   token: string;
 }
 const list: MockUserItem[] = [
-  { id: 0, username: "superAdmin", roleId: 0, token: "superAdmin", isShow: false },
-  { id: 1, username: "common", roleId: 1, token: "common" },
+  { id: 0, username: "superAdmin", roleId: 0, token: "superAdmin", isShow: false, roleName: getRoleInfo(0)?.roleName },
+  { id: 1, username: "common", roleId: 1, token: "common", roleName: getRoleInfo(1)?.roleName },
 ];
 
 export const getUserInfo = (req: any) => {

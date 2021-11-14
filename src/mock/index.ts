@@ -13,6 +13,7 @@ Mock.mock("/mock/api/user/list", "post", user.getList);
 //
 Mock.mock("/mock/api/role/list", "post", Roles.getList);
 Mock.mock("/mock/api/role/create", "post", Roles.roleCreate);
+Mock.mock("/mock/api/role/update", "post", Roles.update);
 Mock.mock("/mock/api/role/option-list", "get", Roles.getOptionList);
 
 Mock.mock("/mock/api/article/list", "post", Article.getList);

@@ -115,7 +115,10 @@ const AuthManage: React.FC<ViewProps<Props>> = (props) => {
         onOk={() => {
           getList();
         }}></ModalCreate.Modal>
-      <ModalUpdate.Modal></ModalUpdate.Modal>
+      <ModalUpdate.Modal
+        onOk={() => {
+          getList();
+        }}></ModalUpdate.Modal>
     </ContentMain>
   );
 };

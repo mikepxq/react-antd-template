@@ -94,6 +94,13 @@ interface ReqDataRoleCreate {
   halfCheckedKeys: string[];
   remark?: string;
 }
+interface ReqDataRoleUpdate {
+  id: number;
+  roleName: string;
+  checkedKeys: string[];
+  halfCheckedKeys: string[];
+  remark?: string;
+}
 //
 
 interface UserItem extends TableItem {

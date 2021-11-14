@@ -3,7 +3,7 @@ interface MockRoleItem extends RoleItem {
   isShow?: boolean;
 }
 let listIndex = 2;
-const list: MockRoleItem[] = [
+let list: MockRoleItem[] = [
   {
     id: 0,
     roleName: "superAdmin",
@@ -33,7 +33,19 @@ export const getList = () => {
 export const roleCreate = (req: any) => {
   const reqBody = JSON.parse(req.body);
 
-  list.push({ ...reqBody, id: listIndex++ });
+  list.push({
+    ...reqBody,
+    remark: `${reqBody.remark} \n如果用动态角色登录后，无法直接访问网址，请打开控制台，清除本地数据后使用！`,
+    id: listIndex++,
+  });
+  return resFn();
+};
+export const update = (req: any) => {
+  const reqBody: ReqDataRoleUpdate = JSON.parse(req.body);
+  list = list.map((item) => {
+    if (item.id != reqBody.id) return item;
+    return { ...item, ...reqBody };
+  });
   return resFn();
 };
 /** 获取用户信息 */
