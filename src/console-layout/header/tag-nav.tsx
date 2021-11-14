@@ -3,6 +3,7 @@ import { useActionsConsoleLayout, useConsoleLayout } from "@/store/console-layou
 import React, { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { Tag } from "antd";
+import { LeftOutlined } from "@ant-design/icons";
 interface Props {
   [key: string]: any;
 }
@@ -21,6 +22,9 @@ const TagNav: React.FC<ViewProps<Props>> = (props) => {
   //render
   return (
     <nav className={`tag-nav ${className}`}>
+      <Tag className="item" onClick={() => history.goBack()}>
+        <LeftOutlined /> 返回
+      </Tag>
       <Tag className="item" onClick={() => history.push("/home")}>
         首页
       </Tag>
