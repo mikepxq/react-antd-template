@@ -136,7 +136,19 @@ interface ArticleItem extends TableItem {
   author: author;
   description?: string;
   dateTime?: string;
+  isPublish?: boolean;
   // author: string;
+}
+interface FormDataArticle {
+  title: string;
+  author: author;
+  description?: string;
+}
+interface ReqDataArticleDraftCreate {
+  title: string;
+  author: author;
+  description?: string;
+  content: string;
 }
 interface FormDataArticleList {
   name?: string; //
