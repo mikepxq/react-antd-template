@@ -22,6 +22,8 @@ export const reqRoleUpdate: ApiFn<ReqDataRoleUpdate> = (data) => requestPost("/m
 export const reqUserCreate: ApiFn<ReqDataUserCreate> = (data) => requestPost("/mock/api/user/create", data);
 /** 获取用户列表 */
 export const reqUserList: ApiFn<ReqDataUserList, ResDataUserList> = (data) => requestPost("/mock/api/user/list", data);
+/** 更新用户 */
+export const reqUserUpdate: ApiFn<ReqDataUserUpdate> = (data) => requestPost("/mock/api/user/update", data);
 /************************************ 权限管理 end********************************************** */
 /************************************ 文章管理 ********************************************** */
 /** 获取文章列表 */

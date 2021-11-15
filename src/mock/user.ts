@@ -5,7 +5,7 @@ interface MockUserItem extends UserItem {
   isShow?: false;
   token: string;
 }
-const list: MockUserItem[] = [
+let list: MockUserItem[] = [
   { id: 0, username: "superAdmin", roleId: 0, token: "superAdmin", isShow: false, roleName: getRoleInfo(0)?.roleName },
   { id: 1, username: "common", roleId: 1, token: "common", roleName: getRoleInfo(1)?.roleName },
 ];
@@ -43,6 +43,19 @@ export const create = (req: any) => {
     ...reqBody,
     roleName: _roleInfo.roleName || "",
     token: reqBody.username,
+  });
+  return resFn();
+};
+export const update = (req: any) => {
+  const reqBody: ReqDataUserUpdate = JSON.parse(req.body);
+  const _roleInfo = getRoleInfo(reqBody.roleId);
+  list = list.map((item) => {
+    if (item.id != reqBody.id) return item;
+    return {
+      ...item,
+      ...reqBody,
+      roleName: _roleInfo.roleName || "",
+    };
   });
   return resFn();
 };

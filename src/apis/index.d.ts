@@ -122,6 +122,9 @@ interface ResDataUserList extends ResPageData {
   list: UserItem[];
 }
 
+interface ReqDataUserUpdate extends FormDataUserCreate {
+  id: number;
+}
 /************************************ 权限管理 end********************************************** */
 /************************************ 文章管理 ********************************************** */
 /**热度 */
