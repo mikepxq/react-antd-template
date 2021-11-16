@@ -55,6 +55,7 @@ const ArticleList: React.FC<ViewProps<Props>> = (props) => {
       },
     },
     { key: "dateTime", title: "时间" },
+    { key: "publishStatus", title: "发布状态" },
     {
       key: "actions",
       dataIndex: "actions",

@@ -4,51 +4,45 @@ import "@toast-ui/editor/dist/toastui-editor.css";
 import { Editor } from "@toast-ui/react-editor";
 import ContentMain from "@/console-layout/content-main";
 import ArticleCollapseForm from "./components/article-collapse-form";
-import { sleep } from "@/utils";
+
 import { initialValue } from "./demo-data";
-import { reqArticleDraftCreate, reqArticleDraftUpdate } from "@/apis";
+import { reqArticleCreate, reqArticleUpdate } from "@/apis";
 import { appNotification } from "@/plugins/antd";
 interface Props {
   [key: string]: any;
 }
+type OnSubmitOptions = { publishStatus: ArticleStatus };
 const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
   const { className = "" } = props;
   const EditorRef = React.createRef<Editor>();
-  const [draftLoading, setDraftLoading] = useState(false);
-  const [publishLoading, setPublishLoading] = useState(false);
+  const [loadingMap, setLoadingMap] = useState({ draft: false, publish: false });
   //文章id
   const [id, setId] = useState<number>();
-  /** 新建草稿 */
-  const onDraftCreate = async () => {
+
+  /** 新建文章 */
+  const onCreate = async (options: OnSubmitOptions) => {
     const _form = await form.validateFields().catch(() => undefined);
-    if (!_form || draftLoading || !EditorRef.current) return;
+    if (!_form || loadingMap[options.publishStatus] || !EditorRef.current) return;
     const editor = EditorRef.current.getInstance();
-    setDraftLoading(true);
-    const res = await reqArticleDraftCreate({ ..._form, content: editor.getMarkdown(), publishStatus: "draft" });
-    setDraftLoading(false);
-    if (res.code != 200) return appNotification.error({ message: res.message || "草稿添加失败！" });
-    appNotification.success({ message: res.message || "草稿添加成功！" });
+    setLoadingMap({ ...loadingMap, [options.publishStatus]: true });
+    const res = await reqArticleCreate({ ...options, ..._form, content: editor.getMarkdown() });
+    setLoadingMap({ ...loadingMap, [options.publishStatus]: false });
+    if (res.code != 200) return appNotification.error({ message: res.message || "添加失败！" });
+    appNotification.success({ message: res.message || "添加成功！" });
     setId(res.data.id);
   };
-  /** 再次保存草稿 */
-  const onDraftUpdate = async () => {
+  /** 再次保存文章 带上id */
+  const onUpdate = async (options: OnSubmitOptions) => {
     const _form = await form.validateFields().catch(() => undefined);
-    if (!_form || draftLoading || !EditorRef.current || id === undefined) return;
+    if (!_form || loadingMap[options.publishStatus] || !EditorRef.current || id === undefined) return;
     const editor = EditorRef.current.getInstance();
-    setDraftLoading(true);
-    const res = await reqArticleDraftUpdate({ id, ..._form, content: editor.getMarkdown(), publishStatus: "draft" });
-    setDraftLoading(false);
-    if (res.code != 200) return appNotification.error({ message: res.message || "草稿更新失败！" });
-    appNotification.success({ message: res.message || "草稿更新成功！" });
+    setLoadingMap({ ...loadingMap, [options.publishStatus]: true });
+    const res = await reqArticleUpdate({ id, ...options, ..._form, content: editor.getMarkdown() });
+    setLoadingMap({ ...loadingMap, [options.publishStatus]: false });
+    if (res.code != 200) return appNotification.error({ message: res.message || "更新失败！" });
+    appNotification.success({ message: res.message || "更新成功！" });
   };
-  const onPublish = async () => {
-    const _form = await form.validateFields().catch(() => undefined);
-    if (!_form || publishLoading) return;
-    setPublishLoading(true);
-    await sleep();
-    setPublishLoading(false);
-    // console.log("[s]", s);
-  };
+
   const [form] = Form.useForm<FormDataArticle>();
   //render
   return (
@@ -56,12 +50,15 @@ const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
       <ArticleCollapseForm
         form={form}
         onDraft={() => {
-          if (id === undefined) return onDraftCreate();
-          onDraftUpdate();
+          if (id === undefined) return onCreate({ publishStatus: "draft" });
+          onUpdate({ publishStatus: "draft" });
         }}
-        draftLoading={draftLoading}
-        publishLoading={publishLoading}
-        onPublish={onPublish}
+        draftLoading={loadingMap.draft}
+        publishLoading={loadingMap.publish}
+        onPublish={() => {
+          if (id === undefined) return onCreate({ publishStatus: "publish" });
+          onUpdate({ publishStatus: "publish" });
+        }}
       />
       <main className="all-remain" style={{ marginTop: 10 }}>
         <Editor

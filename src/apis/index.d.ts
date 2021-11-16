@@ -145,20 +145,21 @@ interface FormDataArticle {
   description?: string;
 }
 type ArticleStatus = "publish" | "draft";
-interface ReqDataArticleDraftCreate {
+interface ReqDataArticleCreate {
   title: string;
   author: author;
   description?: string;
   content: string;
   publishStatus?: ArticleStatus;
 }
-interface ResDataArticleDraftCreate {
+interface ResDataArticleCreate {
   id: number;
 }
 /** 更新草稿 */
-interface ReqDataArticleDraftUpdate extends ReqDataArticleDraftCreate {
+interface ReqDataArticleUpdate extends ReqDataArticleCreate {
   id: number;
 }
+
 interface FormDataArticleList {
   name?: string; //
 }

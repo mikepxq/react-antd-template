@@ -28,8 +28,8 @@ let list: ArticleItem[] = Array(2)
     });
   });
 
-export const draftCreate = (req: any) => {
-  const reqBody: ReqDataArticleDraftCreate = JSON.parse(req.body);
+export const create = (req: any) => {
+  const reqBody: ReqDataArticleCreate = JSON.parse(req.body);
   const _id = listIndex++;
   list.push(
     Mock.mock({
@@ -41,13 +41,12 @@ export const draftCreate = (req: any) => {
       hot: "@integer(0, 5)",
       dateTime: "@datetime",
       ...reqBody,
-      publishStatus: "draft",
     })
   );
-  return resFn<ResDataArticleDraftCreate>({ id: _id });
+  return resFn<ResDataArticleCreate>({ id: _id });
 };
-export const draftUpdate = (req: any) => {
-  const reqBody: ReqDataArticleDraftUpdate = JSON.parse(req.body);
+export const update = (req: any) => {
+  const reqBody: ReqDataArticleUpdate = JSON.parse(req.body);
   list = list.map((item) => {
     if (item.id != reqBody.id) return item;
     return {
