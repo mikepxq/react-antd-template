@@ -4,8 +4,8 @@ import { resFn } from "./utils";
 const baseContent =
   '<p>I am testing data, I am testing data.</p><p><img src="https://wpimg.wallstcn.com/4c69009c-0fd4-4153-b112-6cb53d1cf943"></p>';
 // const image_uri = "https://wpimg.wallstcn.com/e4558086-631c-425c-9430-56ffb46e70b3";
-let listIndex = 2;
-const list: ArticleItem[] = Array(2)
+let listIndex = 3;
+let list: ArticleItem[] = Array(2)
   .fill(1)
   .map(() => {
     return Mock.mock({
@@ -30,9 +30,10 @@ const list: ArticleItem[] = Array(2)
 
 export const draftCreate = (req: any) => {
   const reqBody: ReqDataArticleDraftCreate = JSON.parse(req.body);
+  const _id = listIndex++;
   list.push(
     Mock.mock({
-      id: listIndex++,
+      id: _id,
       timestamp: +Mock.Random.date("T"),
       // author: "@first",
       // title: "@title(5, 10)",
@@ -40,9 +41,20 @@ export const draftCreate = (req: any) => {
       hot: "@integer(0, 5)",
       dateTime: "@datetime",
       ...reqBody,
-      isPublish: false,
+      publishStatus: "draft",
     })
   );
+  return resFn<ResDataArticleDraftCreate>({ id: _id });
+};
+export const draftUpdate = (req: any) => {
+  const reqBody: ReqDataArticleDraftUpdate = JSON.parse(req.body);
+  list = list.map((item) => {
+    if (item.id != reqBody.id) return item;
+    return {
+      ...item,
+      ...reqBody,
+    };
+  });
   return resFn();
 };
 export const getList = (req: any) => {

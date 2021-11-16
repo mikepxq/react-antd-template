@@ -136,7 +136,7 @@ interface ArticleItem extends TableItem {
   author: author;
   description?: string;
   dateTime?: string;
-  isPublish?: boolean;
+  publishStatus?: ArticleStatus;
   // author: string;
 }
 interface FormDataArticle {
@@ -144,11 +144,20 @@ interface FormDataArticle {
   author: author;
   description?: string;
 }
+type ArticleStatus = "publish" | "draft";
 interface ReqDataArticleDraftCreate {
   title: string;
   author: author;
   description?: string;
   content: string;
+  publishStatus?: ArticleStatus;
+}
+interface ResDataArticleDraftCreate {
+  id: number;
+}
+/** 更新草稿 */
+interface ReqDataArticleDraftUpdate extends ReqDataArticleDraftCreate {
+  id: number;
 }
 interface FormDataArticleList {
   name?: string; //
