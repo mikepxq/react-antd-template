@@ -22,7 +22,8 @@ const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
   /** 新建文章 */
   const onCreate = async (options: OnSubmitOptions) => {
     const _form = await form.validateFields().catch(() => undefined);
-    if (!_form || loadingMap[options.publishStatus] || !EditorRef.current) return;
+    if (!_form) return setCollapseIsOpen(true);
+    if (loadingMap[options.publishStatus] || !EditorRef.current) return;
     const editor = EditorRef.current.getInstance();
     setLoadingMap({ ...loadingMap, [options.publishStatus]: true });
     const res = await reqArticleCreate({ ...options, ..._form, markdown: editor.getMarkdown() });
@@ -34,7 +35,8 @@ const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
   /** 再次保存文章 带上id */
   const onUpdate = async (options: OnSubmitOptions) => {
     const _form = await form.validateFields().catch(() => undefined);
-    if (!_form || loadingMap[options.publishStatus] || !EditorRef.current || id === undefined) return;
+    if (!_form) return setCollapseIsOpen(true);
+    if (loadingMap[options.publishStatus] || !EditorRef.current || id === undefined) return;
     const editor = EditorRef.current.getInstance();
     setLoadingMap({ ...loadingMap, [options.publishStatus]: true });
     const res = await reqArticleUpdate({ id, ...options, ..._form, markdown: editor.getMarkdown() });
@@ -44,10 +46,14 @@ const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
   };
 
   const [form] = Form.useForm<FormDataArticle>();
+  const [collapseIsOpen, setCollapseIsOpen] = useState(true); //默认显示表单
+
   //render
   return (
     <ContentMain className={`${className} flex-column`}>
       <ArticleCollapseForm
+        collapseIsOpen={collapseIsOpen}
+        onChangeCollapse={setCollapseIsOpen}
         form={form}
         onDraft={() => {
           if (id === undefined) return onCreate({ publishStatus: "draft" });

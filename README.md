@@ -39,8 +39,8 @@ npm run link:fix
 ## create-react-app+craco VS vite+react-ts
 
 > 明知道 cra 慢的心疼，那为什么不用 vite 呢，这主要考虑长期的稳定性。既然是 react 生态，那最好尽量使用官方推荐的方案。
-
-> 不过好消息是，现在能在 react 相关生态看见 vite 的声影。这里我也会持续关注 react 官方，当使用 vite 构建的时候，我会尽快跟进。
+>
+> 不过好消息是，现在能在 react 相关生态看见 vite 的身影。我也会持续关注 react 官方，会尽快跟进。
 
 ## less
 

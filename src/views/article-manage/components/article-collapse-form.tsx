@@ -9,13 +9,24 @@ interface Props {
   onDraft?: () => void;
   draftLoading?: boolean;
   publishLoading?: boolean;
+  collapseIsOpen?: boolean;
+  onChangeCollapse?: (value: boolean) => void;
 }
 const ArticleCollapseForm: React.FC<ViewProps<Props>> = (props) => {
-  const { className = "", onPublish, onDraft, form, draftLoading, publishLoading } = props;
-  const [isOpen, setIsOpen] = useState(true); //默认显示表单
+  const {
+    className = "",
+    onPublish,
+    onDraft,
+    form,
+    draftLoading,
+    publishLoading,
+    collapseIsOpen = true,
+    onChangeCollapse,
+  } = props;
+
   //render
   return (
-    <Collapse className={`article-collapse-form ${className}`} activeKey={[String(isOpen)]}>
+    <Collapse className={`article-collapse-form ${className}`} activeKey={[String(collapseIsOpen)]}>
       <Panel
         showArrow={false}
         header={
@@ -23,10 +34,10 @@ const ArticleCollapseForm: React.FC<ViewProps<Props>> = (props) => {
             <Button
               type="primary"
               onClick={() => {
-                setIsOpen(!isOpen);
+                onChangeCollapse && onChangeCollapse(!collapseIsOpen);
               }}>
               配置
-              <RightOutlined className="arrow" style={{ transform: `rotate(${isOpen ? 90 : 0}deg)` }} />
+              <RightOutlined className="arrow" style={{ transform: `rotate(${collapseIsOpen ? 90 : 0}deg)` }} />
             </Button>
             <Space className="fr">
               <Button onClick={onPublish} type="primary" loading={publishLoading}>
