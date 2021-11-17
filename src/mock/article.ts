@@ -1,11 +1,11 @@
+import { articleInitialValue } from "@/model";
 import Mock from "mockjs";
 import { resFn } from "./utils";
 //参考 https://github.com/PanJiaChen/vue-element-admin/blob/master/mock/article.js
-const baseContent =
-  '<p>I am testing data, I am testing data.</p><p><img src="https://wpimg.wallstcn.com/4c69009c-0fd4-4153-b112-6cb53d1cf943"></p>';
 // const image_uri = "https://wpimg.wallstcn.com/e4558086-631c-425c-9430-56ffb46e70b3";
 let listIndex = 3;
-let list: ArticleItem[] = Array(2)
+
+const list: ArticleInfoItem[] = Array(2)
   .fill(1)
   .map(() => {
     return Mock.mock({
@@ -15,7 +15,7 @@ let list: ArticleItem[] = Array(2)
       // reviewer: "@first",
       title: "@title(5, 10)",
       // content_short: "mock data",
-      content: baseContent,
+      markdown: articleInitialValue,
       // forecast: "@float(0, 100, 2, 2)",
       hot: "@integer(0, 5)",
       // "type|1": ["CN", "US", "JP", "EU"],
@@ -47,12 +47,8 @@ export const create = (req: any) => {
 };
 export const update = (req: any) => {
   const reqBody: ReqDataArticleUpdate = JSON.parse(req.body);
-  list = list.map((item) => {
-    if (item.id != reqBody.id) return item;
-    return {
-      ...item,
-      ...reqBody,
-    };
+  list.forEach((item, index) => {
+    if (item.id == reqBody.id) list[index] = { ...item, ...reqBody };
   });
   return resFn();
 };
@@ -64,4 +60,9 @@ export const getList = (req: any) => {
   const _end = _start + reqBody.pageSize;
   const _list = list.slice(_start, _end);
   return resFn<ResDataArticleList>({ list: _list, total: list.length });
+};
+export const info = (req: any) => {
+  const reqBody: ReqDataArticleInfo = JSON.parse(req.body);
+  const _info = list.filter((item) => item.id == reqBody.id)[0];
+  return resFn<ResDataArticleInfo>(_info);
 };

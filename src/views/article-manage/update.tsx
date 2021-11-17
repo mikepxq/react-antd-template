@@ -20,6 +20,7 @@ const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
   const [isInitEnd, setIsInitEnd] = useState(false);
   const history = useHistory();
   const [id, setId] = useState<number>();
+
   useEffect(() => {
     const urlValuesMap = queryString.parse(location.search);
     if (!urlValuesMap.id) {
@@ -32,14 +33,24 @@ const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
   //
   const getArticleInfo = async () => {
     if (!id) return;
-    // TODO完成api
-    await reqArticleInfo({ id: id });
-    form.setFieldsValue({ title: "本地测试数据", author: "本地测试数据" });
+    const res = await reqArticleInfo({ id: id });
     setIsInitEnd(true);
+    if (res.code != 200) return appMessage.error(res.message || "获取数据失败！");
+    if (!res.data) return appMessage.warn(res.message || "无相关数据");
+
+    form.setFieldsValue({ title: res.data.title, author: res.data.author });
+
+    setInfo(res.data);
   };
   useEffect(() => {
     getArticleInfo();
   }, [id]);
+  const [info, setInfo] = useState<ResDataArticleInfo>();
+  useEffect(() => {
+    if (!EditorRef.current || !info) return;
+    const editor = EditorRef.current.getInstance();
+    editor.setMarkdown(info.markdown || "");
+  }, [info]);
   //
   const EditorRef = React.createRef<Editor>();
   const [loadingMap, setLoadingMap] = useState({ draft: false, publish: false });
@@ -50,13 +61,13 @@ const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
     if (!_form || loadingMap[options.publishStatus] || !EditorRef.current || id === undefined) return;
     const editor = EditorRef.current.getInstance();
     setLoadingMap({ ...loadingMap, [options.publishStatus]: true });
-    const res = await reqArticleUpdate({ id, ...options, ..._form, content: editor.getMarkdown() });
+    const res = await reqArticleUpdate({ id, ...options, ..._form, markdown: editor.getMarkdown() });
     setLoadingMap({ ...loadingMap, [options.publishStatus]: false });
     if (res.code != 200) return appNotification.error({ message: res.message || "更新失败！" });
     appNotification.success({ message: res.message || "更新成功！" });
   };
 
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<FormDataArticle>();
   if (!isInitEnd) return <LazySpin />;
   //render
   return (
@@ -73,13 +84,7 @@ const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
         }}
       />
       <main className="all-remain" style={{ marginTop: 10 }}>
-        <Editor
-          initialValue="h react editor"
-          previewStyle="vertical"
-          initialEditType="markdown"
-          ref={EditorRef}
-          height="100%"
-        />
+        <Editor previewStyle="vertical" initialEditType="markdown" ref={EditorRef} height="100%" />
       </main>
     </ContentMain>
   );

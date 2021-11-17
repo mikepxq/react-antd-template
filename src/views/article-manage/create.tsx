@@ -5,9 +5,9 @@ import { Editor } from "@toast-ui/react-editor";
 import ContentMain from "@/console-layout/content-main";
 import ArticleCollapseForm from "./components/article-collapse-form";
 
-import { initialValue } from "./demo-data";
 import { reqArticleCreate, reqArticleUpdate } from "@/apis";
 import { appNotification } from "@/plugins/antd";
+import { articleInitialValue } from "@/model/article";
 interface Props {
   [key: string]: any;
 }
@@ -25,7 +25,7 @@ const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
     if (!_form || loadingMap[options.publishStatus] || !EditorRef.current) return;
     const editor = EditorRef.current.getInstance();
     setLoadingMap({ ...loadingMap, [options.publishStatus]: true });
-    const res = await reqArticleCreate({ ...options, ..._form, content: editor.getMarkdown() });
+    const res = await reqArticleCreate({ ...options, ..._form, markdown: editor.getMarkdown() });
     setLoadingMap({ ...loadingMap, [options.publishStatus]: false });
     if (res.code != 200) return appNotification.error({ message: res.message || "添加失败！" });
     appNotification.success({ message: res.message || "添加成功！" });
@@ -37,7 +37,7 @@ const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
     if (!_form || loadingMap[options.publishStatus] || !EditorRef.current || id === undefined) return;
     const editor = EditorRef.current.getInstance();
     setLoadingMap({ ...loadingMap, [options.publishStatus]: true });
-    const res = await reqArticleUpdate({ id, ...options, ..._form, content: editor.getMarkdown() });
+    const res = await reqArticleUpdate({ id, ...options, ..._form, markdown: editor.getMarkdown() });
     setLoadingMap({ ...loadingMap, [options.publishStatus]: false });
     if (res.code != 200) return appNotification.error({ message: res.message || "更新失败！" });
     appNotification.success({ message: res.message || "更新成功！" });
@@ -62,7 +62,7 @@ const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
       />
       <main className="all-remain" style={{ marginTop: 10 }}>
         <Editor
-          initialValue={initialValue}
+          initialValue={articleInitialValue}
           previewStyle="vertical"
           initialEditType="markdown"
           ref={EditorRef}

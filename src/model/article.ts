@@ -1,4 +1,4 @@
-export const initialValue = `![image](https://uicdn.toast.com/toastui/img/tui-editor-bi.png)
+export const articleInitialValue = `![image](https://uicdn.toast.com/toastui/img/tui-editor-bi.png)
 
 # Awesome Editor!
 

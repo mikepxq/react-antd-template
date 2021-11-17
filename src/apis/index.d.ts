@@ -149,7 +149,7 @@ interface ReqDataArticleCreate {
   title: string;
   author: author;
   description?: string;
-  content: string;
+  markdown: string;
   publishStatus?: ArticleStatus;
 }
 interface ResDataArticleCreate {
@@ -170,4 +170,8 @@ interface ResDataArticleList extends ResPageData {
 interface ReqDataArticleInfo {
   id: number;
 }
+interface ArticleInfoItem extends ArticleItem {
+  markdown?: string;
+}
+type ResDataArticleInfo = ArticleInfoItem | null;
 /************************************ 文章管理 end********************************************** */

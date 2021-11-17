@@ -19,5 +19,5 @@ Mock.mock("/mock/api/role/option-list", "get", Roles.getOptionList);
 
 Mock.mock("/mock/api/article/create", "post", Article.create);
 Mock.mock("/mock/api/article/update", "post", Article.update);
-
 Mock.mock("/mock/api/article/list", "post", Article.getList);
+Mock.mock("/mock/api/article/info", "post", Article.info);

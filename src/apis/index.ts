@@ -36,5 +36,6 @@ export const reqArticleUpdate: ApiFn<ReqDataArticleUpdate> = (data) => requestPo
 export const reqArticleList: ApiFn<ReqDataArticleList, ResDataArticleList> = (data) =>
   requestPost("/mock/api/article/list", data);
 /** 获取文章详细信息 */
-export const reqArticleInfo: ApiFn<ReqDataArticleInfo> = (data) => requestPost("/mock/api/article/Info", data);
+export const reqArticleInfo: ApiFn<ReqDataArticleInfo, ResDataArticleInfo> = (data) =>
+  requestPost("/mock/api/article/info", data);
 /************************************ 文章管理 end********************************************** */
