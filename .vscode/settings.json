@@ -35,5 +35,6 @@
     "vite",
     "mikepxq",
     "reqSvgs"
-  ]
+  ],
+  "liveServer.settings.root": "/build"
 }
