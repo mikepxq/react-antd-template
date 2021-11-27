@@ -44,7 +44,7 @@ const Aside: React.FC<ViewProps<Props>> = (props) => {
           return (
             <Menu.SubMenu
               key={route.path}
-              icon={<UploadOutlined />}
+              icon={route.icon && <route.icon />}
               title={route.title || route.name}
               onTitleClick={() => {
                 setOpenKeysMap({ ...openKeysMap, [route.path]: !openKeysMap[route.path] });
@@ -58,7 +58,7 @@ const Aside: React.FC<ViewProps<Props>> = (props) => {
         return (
           <Menu.Item
             key={route.path}
-            icon={<UploadOutlined />}
+            icon={route.icon && <route.icon />}
             onClick={() => {
               history.push(route.path);
               props.onChange && props.onChange(route);
