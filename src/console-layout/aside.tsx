@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Menu, Layout } from "antd";
 const { Sider } = Layout;
-import { UploadOutlined } from "@ant-design/icons";
 import "./style.less";
 import { useHistory } from "react-router-dom";
 import { useCurrentRoute } from "@/router/hooks";

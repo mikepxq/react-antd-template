@@ -2,9 +2,8 @@ import Login from "@/views/login/index";
 import Page404 from "@/views/page404";
 import ConsoleLayout from "@/console-layout";
 import React from "react";
-import { ReactComponent as RunningSvg } from "@/icons/svg/running.svg";
-
 import { UserOutlined } from "@ant-design/icons";
+import { IconExample, IconRun } from "@/icons";
 // import { sleep } from "@/utils";
 // import Home from "@/views/home";
 /**
@@ -65,13 +64,13 @@ export const consoleRoute: RouteItem = {
       name: "doing",
       isAuth: false,
       component: React.lazy(async () => import("@/views/doing")),
-      icon: RunningSvg,
+      icon: IconRun,
     },
     {
       path: "/console/demo",
       name: "demo",
       component: React.lazy(() => import("@/views/demo/index")),
-      icon: UserOutlined,
+      icon: IconExample,
       children: [
         {
           path: "/console/demo/hook-modal",
