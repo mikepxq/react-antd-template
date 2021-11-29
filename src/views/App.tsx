@@ -1,9 +1,9 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { RouterView, useRoutes } from "@/router";
-import { Router } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { useUser, useUserDispatch } from "@/store/user";
 import InitLoading from "@/components/init-loading";
-import { RouterHistory } from "@/router";
+
 // 权限 动态路由
 const App: React.FC = () => {
   const { routeList } = useRoutes();
@@ -34,9 +34,9 @@ const App: React.FC = () => {
       {/* 路由初始完 避免异步动态路由直接404 */}
       {isInitEnd && (
         <Suspense fallback={<InitLoading />}>
-          <Router history={RouterHistory}>
+          <HashRouter>
             <RouterView routes={routeList} className="m-page" />
-          </Router>
+          </HashRouter>
         </Suspense>
       )}
     </>
