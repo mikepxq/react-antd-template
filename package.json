@@ -29,6 +29,7 @@
     "start": "craco  start",
     "build": "craco  build",
     "build:alz": "cross-env ANALYZE=true craco  build",
+    "build:mock": "cross-env REACT_APP_MOCK=true craco  build",
     "lint-fix": "eslint --fix --ext  .ts,tsx,js,d.ts,less,scss src",
     "prepare": "husky install"
   },

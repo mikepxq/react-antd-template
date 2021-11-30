@@ -36,5 +36,6 @@
     "mikepxq",
     "reqSvgs"
   ],
-  "liveServer.settings.root": "/build"
+  "liveServer.settings.root": "/build",
+  "liveServer.settings.port": 5501
 }
