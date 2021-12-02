@@ -39,9 +39,10 @@ module.exports = {
       }
       //https://ant.design/docs/react/replace-moment-cn
       /** 等用了moment 时再做个比较 */
-      // if (isProd) {
-      //   webpackConfig.plugins.push(new AntdDayjsWebpackPlugin());
-      // }
+      if (isProd) {
+        // webpackConfig.plugins.push(new AntdDayjsWebpackPlugin());
+        webpackConfig.output.publicPath = "https://mikepxq.github.io/react-antd-template/";
+      }
       return webpackConfig;
     },
   },
