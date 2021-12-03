@@ -1,7 +1,23 @@
 import React from "react";
 import Icon from "@ant-design/icons";
-import { ReactComponent as Run } from "@/icons/svg/run.svg";
-import { ReactComponent as Example } from "@/icons/svg/example.svg";
+import { ReactComponent as SvgRun } from "@/icons/svg/run.svg";
+import { ReactComponent as SvgExample } from "@/icons/svg/example.svg";
+import { ReactComponent as SvgModal } from "@/icons/svg/modal.svg";
+import { ReactComponent as SvgLog } from "@/icons/svg/log.svg";
+import { ReactComponent as SvgVs } from "@/icons/svg/vs.svg";
+import { ReactComponent as SvgAuth } from "@/icons/svg/auth.svg";
+import { ReactComponent as SvgRole } from "@/icons/svg/role.svg";
+import { ReactComponent as SvgRegular } from "@/icons/svg/regular.svg";
+import { ReactComponent as SvgArticle } from "@/icons/svg/article.svg";
+import { ReactComponent as SvgList } from "@/icons/svg/list.svg";
 
-export const IconRun = (props: any) => <Icon component={Run} {...props} />;
-export const IconExample = (props: any) => <Icon component={Example} {...props} />;
+export const Run = (props: any) => <Icon component={SvgRun} {...props} />;
+export const Example = (props: any) => <Icon component={SvgExample} {...props} />;
+export const Modal = (props: any) => <Icon component={SvgModal} {...props} />;
+export const Log = (props: any) => <Icon component={SvgLog} {...props} />;
+export const Vs = (props: any) => <Icon component={SvgVs} {...props} />;
+export const Auth = (props: any) => <Icon component={SvgAuth} {...props} />;
+export const Role = (props: any) => <Icon component={SvgRole} {...props} />;
+export const Regular = (props: any) => <Icon component={SvgRegular} {...props} />;
+export const Article = (props: any) => <Icon component={SvgArticle} {...props} />;
+export const List = (props: any) => <Icon component={SvgList} {...props} />;

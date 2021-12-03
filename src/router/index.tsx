@@ -3,7 +3,7 @@ import Page404 from "@/views/page404";
 import ConsoleLayout from "@/console-layout";
 import React from "react";
 import { UserOutlined } from "@ant-design/icons";
-import { IconExample, IconRun } from "@/icons";
+import * as Icons from "@/icons";
 // import { sleep } from "@/utils";
 // import Home from "@/views/home";
 /**
@@ -64,31 +64,31 @@ export const consoleRoute: RouteItem = {
       name: "doing",
       isAuth: false,
       component: React.lazy(async () => import("@/views/doing")),
-      icon: IconRun,
+      icon: Icons.Run,
     },
     {
       path: "/console/demo",
       name: "demo",
       component: React.lazy(() => import("@/views/demo/index")),
-      icon: IconExample,
+      icon: Icons.Example,
       children: [
         {
           path: "/console/demo/hook-modal",
           name: "hook-modal",
           component: React.lazy(() => import("@/views/demo/hook-modal/index")),
-          icon: UserOutlined,
+          icon: Icons.Modal,
         },
         {
           path: "/console/demo/hook-log",
           name: "hook-log",
           component: React.lazy(() => import("@/views/demo/hook-log")),
-          icon: UserOutlined,
+          icon: Icons.Log,
         },
         {
           path: "/console/demo/vs-version",
           name: "vs-version",
           component: React.lazy(() => import("@/views/demo/vs-version/index")),
-          icon: UserOutlined,
+          icon: Icons.Vs,
         },
       ],
     },
@@ -120,7 +120,7 @@ export const consoleRoute: RouteItem = {
       name: "auth-manage",
       title: "权限管理",
       component: React.lazy(() => import("@/views/auth-manage/index")),
-      icon: UserOutlined,
+      icon: Icons.Auth,
       redirect: "/console/auth-manage/role-manage",
       children: [
         {
@@ -128,7 +128,7 @@ export const consoleRoute: RouteItem = {
           name: "role-manage",
           title: "角色管理",
           component: React.lazy(() => import("@/views/auth-manage/role-manage/index")),
-          icon: UserOutlined,
+          icon: Icons.Role,
         },
         {
           path: "/console/auth-manage/user-manage",
@@ -144,15 +144,14 @@ export const consoleRoute: RouteItem = {
       name: "Regular",
       title: "正则",
       component: React.lazy(() => import("@/views/regular/index")),
-      icon: UserOutlined,
+      icon: Icons.Regular,
     },
     {
       path: "/console/article",
       name: "ArticleManage",
       title: "文章管理",
       component: React.lazy(() => import("@/views/article-manage/index")),
-      icon: UserOutlined,
-      // isLinkBreadCrumb: false, //是否点击是否跳转
+      icon: Icons.Article,
       redirect: "/console/article/list",
       children: [
         {
@@ -160,14 +159,13 @@ export const consoleRoute: RouteItem = {
           name: "ArticleList",
           title: "文章列表",
           component: React.lazy(() => import("@/views/article-manage/list")),
-          icon: UserOutlined,
+          icon: Icons.List,
         },
         {
           path: "/console/article/create",
           name: "ArticleCreate",
           title: "新建文章",
           component: React.lazy(() => import("@/views/article-manage/create")),
-          icon: UserOutlined,
           isHidden: true,
         },
         {
@@ -175,7 +173,6 @@ export const consoleRoute: RouteItem = {
           name: "ArticleUpdate",
           title: "编辑文章",
           component: React.lazy(() => import("@/views/article-manage/update")),
-          icon: UserOutlined,
           isHidden: true,
         },
       ],
@@ -197,4 +194,5 @@ export const Provider = createProvider([...syncRoutes, defaultRoute]);
 export { useRoutes, useRoutesAction, useIs404 } from "./hooks";
 export { default as RouterView } from "./router-view";
 import { createBrowserHistory } from "history";
+
 export const RouterHistory = createBrowserHistory();
