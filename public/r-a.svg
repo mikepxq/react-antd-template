@@ -1,0 +1,16 @@
+<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" style="vector-effect: non-scaling-stroke;" stroke="null">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <g stroke="null">
+  <title style="vector-effect: non-scaling-stroke;" stroke="null">background</title>
+  <rect stroke="null" fill="#fff" id="canvas_background" height="482" width="642" y="-1" x="-1"/>
+  <g style="vector-effect: non-scaling-stroke;" stroke="null" display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect stroke="null" fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g stroke="null">
+  <title style="vector-effect: non-scaling-stroke;" stroke="null">Layer 1</title>
+  <rect stroke="#000" style="vector-effect: non-scaling-stroke;" id="svg_1" height="480.000012" width="640.000034" y="0" x="0" stroke-width="1.5" fill="#61dafb"/>
+  <text stroke="#000" transform="matrix(48.95381031360719,0,0,24.06981418398279,-14000.545799015297,-4997.000792360139) " xml:space="preserve" text-anchor="start" font-family="'Shadows Into Light', serif" font-size="24" id="svg_2" y="226.810603" x="286.323222" stroke-width="0" fill="#000000">R</text>
+  <text stroke="#000" transform="matrix(5.71465027574205,0,0,3.2804157184402003,-2229.3027953508486,-580.5468676878708) " xml:space="preserve" text-anchor="start" font-family="'Shadows Into Light', serif" font-size="24" id="svg_3" y="304.654137" x="479.432977" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#000000">a</text>
+ </g>
+</svg>
