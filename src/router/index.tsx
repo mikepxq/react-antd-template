@@ -193,6 +193,3 @@ import { createProvider } from "./hooks";
 export const Provider = createProvider([...syncRoutes, defaultRoute]);
 export { useRoutes, useRoutesAction, useIs404 } from "./hooks";
 export { default as RouterView } from "./router-view";
-import { createBrowserHistory } from "history";
-
-export const RouterHistory = createBrowserHistory();

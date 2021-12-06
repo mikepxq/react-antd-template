@@ -24,7 +24,7 @@ const RouteBefore: React.FC<ViewProps<Props>> = (props) => {
     //1.404
     if (is404) {
       NProgress.done();
-      if (!authList) return history.replace("/login"); //1.1未登录
+      if (!authList) return history.replace({ pathname: "/login" }); //1.1未登录
       return history.replace("/404"); //1.1未登录
     }
     //2.如果有重定向路由
