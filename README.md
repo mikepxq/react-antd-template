@@ -42,6 +42,8 @@ npm run link:fix
 >
 > 不过好消息是，现在能在 react 相关生态看见 vite 的身影。我也会持续关注 react 官方，会尽快跟进。
 
+[线上地址](https://mikepxq.github.io/react-antd-template)
+
 ## less
 
 > 为什么使用 less？因为 antd 使用的 less。同步 ui 在动态主题时，可以使用全局变量。
@@ -74,7 +76,11 @@ reqUserInfo()
 
 > 不同层有不同的前缀，这样更美观的同时，也能更快的定位是那里的调用。
 
-## 浏览器的支持
+# Demo
+
+![demo](https://mikepxq.github.io/react-antd-template/demo/demo.webm)
+
+# 浏览器的支持
 
 > 虽然 cra 兼容 ie10+,但此项目暂不做 ie 的支持
 
