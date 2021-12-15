@@ -78,8 +78,7 @@ reqUserInfo()
 
 # Demo
 
-<!-- [demo](https://mikepxq.github.io/react-antd-template/demo/demo.webm) -->
-<video controls="" autoplay="" name="media"><source src="https://mikepxq.github.io/react-antd-template/demo/demo.webm" type="video/webm"></video>
+![demo](https://mikepxq.github.io/react-antd-template/demo/demo.gif)
 
 # 浏览器的支持
 
