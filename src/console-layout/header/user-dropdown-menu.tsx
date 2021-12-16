@@ -6,6 +6,7 @@ import { Dropdown, Menu } from "antd";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import type { History } from "history";
+import Cookies from "js-cookie";
 interface Props {
   [key: string]: any;
 }
@@ -21,6 +22,8 @@ const list: ListItem[] = [
     onclick: ({ history }) => {
       store.dispatch({ type: "RESET_STORE" });
       localStorage.clear();
+      Cookies.remove("token");
+      Cookies.remove("userId");
       history.replace({ pathname: "/login" });
       appNotification.success({ message: "退出成功，请重新登录！" });
     },

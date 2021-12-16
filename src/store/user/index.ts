@@ -3,6 +3,7 @@ import { asyncRoutes, defaultRoute, syncRoutes, useRoutesAction } from "@/router
 import { generatorAuthRouteList } from "@/router/utils";
 import { useAppDispatch, useSelector } from "@/store-hooks";
 import { createSlice } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 type State = {
   username: string;
   authList?: string[];
@@ -12,8 +13,8 @@ type State = {
 const initialState: State = {
   username: "",
   authList: undefined,
-  token: localStorage.getItem("token") || "",
-  id: localStorage.getItem("userId") || "",
+  token: Cookies.get("token") || "",
+  id: Cookies.get("userId") || "",
 };
 
 export const slice = createSlice({
@@ -55,8 +56,8 @@ export const useUserDispatch = () => {
     fetchLogin: async (data: ReqDataLogin) => {
       const res = await reqLogin(data);
       if (res.code != 200) return res; //直接给页面使用
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("userId", String(res.data.id));
+      Cookies.set("token", res.data.token, { expires: 1 / 2 / 24 }); //0.5h
+      Cookies.set("userId", String(res.data.id), { expires: 1 / 2 / 24 }); //0.5h
       resetRoutes(res.data);
       dispatch(slice.actions.setUserInfo(res.data));
       return res;

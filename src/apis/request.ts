@@ -3,6 +3,7 @@ import { MockApiSleepTime } from "@/model/config";
 import { sleep } from "@/utils";
 import axios from "axios";
 import { ErrorMiddleware } from "./error";
+import Cookies from "js-cookie";
 const axiosInstance = axios.create({
   baseURL: "",
   timeout: 10000,
@@ -12,7 +13,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     /** */
-    return { ...config, token: localStorage.getItem("token") || "" };
+    return { ...config, token: Cookies.get("token") || "" };
   }
   // (err) => {}
 );
