@@ -15,10 +15,13 @@
     //
     
   2.提交检查 修复
-    npx husky-init & npm install
+    1.安装 npx husky-init & npm install
       "lint-staged": {
         "*.{js,tsx,ts}": "eslint --cache --fix"
       }
+    2.修复 husky 无效
+      去除pre-commit 执行下面，重新生成文件
+      npx husky add .husky/pre-commit "npx lint-staged"
     npm i -D lint-staged@10
     lint
   3.更新依赖
