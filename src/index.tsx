@@ -17,6 +17,7 @@ const MockEnter: React.FC = () => {
   }, []);
   return <>{mockEnd && <App />}</>;
 };
+
 ReactDOM.render(
   // <React.StrictMode>
   <ConfigProvider locale={zhCN}>

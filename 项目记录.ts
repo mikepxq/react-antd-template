@@ -46,6 +46,9 @@
     npm i -D webpack-bundle-analyzer
   6.环境变量
     npm i -D cross-env
+  7.修复热更新 
+  //https://github.com/facebook/create-react-app/issues/11880#issuecomment-1005409614
+ yarn add -D react-error-overlay@v6.0.9
 3.依赖 项目基础结构 routes store...
   1.routes 
     npm i react-router-dom @types/react-router-dom
