@@ -1,18 +1,12 @@
 import React from "react";
-import { useUser, useUserDispatch } from "@/store/user";
-import { Button, Space } from "antd";
 import "./style.less";
-import { useRoutes } from "@/router";
-import AppHeader from "./header";
+import AppHeader from "./header/index";
 
 const Home: React.FC<ViewProps> = (props) => {
   const { className } = props;
-  const { routeList } = useRoutes();
-  const user = useUser();
-  const { fetchUserInfo } = useUserDispatch();
   //render
   return (
-    <div className={`${className} home__page`}>
+    <div className={`${className} home--page`}>
       <AppHeader />
     </div>
   );

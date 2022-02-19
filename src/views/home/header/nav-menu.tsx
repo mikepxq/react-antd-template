@@ -1,14 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { ReactComponent as LogoSvg } from "@/icons/svg/logo.svg";
+
 import { Menu } from "antd";
+import { useHistory } from "react-router-dom";
 interface Props {
   [key: string]: any;
 }
+const NavMenuList: RouteItem[] = [
+  {
+    path: "/console",
+    exact: true,
+    title: "console",
+  },
+];
 /** 默认去除前后空格 */
-const AppHeader: React.FC<ViewProps<Props>> = (props) => {
-  const { className = "" } = props;
-  const getSideMenu = (routes: RouteItem[] = []) => {
+const NavMenu: React.FC<ViewProps<Props>> = (props) => {
+  const history = useHistory();
+  const getNavMenu = (routes: RouteItem[] = []) => {
     return routes
       .filter((route) => !route.isHidden) //筛选不能显示的
       .map((route) => {
@@ -23,7 +30,7 @@ const AppHeader: React.FC<ViewProps<Props>> = (props) => {
                 // setOpenKeysMap({ ...openKeysMap, [route.path]: !openKeysMap[route.path] });
                 props.onChange && props.onChange(route);
               }}>
-              {getSideMenu(route.children)}
+              {getNavMenu(route.children)}
             </Menu.SubMenu>
           );
         }
@@ -33,8 +40,7 @@ const AppHeader: React.FC<ViewProps<Props>> = (props) => {
             key={route.path}
             icon={route.icon && <route.icon />}
             onClick={() => {
-              // history.push(route.path);
-              props.onChange && props.onChange(route);
+              history.push(route.path);
             }}>
             {route.title || route.name}
           </Menu.Item>
@@ -42,15 +48,6 @@ const AppHeader: React.FC<ViewProps<Props>> = (props) => {
       });
   };
   //render
-  return (
-    <header className="app-header">
-      <div className="--container">
-        <Link to="/">
-          <LogoSvg />
-          <Menu></Menu>
-        </Link>
-      </div>
-    </header>
-  );
+  return <Menu>{getNavMenu(NavMenuList)}</Menu>;
 };
-export default AppHeader;
+export default NavMenu;

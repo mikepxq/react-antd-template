@@ -1,8 +1,25 @@
-.home__page {
-  .app-header {
+@import "@/styles/var.less";
+.home--page {
+  > .header {
     height: 50px;
-    > .--container {
+    box-shadow: @layout-box-shadow;
+
+    > .container {
       height: 100%;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: @app-container-width;
+      margin: 0 auto;
+      .logo--wrap {
+        display: flex;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        .logo {
+        }
+      }
     }
   }
 }
