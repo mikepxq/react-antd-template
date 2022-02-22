@@ -30,7 +30,7 @@ const ArticleCollapseForm: React.FC<ViewProps<Props>> = (props) => {
       <Panel
         showArrow={false}
         header={
-          <nav className="clear">
+          <nav className="clear" style={{ width: "100%" }}>
             <Button
               type="primary"
               onClick={() => {
@@ -40,11 +40,11 @@ const ArticleCollapseForm: React.FC<ViewProps<Props>> = (props) => {
               <RightOutlined className="arrow" style={{ transform: `rotate(${collapseIsOpen ? 90 : 0}deg)` }} />
             </Button>
             <Space className="fr">
-              <Button onClick={onPublish} type="primary" loading={publishLoading}>
-                发布
-              </Button>
               <Button onClick={onDraft} loading={draftLoading}>
                 草稿
+              </Button>
+              <Button onClick={onPublish} type="primary" loading={publishLoading}>
+                发布
               </Button>
             </Space>
           </nav>

@@ -8,7 +8,7 @@ import LazySpin from "@/components/lazy-spin";
 import queryString from "query-string";
 import { reqArticleInfo, reqArticleUpdate } from "@/apis";
 import { appMessage, appNotification } from "@/plugins/antd";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 interface Props {
   [key: string]: any;
@@ -20,7 +20,7 @@ const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
   const [isInitEnd, setIsInitEnd] = useState(false);
   const history = useHistory();
   const [id, setId] = useState<number>();
-
+  const location = useLocation();
   useEffect(() => {
     const urlValuesMap = queryString.parse(location.search);
     if (!urlValuesMap.id) {
@@ -88,7 +88,15 @@ const ArticleManage: React.FC<ViewProps<Props>> = (props) => {
         }}
       />
       <main className="all-remain" style={{ marginTop: 10 }}>
-        <Editor previewStyle="vertical" initialEditType="markdown" ref={EditorRef} height="100%" />
+        <Editor
+          previewStyle="vertical"
+          initialEditType="markdown"
+          ref={EditorRef}
+          height="100%"
+          onKeydown={() => {
+            console.log("[editor]");
+          }}
+        />
       </main>
     </ContentMain>
   );
