@@ -40,8 +40,9 @@ const getRouteTreeList = (routeList: RouteItem[], parent?: RouteItem) => {
 const getRouteTreeDom = (routeList: RouteItem[]) => {
   return routeList.map((route) => {
     //route.isLayout ? '' :
+    // Boolean(route.index) as any 实际上 还是 boolean
     return (
-      <Route path={route.path} element={route.element} key={`${route._key}`} index={Boolean(route.index)}>
+      <Route path={route.path} element={route.element} key={`${route._key}`} index={Boolean(route.index) as any}>
         {route.children && getRouteTreeDom(route.children)}
       </Route>
     );

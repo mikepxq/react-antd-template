@@ -4,7 +4,7 @@ interface RouteProps {
   routes?: RouteItem[];
   className?: string;
 }
-interface RouteItem extends ReactRouterDom.NonIndexRouteObject {
+type RouteItem = ReactRouterDom.RouteObject & {
   //生成数据
   // parent?: RouteItem;
   breadCrumbRouteList?: RouteItem[]; //方便使用
@@ -27,7 +27,7 @@ interface RouteItem extends ReactRouterDom.NonIndexRouteObject {
   isShortcutTag?: boolean;
   /** 是否隐藏侧边栏 */
   isHidden?: boolean;
-}
+};
 
 type BreadCrumbItem = { path: string; text: string };
 /** 权限选项单选 */
