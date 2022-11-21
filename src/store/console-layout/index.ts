@@ -1,5 +1,5 @@
-import { useAppDispatch, useSelector } from "@/store-hooks";
-import { createSlice } from "@reduxjs/toolkit";
+import { useAppDispatch, useSelector } from '@/store-hooks';
+import { createSlice } from '@reduxjs/toolkit';
 type VisitedRouteItem = { path: string; title?: string; name: string; isDelete?: boolean };
 const initialState = {
   visitedMap: {} as Record<string, VisitedRouteItem>,
@@ -7,7 +7,7 @@ const initialState = {
 type State = typeof initialState;
 
 export const slice = createSlice({
-  name: "consoleLayout",
+  name: 'consoleLayout',
   initialState,
   reducers: {
     _setVisitedMap(state, action: Action<VisitedRouteItem>) {

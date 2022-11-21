@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { Tree, Form, FormProps } from "antd";
-import { useRoutes } from "@/router";
-import { generatorAuthTreeOptionFromRoutes } from "@/model/auth-tree";
+import React, { useState } from 'react';
+import { Tree, Form, FormProps } from 'antd';
+
+import { useRouteList } from '@/router/hooks';
+import { generatorAuthTreeOptionFromRoutes } from '@/router/utils';
 
 interface FormOptionAuthTreeProps {
   [key: string]: any;
@@ -9,8 +10,8 @@ interface FormOptionAuthTreeProps {
   onChange?: (value: Antd.TreeCheckedKeys) => void;
 }
 const FormOptionAuthTree: React.FC<ViewProps<FormOptionAuthTreeProps>> = (props) => {
-  const { className = "", value = { checkedKeys: [] }, onChange } = props;
-  const { routeList } = useRoutes();
+  const { className = '', value = { checkedKeys: [] }, onChange } = props;
+  const routeList = useRouteList();
   const [treeOption] = useState(generatorAuthTreeOptionFromRoutes(routeList)); //不会每次只需
 
   return (
@@ -31,7 +32,7 @@ interface Props extends FormProps {
   [key: string]: any;
 }
 const FormItemAuthTree: React.FC<ViewProps<Props>> = (props) => {
-  const { className = "", name = "authTree" } = props;
+  const { className = '', name = 'authTree' } = props;
   //render
   return (
     <Form.Item className={className} name={name} label="权限列表">

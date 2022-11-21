@@ -1,9 +1,9 @@
-import { reqRoleCreate } from "@/apis";
-import AppInput from "@/components/app-input";
-import { appMessage } from "@/plugins/antd";
-import { Button, Form, Input, Modal } from "antd";
-import React, { useRef, useState } from "react";
-import FormItemAuthTree from "../components/form-item-auth-tree";
+import { reqRoleCreate } from '@/apis';
+import AppInput from '@/components/app-input';
+import { appMessage } from '@/plugins/antd';
+import { Button, Form, Input, Modal } from 'antd';
+import React, { useRef, useState } from 'react';
+import FormItemAuthTree from '../components/form-item-auth-tree';
 
 interface ButtonProps {
   [key: string]: any;
@@ -59,8 +59,8 @@ const useModalCreate = () => {
             remark: _form.remark,
           });
           setLoading(false);
-          if (res.code != 200) return appMessage.error(res.message || "添加失败！");
-          appMessage.success(res.message || "添加成功！");
+          if (res.code != 200) return appMessage.error(res.message || '添加失败！');
+          appMessage.success(res.message || '添加成功！');
           setIsShow((isShowRef.current = false));
           onOk && onOk();
         }}>

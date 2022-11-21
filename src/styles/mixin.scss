@@ -1,0 +1,11 @@
+@mixin b() {
+  border: 1px solid;
+}
+
+@mixin flex-column() {
+  display: flex;
+  flex-direction: column;
+  .all-remain {
+    flex-grow: 2;
+  }
+}

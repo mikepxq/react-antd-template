@@ -1,7 +1,7 @@
-import { appMessage } from "@/plugins/antd";
+import { appMessage } from '@/plugins/antd';
 
 const loginFn = (res: ApiRes) => {
-  appMessage.error(res.message || "用户失效，请重新登录！");
+  appMessage.error(res.message || '用户失效，请重新登录！');
 };
 type ErrorFn = (res: ApiRes) => void;
 const errorMap: Record<string, ErrorFn> = {

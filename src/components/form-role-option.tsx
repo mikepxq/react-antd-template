@@ -1,8 +1,8 @@
-import { reqRoleOptionList } from "@/apis";
-import { appMessage } from "@/plugins/antd";
-import { Select } from "antd";
+import { reqRoleOptionList } from '@/apis';
+import { appMessage } from '@/plugins/antd';
+import { Select } from 'antd';
 const { Option } = Select;
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 interface Props {
   [key: string]: any;
   value?: number;
@@ -10,7 +10,7 @@ interface Props {
 }
 let isUnMount = false;
 const FormRoleOption: React.FC<ViewProps<Props>> = (props) => {
-  const { className = "", value, onChange } = props;
+  const { className = '', value, onChange } = props;
   const [list, setList] = useState<OptionItem[]>([]);
   const [loading, setLoading] = useState(false);
   const getList = async () => {
@@ -19,7 +19,7 @@ const FormRoleOption: React.FC<ViewProps<Props>> = (props) => {
     const res = await reqRoleOptionList();
     if (isUnMount) return; //避免卸载后渲染
     setLoading(false);
-    if (res.code != 200) appMessage.error(res.message || "获取数据失败！");
+    if (res.code != 200) appMessage.error(res.message || '获取数据失败！');
     setList(res.data);
     if (value === undefined) onChange && onChange(res.data[0].value);
   };

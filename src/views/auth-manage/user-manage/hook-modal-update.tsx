@@ -1,9 +1,9 @@
-import { reqUserUpdate } from "@/apis";
-import AppInput from "@/components/app-input";
-import FormRoleOption from "@/components/form-role-option";
-import { appMessage } from "@/plugins/antd";
-import { Button, Form, Modal } from "antd";
-import React, { useRef, useState } from "react";
+import { reqUserUpdate } from '@/apis';
+import AppInput from '@/components/app-input';
+import FormRoleOption from '@/components/form-role-option';
+import { appMessage } from '@/plugins/antd';
+import { Button, Form, Modal } from 'antd';
+import React, { useRef, useState } from 'react';
 // import FormItemAuthTree from "../components/form-item-auth-tree";
 
 interface ButtonProps {
@@ -60,8 +60,8 @@ const useModalUpdate = () => {
           setLoading(true);
           const res = await reqUserUpdate({ id: Number(activeItem.current.id), ..._form });
           setLoading(false);
-          if (res.code != 200) return appMessage.error(res.message || "更新失败！");
-          appMessage.success(res.message || "更新成功！");
+          if (res.code != 200) return appMessage.error(res.message || '更新失败！');
+          appMessage.success(res.message || '更新成功！');
           setIsShow((isShowRef.current = false));
           onOk && onOk();
         }}>
@@ -69,7 +69,7 @@ const useModalUpdate = () => {
           <Form.Item name="username" label="用户名称" rules={[{ required: true }]}>
             <AppInput placeholder="请输入用户名称" />
           </Form.Item>
-          <Form.Item name="roleId" label="所属角色" rules={[{ required: true, message: "请选择所属角色" }]}>
+          <Form.Item name="roleId" label="所属角色" rules={[{ required: true, message: '请选择所属角色' }]}>
             <FormRoleOption />
           </Form.Item>
         </Form>

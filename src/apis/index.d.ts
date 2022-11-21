@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/triple-slash-reference */
-/// <reference path="../store/user.d.ts"/>
+// / <reference path="../store/user.d.ts"/>
 /** 页面请求 */
 type DispatchFn<Req = any, Res = any> = (payload: string, options?: Req) => ApiRes<Res> | Promise<ApiRes<Res>>;
 
@@ -28,6 +28,8 @@ type InterfaceToType<Interface> = { [key in keyof Interface]: Interface[key] };
 /************************************ 全局 ********************************************** */
 interface TableItem {
   sn?: number; //序号
+  createdAt?: string;
+  updatedAt?: string;
 }
 interface ReqPageData {
   current?: number;
@@ -45,12 +47,12 @@ interface OptionItem {
 /************************************ 用户操作 ********************************************** */
 /**获取用户信息 */
 interface ReqDataUserInfo {
-  id: string | number;
+  id?: string | number;
 }
 interface ResDataUserInfo {
   username: string;
   authList: string[];
-  roleName: Model.RoleKeys;
+  roleName: string;
   token: string;
   id: number;
 }
@@ -62,13 +64,14 @@ interface ReqDataLogin {
 }
 type ResDataLogin = ResDataUserInfo;
 /************************************ 用户操作 end********************************************** */
+
 /************************************ 权限管理 ********************************************** */
 
 interface FormDataAuthManageList {
   roleName?: string;
 }
 
-type ReqDataRoleList = FormDataAuthManageList;
+interface ReqDataRoleList extends FormDataAuthManageList, ReqPageData {}
 interface RoleItem extends TableItem {
   id: number;
   roleName: string;
@@ -132,31 +135,30 @@ type HotNumber = 0 | 1 | 2 | 3 | 4 | 5;
 interface ArticleItem extends TableItem {
   id: number;
   title: string;
-  hot: HotNumber;
-  author: author;
-  description?: string;
-  dateTime?: string;
-  publishStatus?: ArticleStatus;
+  // hot: HotNumber;
+  // author?: string;
+  // description?: string;
+  statusType?: Config.TypeStatusKey;
+  statusMap?: Config.TypeStatusValue;
   // author: string;
+  jsonString?: string;
 }
 interface FormDataArticle {
   title: string;
-  author: author;
+  // author: author;
   description?: string;
 }
-type ArticleStatus = "publish" | "draft";
-interface ReqDataArticleCreate {
+
+interface ReqDataArticleSave {
+  id?: number; //没有就新增
   title: string;
-  author: author;
-  description?: string;
-  markdown: string;
-  publishStatus?: ArticleStatus;
+  jsonString?: string;
+  // author: author;
+  // description?: string;
+  // markdown: string;
+  statusType?: Config.TypeStatusKey;
 }
 interface ResDataArticleCreate {
-  id: number;
-}
-/** 更新草稿 */
-interface ReqDataArticleUpdate extends ReqDataArticleCreate {
   id: number;
 }
 
@@ -173,5 +175,33 @@ interface ReqDataArticleInfo {
 interface ArticleInfoItem extends ArticleItem {
   markdown?: string;
 }
-type ResDataArticleInfo = ArticleInfoItem | null;
+type ResDataArticleInfo = ArticleInfoItem;
+/** 片段 template-0 */
+type PartItemTableItem = { title: string; list: string[] };
+/** 编号列表 */
+type PartItemListItem =
+  | {
+      orderType: SerialOrderType;
+      text?: string;
+      tableList?: PartItemTableItem[];
+      list: PartItemListItem[];
+    }
+  | string;
+
+type SerialOrderType = 'number' | 'alpha' | 'common';
+/** 文章段落 */
+interface PreviewPartItem {
+  title?: string;
+  list?: PartItemListItem[];
+  table?: any[];
+  orderType?: SerialOrderType;
+  _partKey?: string; //挂载数据
+}
+
+interface ArticleModuleItem {
+  title: string;
+
+  partList?: PreviewPartItem[];
+}
+
 /************************************ 文章管理 end********************************************** */

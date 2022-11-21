@@ -1,30 +1,38 @@
-import React from "react";
-import { useUser, useUserDispatch } from "@/store/user";
-import { Button, Space } from "antd";
-import "./style.less";
-import { useRoutes } from "@/router";
-import { Link } from "react-router-dom";
-import { ReactComponent as LogoSvg } from "@/icons/svg/logo.svg";
+import React, { useEffect } from 'react';
+import { useUser, useUserDispatch } from '@/store/user';
+import { Button, Space } from 'antd';
+import './style.scss';
+import { useRouteList } from '@/router/hooks';
+import { Link, useNavigate } from 'react-router-dom';
+import SvgIcon from '@/components/svg-icon';
 
 const Home: React.FC<ViewProps> = (props) => {
-  const { className } = props;
-  const { routeList } = useRoutes();
+  const { className = '' } = props;
+  const routeList = useRouteList();
   const user = useUser();
   const { fetchUserInfo } = useUserDispatch();
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    //重定向 去后台
+    navigate('/console', { replace: true });
+  }, []);
   //render
   return (
-    <div className={`${className} home__page`}>
+    <div className={`home-page ${className}`}>
       <header className="App-header">
-        <LogoSvg className="App-logo" />
+        <SvgIcon className="App-logo" name="logo"></SvgIcon>
         <h2>接着开发权限管理</h2>
         <Space>
-          {routeList.map((route) => {
-            return (
-              <Link to={route.path} key={route.path}>
-                {route.name}
-              </Link>
-            );
-          })}
+          {routeList
+            .filter((r) => r.title)
+            .map((route) => {
+              return (
+                <Link to={route.path || '/'} key={route.path}>
+                  {route.title}
+                </Link>
+              );
+            })}
         </Space>
         <Button
           onClick={() => {

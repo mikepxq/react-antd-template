@@ -1,41 +1,43 @@
 {
-  "workbench.colorCustomizations": {
-    "activityBar.activeBackground": "#47ccf8",
-    "activityBar.activeBorder": "#d708a4",
-    "activityBar.background": "#47ccf8",
-    "activityBar.foreground": "#15202b",
-    "activityBar.inactiveForeground": "#15202b99",
-    "activityBarBadge.background": "#d708a4",
-    "activityBarBadge.foreground": "#e7e7e7",
-    "statusBar.background": "#16bef6",
-    "statusBar.foreground": "#15202b",
-    "statusBarItem.hoverBackground": "#089fd1",
-    "titleBar.activeBackground": "#16bef6",
-    "titleBar.activeForeground": "#15202b",
-    "titleBar.inactiveBackground": "#16bef699",
-    "titleBar.inactiveForeground": "#15202b99",
-    "sash.hoverBorder": "#47ccf8",
-    "statusBarItem.remoteBackground": "#16bef6",
-    "statusBarItem.remoteForeground": "#15202b"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "path-intellisense.mappings": {
+    "@": "${workspaceFolder}/src"
   },
-  "peacock.color": "#16bef6",
-  "typescript.tsdk": "node_modules\\typescript\\lib",
-  "cSpell.userWords": [
-    "fetchs",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#52646b",
+    "activityBar.activeBorder": "#48183a",
+    "activityBar.background": "#52646b",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#48183a",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "sash.hoverBorder": "#52646b",
+    "statusBar.background": "#3c494e",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#52646b",
+    "statusBarItem.remoteBackground": "#3c494e",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#3c494e",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#3c494e99",
+    "titleBar.inactiveForeground": "#e7e7e799",
+    "commandCenter.border": "#e7e7e799"
+  },
+  "peacock.color": "#3c494e",
+  "cSpell.words": [
     "antd",
-    "commitlint",
-    "craco",
-    "nprogress",
-    "browserslist",
+    "codemirror",
+    "foldcode",
+    "foldgutter",
+    "jsoneditor",
+    "jsonlint",
+    "linenumbers",
+    "Nprogress",
     "reduxjs",
-    "deving",
-    "mockjs",
+    "rubyblue",
+    "screenfull",
     "Sider",
-    "toastui",
     "vite",
-    "mikepxq",
-    "reqSvgs"
-  ],
-  "liveServer.settings.root": "/build",
-  "liveServer.settings.port": 5501
+    "vitejs"
+  ]
 }

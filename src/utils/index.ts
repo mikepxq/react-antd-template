@@ -1,3 +1,5 @@
+import { TokenName } from '@/config';
+import Cookies from 'js-cookie';
 /**
  * 模拟加载时间
  * @time 默认2s
@@ -15,7 +17,7 @@ export const sleep = (time = 2) => {
  * @param str
  * @returns
  */
-export const removeFirstLineOfTemplateString = (str: string) => str.replace(/\n/, "");
+export const removeFirstLineOfTemplateString = (str: string) => str.replace(/\n/, '');
 
 /**
  * 获得序列号
@@ -33,3 +35,32 @@ export const getKeyListValueTrueInMap = (map: Record<string, boolean>): string[]
   Object.entries(map)
     .filter(([, v]) => v)
     .map(([key]) => key);
+/** */
+export const getToken = () => Cookies.get(TokenName) || '';
+
+/**避免错误 json 字符 造成解析失败
+ *
+ */
+export const jsonParseNoThrow = (jsonString: string, isLogError = true) => {
+  try {
+    return JSON.parse(jsonString);
+  } catch (e) {
+    isLogError && console.warn('[e]', e);
+    return undefined;
+  }
+};
+/**避免错误 json 字符 造成解析失败
+ *
+ */
+export const linkJs = (url: string) => {
+  return new Promise((resolve) => {
+    let jsScript = document.getElementById(url) as HTMLScriptElement | null;
+    if (jsScript) return resolve(jsScript); //如果有
+    jsScript = document.createElement('script');
+    jsScript.src = url;
+    document.body.appendChild(jsScript);
+    jsScript.onload = () => {
+      resolve(jsScript);
+    };
+  });
+};

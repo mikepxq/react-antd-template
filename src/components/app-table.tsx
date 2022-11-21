@@ -1,5 +1,5 @@
-import { Table } from "antd";
-import React, { useEffect, useState } from "react";
+import { Table } from 'antd';
+import React, { useEffect, useState } from 'react';
 interface Props extends Antd.TableProps<any> {
   [key: string]: any;
 }

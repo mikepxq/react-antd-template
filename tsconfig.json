@@ -1,33 +1,37 @@
 {
-  "extends": "./paths.config.json",
   "compilerOptions": {
-    "target": "es6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": false,
+    "skipLibCheck": false,
+    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": ["vite/client"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "skipDefaultLibCheck": true
   },
+
+  "references": [{ "path": "./tsconfig.node.json" }],
   "files": [
-    "./typings/index.d.ts",
-    "./typings/antd.d.ts",
-    "src/store-hooks/react-redux.d.ts",
-    "./src/model/index.d.ts"
+    "./src/typings/index.d.ts",
+    // "./typings/antd.d.ts",
+    // "src/store-hooks/react-redux.d.ts",
+    "src/router/index.d.ts",
+    "src/typings/react-router-dom.d.ts",
+    "src/typings/antd-icons.d.ts"
   ],
-  "include": [
-    "src"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "mock", "src/app.tsx"],
+  "exclude": ["node_modules"]
 }

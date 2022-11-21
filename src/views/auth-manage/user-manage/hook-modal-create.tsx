@@ -1,9 +1,9 @@
-import { reqUserCreate } from "@/apis";
-import AppInput from "@/components/app-input";
-import FormRoleOption from "@/components/form-role-option";
-import { appMessage } from "@/plugins/antd";
-import { Button, Form, Modal } from "antd";
-import React, { useRef, useState } from "react";
+import { reqUserCreate } from '@/apis';
+import AppInput from '@/components/app-input';
+import FormRoleOption from '@/components/form-role-option';
+import { appMessage } from '@/plugins/antd';
+import { Button, Form, Modal } from 'antd';
+import React, { useRef, useState } from 'react';
 
 interface ButtonProps {
   [key: string]: any;
@@ -52,8 +52,8 @@ const useModalCreate = () => {
           setLoading(true);
           const res = await reqUserCreate(_form);
           setLoading(false);
-          if (res.code != 200) return appMessage.error(res.message || "添加失败！");
-          appMessage.success(res.message || "添加成功！");
+          if (res.code != 200) return appMessage.error(res.message || '添加失败！');
+          appMessage.success(res.message || '添加成功！');
           setIsShow((isShowRef.current = false));
           onOk && onOk();
         }}>
@@ -61,7 +61,7 @@ const useModalCreate = () => {
           <Form.Item name="username" label="用户名称" rules={[{ required: true }]}>
             <AppInput placeholder="请输入用户名称" />
           </Form.Item>
-          <Form.Item name="roleId" label="所属角色" rules={[{ required: true, message: "请选择所属角色" }]}>
+          <Form.Item name="roleId" label="所属角色" rules={[{ required: true, message: '请选择所属角色' }]}>
             <FormRoleOption />
           </Form.Item>
           {/* <Form.Item name="remark" label="备注">

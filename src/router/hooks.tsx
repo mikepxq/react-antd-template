@@ -1,51 +1,54 @@
-import { cloneDeep } from "lodash";
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import RouteView from "./router-view";
-
-/**
- * 重构路由
- * @param routeList 元素路由数据 修改元数据
- * @param parent 给子路由绑定父类
+import React, { useState } from 'react';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import RouterBefore from './before';
+/** 重构配置
+ *
+ * @param routeList
+ * @param parent
  * @returns
  */
-/**
- * 重构路由
- * @param routeList  元素路由数据 修改元数据
- * @param routeTreeList 保存路由树状结构
- * @param parent 给子路由绑定父类
- * @returns
- */
-const getRouteTreeList = (routeList: RouteItem[], routeTreeList: RouteItem[] = [], parent?: RouteItem) => {
-  //
-  routeList.forEach((route) => {
-    route.breadCrumbRoutes = [route]; //1 添加当前路由 到 面包屑路由列表
-    route.exact = true; //默认严格匹配
+const getRouteTreeList = (routeList: RouteItem[], parent?: RouteItem) => {
+  return routeList.map((route) => {
+    //1 添加当前路由 到 面包屑路由列表
+    route.breadCrumbRouteList = [route];
+    // 2. 循环 key
+    route._key = route.path;
     if (parent) {
-      route.parent = parent; //2.给子路由绑定父类
-      route.breadCrumbRoutes = parent.breadCrumbRoutes?.concat(route.breadCrumbRoutes); //2.1追加父面包屑到子路由面包屑
+      // route.parent = parent; //2.给子路由绑定父类
+      route.breadCrumbRouteList = parent.breadCrumbRouteList?.concat(route.breadCrumbRouteList); //1.1追加父面包屑到子路由面包屑
+      // 仅在算法中使用 等级if
+      if (route.index) route._key = `${parent._key}/index`; // 2.1 循环 key
     }
+    // 3. 是否需要权限判断
+    route.isAuth = route.isAuth ?? parent?.isAuth;
+    // 4. 添加路由卫士 作为 权限组件
+    route.element = <RouterBefore route={route}></RouterBefore>;
+    // 5. 如果……,有索引路由
+    if (route.index && parent) parent.isHasIndexChildren = true;
     if (route.children) {
-      route.component = route.component || RouteView; //如果没有组件就透传
-      //4.获得重构后的子路由
-      route.children = getRouteTreeList(route.children, [], route);
-      routeTreeList.push(route); //5.添加到要返回的变量中
-      return routeTreeList.push({
-        ...route,
-        exact: false,
-        isHidden: true,
-        redirect: undefined,
-        isAuth: false,
-        path: `${route.path}/:content`,
-        name: `${route.name}-content`,
-      });
+      route.children = getRouteTreeList(route.children, route);
     }
-    routeTreeList.push(route); //5.添加到要返回的变量中
+    return route;
   });
-  return routeTreeList;
 };
-/**
- * 路由映射
+/** 根据路由配置 生成可供 router v6 <Routes> 使用的子元素
+ *
+ * @param routeList
+ * @param parent
+ * @returns
+ */
+const getRouteTreeDom = (routeList: RouteItem[]) => {
+  return routeList.map((route) => {
+    //route.isLayout ? '' :
+    return (
+      <Route path={route.path} element={route.element} key={`${route._key}`} index={Boolean(route.index)}>
+        {route.children && getRouteTreeDom(route.children)}
+      </Route>
+    );
+  });
+};
+/**路由映射
+ * [path]:[route]方便查询
  * @param routeList
  * @param map
  * @returns
@@ -55,64 +58,50 @@ const getRoutesMap = (routeList: RouteItem[], map: Record<string, RouteItem> = {
     if (route.children) {
       getRoutesMap(route.children, map);
     }
-    map[route.path] = route;
+    map[route.path as string] = route;
   });
   return map;
 };
-const initRoutes = (routeList: RouteItem[]) => {
-  const list = getRouteTreeList(cloneDeep(routeList));
-  const map = getRoutesMap(list);
-  return {
-    list,
-    map,
-  };
-};
-/*******************************外部使用********************************************** */
-//1.上下文
-const RoutesContext = React.createContext({});
-const SetRoutesContext = React.createContext({});
+/*============================================== */
+/** 1.上下文 */
+type TypeRouteListContext = { routeList: RouteItem[]; routesMap: Record<string, RouteItem> };
+const RouteListContext = React.createContext<TypeRouteListContext>({ routeList: [], routesMap: {} });
+// const SetRoutesContext = React.createContext({});
 
+/** 2.封装 BrowserRouter */
 export const createProvider = (routeOptionList: RouteItem[] = []) => {
   //2.上下文挂值
-  const Provider: React.FC = (props) => {
-    const { list, map } = initRoutes(routeOptionList);
-
-    const [routeList, _setRoutes] = useState<RouteItem[]>(list);
-    const [routeMap, _setRouteMap] = useState<Record<string, RouteItem>>(map);
-    const setRoutes = (routeList: RouteItem[]) => {
-      const { list, map } = initRoutes(routeList);
-      _setRoutes(list);
-      _setRouteMap(map);
-    };
+  const Provider: React.FC<any> = (props) => {
+    const [routeList] = useState<RouteItem[]>(getRouteTreeList(routeOptionList));
+    const [routesMap] = useState<Record<string, RouteItem>>(getRoutesMap(routeList));
 
     return (
-      <RoutesContext.Provider value={{ routeList, routeMap }}>
-        <SetRoutesContext.Provider value={{ setRoutes }}>{props.children}</SetRoutesContext.Provider>
-      </RoutesContext.Provider>
+      // https://reactrouter.com/docs/en/v6/api#hashrouter
+      //hash router 导致 search params 无法正常解析
+      <BrowserRouter>
+        <RouteListContext.Provider value={{ routeList, routesMap }}>{props.children}</RouteListContext.Provider>
+      </BrowserRouter>
     );
   };
   return Provider;
 };
-//3.上下文取值
-type TypeUseRoutes = { routeList: RouteItem[]; routeMap: Record<string, RouteItem> };
-/** 获得重构后的路由 */
-export const useRoutes = (): TypeUseRoutes => {
-  return React.useContext(RoutesContext) as TypeUseRoutes;
-};
-type UseRoutesAction = { setRoutes: (routeList: RouteItem[]) => void };
-export const useRoutesAction = (): UseRoutesAction => {
-  return React.useContext(SetRoutesContext) as UseRoutesAction;
-};
 
-export const useIs404 = () => {
-  const location = useLocation();
-  const { routeMap } = React.useContext(RoutesContext) as TypeUseRoutes;
-  //没有就是404 直接访问子类路由
-  return { is404: !routeMap[location.pathname] };
+/** 获得重构后的路由 */
+export const useRouteListDom = () => {
+  const { routeList } = React.useContext(RouteListContext);
+  // 全局只用一次
+  // eslint-disable-next-line react/display-name
+  return () => <Routes>{getRouteTreeDom(routeList)}</Routes>;
 };
-export const useCurrentRoute = () => {
-  const location = useLocation();
-  const { routeMap } = React.useContext(RoutesContext) as TypeUseRoutes;
-  //没有就是404 直接访问子类路由
-  return { currentRoute: routeMap[location.pathname] };
+/** 获得当前路由对象 */
+export const useCurrentRoute = (): RouteItem | undefined => {
+  const { routesMap } = React.useContext(RouteListContext);
+  // 使用原生 避免重复渲染
+  const _location = { pathname: location.pathname };
+  if (location.hash && /#\//.test(location.hash)) {
+    _location.pathname = location.hash.split('#')[1];
+  }
+  return routesMap[_location.pathname];
 };
+/** 获得当前路由对象 */
+export const useRouteList = () => React.useContext(RouteListContext).routeList;

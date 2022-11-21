@@ -1,3 +1,3 @@
-export type * from "@reduxjs/toolkit";
+export * from '@reduxjs/toolkit';
 
 export as namespace Reduxjs;

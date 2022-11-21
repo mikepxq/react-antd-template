@@ -1,9 +1,9 @@
-import { reqRoleUpdate } from "@/apis";
-import AppInput from "@/components/app-input";
-import { appMessage } from "@/plugins/antd";
-import { Button, Form, Input, Modal } from "antd";
-import React, { useRef, useState } from "react";
-import FormItemAuthTree from "../components/form-item-auth-tree";
+import { reqRoleUpdate } from '@/apis';
+import AppInput from '@/components/app-input';
+import { appMessage } from '@/plugins/antd';
+import { Button, Form, Input, Modal } from 'antd';
+import React, { useRef, useState } from 'react';
+import FormItemAuthTree from '../components/form-item-auth-tree';
 
 interface ButtonProps {
   [key: string]: any;
@@ -70,8 +70,8 @@ const useModalUpdate = () => {
             remark: _form.remark,
           });
           setLoading(false);
-          if (res.code != 200) return appMessage.error(res.message || "更新失败！");
-          appMessage.success(res.message || "更新成功！");
+          if (res.code != 200) return appMessage.error(res.message || '更新失败！');
+          appMessage.success(res.message || '更新成功！');
           setIsShow((isShowRef.current = false));
           onOk && onOk();
         }}>

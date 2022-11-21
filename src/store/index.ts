@@ -1,6 +1,6 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import user from "./user";
-import consoleLayout from "./console-layout";
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import user from './user';
+import consoleLayout from './console-layout';
 
 //
 const appReducers = combineReducers({
@@ -9,7 +9,7 @@ const appReducers = combineReducers({
 });
 
 const rootReducers = (state: any, action: any) => {
-  if (action.type == "RESET_STORE") {
+  if (action.type == 'RESET_STORE') {
     state = undefined; //使用默认初始值
   }
   return appReducers(state, action);
