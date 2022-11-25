@@ -6,7 +6,7 @@ import ArticleCollapseForm from '../components/article-collapse-form';
 import { reqArticleSave } from '@/apis';
 import useJsonEditor from '@/components/json-editor/hook';
 import { JsonTemplate } from './json-template';
-import './style.scss';
+import styled from 'styled-components';
 
 interface Props {
   [key: string]: any;
@@ -41,7 +41,7 @@ const ArticleCreate: React.FC<ViewProps<Props>> = (props) => {
 
   //render
   return (
-    <ContentMain className={` ${className} flex-column`}>
+    <ContentMainDom className={` ${className} flex-column`}>
       <ArticleCollapseForm
         collapseIsOpen={collapseIsOpen}
         onChangeCollapse={setCollapseIsOpen}
@@ -55,7 +55,20 @@ const ArticleCreate: React.FC<ViewProps<Props>> = (props) => {
       <Spin spinning={draftLoading} wrapperClassName="json-editor-spin">
         <JsonEditor.Editor initValue={JsonTemplate} onSave={onSave}></JsonEditor.Editor>
       </Spin>
-    </ContentMain>
+    </ContentMainDom>
   );
 };
+//style
+const ContentMainDom = styled(ContentMain)`
+  .json-editor-spin {
+    flex-grow: 2;
+    overflow: hidden;
+    .ant-spin-container {
+      height: 100%;
+      > * {
+        height: 100%;
+      }
+    }
+  }
+`;
 export default ArticleCreate;

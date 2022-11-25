@@ -21,11 +21,11 @@ const RouterNprogress: React.FC<ViewProps> = (props) => {
     </>
   );
 };
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle: any = createGlobalStyle`
 #nprogress{
  .spinner{
   display: none;
  }
-}` as unknown as React.FC; // 忽视错误  不能将类型“{}”分配给类型“ReactNode”。ts(2786)
+}`;
 
 export default RouterNprogress;

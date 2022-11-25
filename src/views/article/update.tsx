@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import ArticleCollapseForm from './components/article-collapse-form';
 import { reqArticleInfo, reqArticleSave } from '@/apis';
 import useJsonEditor from '@/components/json-editor/hook';
-import './create/style.scss';
+
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 interface Props {
