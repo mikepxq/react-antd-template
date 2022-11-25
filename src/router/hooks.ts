@@ -24,7 +24,8 @@ export const useBreadCrumbList = () => {
   return [list];
 };
 /**
- * 找到匹配的当前路由
+ * 找到匹配的当前路由配置项
+ * - 内部有handle
  * @returns
  */
 export const useCurrentMatch = () => {

@@ -1,3 +1,4 @@
+import RouterNprogress from '@/router/router-progress';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -9,11 +10,13 @@ const InitApp: React.FC<ViewProps<Props>> = (props) => {
   const { className = '' } = props;
   //render
   return (
-    <Wrap className={` ${className}`}>
-      <div className="content">
-        <h2>系统准备中……</h2>
-      </div>
-    </Wrap>
+    <RouterNprogress>
+      <Wrap className={` ${className}`}>
+        <div className="content">
+          <h2>系统准备中……</h2>
+        </div>
+      </Wrap>
+    </RouterNprogress>
   );
 };
 //style

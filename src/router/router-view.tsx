@@ -1,6 +1,7 @@
 import { Spin } from 'antd';
 import React, { Suspense, useEffect } from 'react';
 import { Outlet, useLoaderData, useNavigate } from 'react-router-dom';
+import RouterNprogress from './router-progress';
 
 interface Props {
   [key: string]: any;
@@ -17,7 +18,12 @@ const RouterView: React.FC<ViewProps<Props>> = (props) => {
   }, []);
   //render
   return (
-    <Suspense fallback={<Spin size="large" className="fixed-xy-center"></Spin>}>
+    <Suspense
+      fallback={
+        <RouterNprogress>
+          <Spin size="large" className="fixed-xy-center"></Spin>
+        </RouterNprogress>
+      }>
       <Outlet></Outlet>
     </Suspense>
   );
