@@ -32,6 +32,6 @@
     "src/typings/react-router-dom.d.ts",
     "src/typings/antd-icons.d.ts"
   ],
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "mock", "src/app.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "mock", "src/app.tsx", "index.html"],
   "exclude": ["node_modules"]
 }

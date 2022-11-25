@@ -1,29 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumb } from 'antd';
-import { useCurrentRoute } from '@/router/hooks';
+import { useBreadCrumbList } from '@/router/hooks';
+import styled from 'styled-components';
 
 interface Props {
   [key: string]: any;
 }
 const TopNavBreadcrumb: React.FC<ViewProps<Props>> = () => {
-  const currentRoute = useCurrentRoute();
-  const [breadCrumbList, setBreadCrumbList] = useState<RouteItem[]>([]);
-  useEffect(() => {
-    setBreadCrumbList(currentRoute.breadCrumbRouteList as RouteItem[]);
-  }, [currentRoute]);
+  const [list] = useBreadCrumbList();
   //render
   return (
-    <Breadcrumb className="bread-crumbs">
-      {breadCrumbList.map((item, index) => {
+    <BreadcrumbDom className="bread-crumbs">
+      {list.map((item, index) => {
         return (
           <Breadcrumb.Item key={`${item.path}-${index}`}>
             {/* 第一个 或者 最后一个 */}
-            {index > breadCrumbList.length - 2 ? item.title : <Link to={item.path as string}>{item.title}</Link>}
+            {index > list.length - 2 || !item.isCrumbLink ? (
+              item.title
+            ) : (
+              <Link className="link" to={item.path as string}>
+                {item.title}
+              </Link>
+            )}
           </Breadcrumb.Item>
         );
       })}
-    </Breadcrumb>
+    </BreadcrumbDom>
   );
 };
+// style
+const BreadcrumbDom = styled(Breadcrumb)`
+  margin-left: 10px;
+  [class*='ant-breadcrumb'] {
+    vertical-align: middle;
+  }
+  .link {
+    &:hover {
+      color: #1677ff;
+    }
+  }
+`;
 export default TopNavBreadcrumb;

@@ -1,6 +1,6 @@
 export * from './pattern';
 /** mock api 睡眠时间 */
-export const MockApiSleepTime = 0.5;
+export const MockApiSleepTime = 2;
 export const TokenName = 'app-token';
 /** 文章状态类型  */
 export const ArticleStatusMap: Record<TypeStatusKey, TypeStatusValue> = {

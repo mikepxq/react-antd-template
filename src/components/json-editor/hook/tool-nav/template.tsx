@@ -43,7 +43,7 @@ export const useTemplate = () => {
       <Modal
         bodyStyle={{ height: 500, overflow: 'auto' }}
         title="模板字符"
-        visible={isShowRef.current}
+        open={isShowRef.current}
         // onOk={() => {}}
         onCancel={() => {
           setIsShow((isShowRef.current = false));

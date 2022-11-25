@@ -2,8 +2,11 @@ import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Tag } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
-import { useCurrentRoute } from '@/router/hooks';
+
 import { useActionsConsoleLayout, useConsoleLayout } from '@/store/console-layout';
+import styled from 'styled-components';
+import { LayoutBoxShadow } from '@/styles/var';
+import { useCurrentMatch } from '@/router/hooks';
 interface Props {
   [key: string]: any;
 }
@@ -14,15 +17,15 @@ const TagNav: React.FC<ViewProps<Props>> = (props) => {
   const navigate = useNavigate();
   const { visitedList } = useConsoleLayout();
   const { setVisitedMap } = useActionsConsoleLayout();
-  const currentRoute = useCurrentRoute();
+  const cRoute = useCurrentMatch();
+
   useEffect(() => {
-    if (currentRoute.isShortcutTag === false) return;
-    setVisitedMap({ name: currentRoute.name as string, title: currentRoute.title, path: currentRoute.path as string });
-  }, [currentRoute]);
+    setVisitedMap({ title: cRoute.handle.title, path: cRoute.pathname });
+  }, [location.pathname]);
 
   //render
   return (
-    <nav className={`tag-nav ${className}`}>
+    <NavDom className={`tag-nav ${className}`}>
       <Tag className="item" onClick={() => navigate(-1)}>
         <LeftOutlined /> 返回
       </Tag>
@@ -50,11 +53,47 @@ const TagNav: React.FC<ViewProps<Props>> = (props) => {
                 navigate(visitedList[visitedList.length - 1].path);
               }
             }}>
-            {route.title || route.name}
+            {route.title}
           </Tag>
         );
       })}
-    </nav>
+    </NavDom>
   );
 };
+//styles
+const NavDom = styled.nav`
+  box-shadow: ${LayoutBoxShadow};
+  padding: 0 20px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  > .item {
+    cursor: pointer;
+    user-select: none;
+    padding: 0 5px;
+    border: 1px solid rgb(212, 207, 207);
+    color: #495060;
+    display: flex;
+    align-items: center;
+    height: 20px;
+    line-height: 20px;
+    &.active {
+      background-color: #42b983;
+      border-color: #42b983;
+      color: #fff;
+    }
+
+    .ant-tag-close-icon {
+      font-size: 12px;
+      border-radius: 50%;
+      display: inline-block;
+      text-align: center;
+      margin-left: 3px;
+      padding: 2px;
+      &:hover {
+        background-color: #888;
+      }
+    }
+  }
+`;
 export default React.memo(TagNav);

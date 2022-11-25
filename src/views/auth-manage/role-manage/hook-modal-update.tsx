@@ -53,7 +53,7 @@ const useModalUpdate = () => {
     return (
       <Modal
         title="编辑角色"
-        visible={isShowRef.current}
+        open={isShowRef.current}
         confirmLoading={loading}
         onCancel={() => {
           setIsShow((isShowRef.current = false));

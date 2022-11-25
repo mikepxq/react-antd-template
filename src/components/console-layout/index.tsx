@@ -1,9 +1,10 @@
+import RouterView from '@/router/router-view';
 import { Layout } from 'antd';
 import React, { useState } from 'react';
-import { Outlet } from 'react-router';
+import styled from 'styled-components';
 import Aside from './aside';
 import ContainerHeader from './header';
-import './style.scss';
+
 // interface Props {
 //   [key: string]: any;
 // }
@@ -11,13 +12,14 @@ import './style.scss';
 const ConsoleLayout: React.FC<ViewProps> = (props) => {
   const { className = '' } = props;
   const [collapsed, setCollapsed] = useState(false);
+
   //render
   return (
     <Layout className={`layout page ${className}`}>
       {/*  */}
-      <Aside collapsed={collapsed} routes={props.to?.children} />
+      <Aside collapsed={collapsed} />
       {/* 容器 */}
-      <Layout.Content className="container">
+      <LayoutContent className="container">
         {/*  */}
         <ContainerHeader
           collapsed={collapsed}
@@ -25,10 +27,15 @@ const ConsoleLayout: React.FC<ViewProps> = (props) => {
             setCollapsed(v);
           }}
         />
-        <Outlet />
-      </Layout.Content>
+        <RouterView></RouterView>
+      </LayoutContent>
     </Layout>
   );
 };
+// style
+const LayoutContent = styled(Layout.Content)`
+  display: flex;
+  flex-direction: column;
+`;
 // 避免更换路由时 避免重复渲染
 export default React.memo(ConsoleLayout);

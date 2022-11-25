@@ -1,54 +1,83 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useUser, useUserDispatch } from '@/store/user';
 import { Button, Space } from 'antd';
-import './style.scss';
-import { useRouteList } from '@/router/hooks';
-import { Link, useNavigate } from 'react-router-dom';
+
 import SvgIcon from '@/components/svg-icon';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Home: React.FC<ViewProps> = (props) => {
   const { className = '' } = props;
-  const routeList = useRouteList();
+
   const user = useUser();
   const { fetchUserInfo } = useUserDispatch();
 
-  const navigate = useNavigate();
-  useEffect(() => {
-    //重定向 去后台
-    navigate('/console', { replace: true });
-  }, []);
   //render
   return (
-    <div className={`home-page ${className}`}>
+    <HomePage className={`home-page ${className}`}>
       <header className="App-header">
         <SvgIcon className="App-logo" name="logo"></SvgIcon>
         <h2>接着开发权限管理</h2>
         <Space>
-          {routeList
-            .filter((r) => r.title)
-            .map((route) => {
-              return (
-                <Link to={route.path || '/'} key={route.path}>
-                  {route.title}
-                </Link>
-              );
-            })}
+          <Link to="/console">
+            <Button>控制台</Button>
+          </Link>
         </Space>
-        <Button
-          onClick={() => {
-            fetchUserInfo({ id: user.id });
-          }}>
-          获取用户
-        </Button>
-        <p>username: {user.username}</p>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        <div className="user-box">
+          <Button
+            onClick={() => {
+              fetchUserInfo({ id: user.id });
+            }}>
+            获取用户
+          </Button>
+          <p>username: {user.username}</p>
+        </div>
         <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
           Learn React
         </a>
       </header>
-    </div>
+    </HomePage>
   );
 };
+//style
+const HomePage = styled.div`
+  text-align: center;
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+  .App-link {
+    color: #61dafb;
+  }
+
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .user-box {
+    margin-top: 10px;
+  }
+`;
 export default Home;

@@ -69,11 +69,12 @@ yarn add -D    vite
     yarn add  antd
   2.yarn add nprogress
     yarn add -D @types/nprogress
-5.其他
+
+
+其他
   1.svg icons
     https://github.com/vbenjs/vite-plugin-svg-icons/blob/main/README.zh_CN.md
     yarn add vite-plugin-svg-icons -D
   2.codemirror
-
     yarn add jsonlint
  */

@@ -1,6 +1,6 @@
 import { TokenName } from '@/config';
 import { reqLogin, reqUserInfo } from '@/apis';
-import { useAppDispatch, useSelector } from '@/store-hooks';
+import { useAppDispatch, useSelector } from '@/hooks/store';
 import { getToken } from '@/utils';
 import { createSlice } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
@@ -31,7 +31,8 @@ export const useUser = (): State => {
   return useSelector((state) => state.user);
 };
 
-export const actions = slice.actions;
+export const userActions = slice.actions;
+export const userSlice = slice;
 /** hooks 就是运行时 */
 export const useUserDispatch = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +40,7 @@ export const useUserDispatch = () => {
   return {
     fetchUserInfo: async (data?: ReqDataUserInfo) => {
       const res = await reqUserInfo(data);
-      dispatch(slice.actions.setUserInfo(res.data));
+      dispatch(userActions.setUserInfo(res.data));
       //留给页面使用
       return res;
     },
@@ -49,7 +50,7 @@ export const useUserDispatch = () => {
 
       Cookies.set(TokenName, res.data.token, { expires: 1 / 24 / 2 }); //0.5h
       Cookies.set('userId', String(res.data.id), { expires: 1 / 24 / 2 }); //0.5h
-      dispatch(slice.actions.setUserInfo(res.data));
+      dispatch(userActions.setUserInfo(res.data));
       return res;
     },
   };

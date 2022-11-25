@@ -1,8 +1,10 @@
-import { MenuFoldOutlined } from '@ant-design/icons';
 import React from 'react';
-import TagNav from './tag-nav';
+import { MenuFoldOutlined } from '@ant-design/icons';
 import TopNavBreadcrumb from './breadcrumb';
+import TagNav from './tag-nav';
 import UserDropdownMenu from './user-dropdown-menu';
+import styled from 'styled-components';
+import { LayoutBoxShadow } from '@/styles/var';
 
 interface Props {
   collapsed?: boolean;
@@ -12,7 +14,7 @@ const ContainerHeader: React.FC<ViewProps<Props>> = (props) => {
   const { collapsed, onChangeCollapsed, className = '' } = props;
   //render
   return (
-    <header className={`header ${className}`}>
+    <HeaderDom className={` ${className}`}>
       <section className="top-nav">
         <div className="left">
           <MenuFoldOutlined
@@ -29,7 +31,29 @@ const ContainerHeader: React.FC<ViewProps<Props>> = (props) => {
       </section>
 
       <TagNav />
-    </header>
+    </HeaderDom>
   );
 };
+// styles
+const HeaderDom = styled('header')`
+  .top-nav {
+    height: 50px;
+    box-shadow: ${LayoutBoxShadow};
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .left {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      .icon {
+        font-size: 20px;
+        &.collapsed {
+          transform: rotateZ(180deg);
+        }
+      }
+    }
+  }
+`;
 export default ContainerHeader;

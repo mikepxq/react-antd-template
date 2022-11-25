@@ -1,30 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+//router
+import { RouterProvider } from 'react-router-dom';
+import { router } from './router';
+import InitApp from './components/init-app';
+//store
 import { Provider as StoreProvider } from 'react-redux';
-import App from '@/app';
-import './styles/index.scss';
+import store from './store';
+//ui
 import { ConfigProvider } from 'antd';
+import './styles/index.scss';
 // import dayjs from 'dayjs';
 // import 'dayjs/locale/zh-cn';
 import zhCN from 'antd/locale/zh_CN';
-import store from './store';
-import { BrowserRouterProvider } from './router';
+// other
 import 'virtual:svg-icons-register'; //引入icons注册脚本
+
 // dayjs.locale('zh-cn');
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
-    // <React.StrictMode>
-    <ConfigProvider locale={zhCN}>
-      {/* 等待支持react v18 */}
-      <StoreProvider store={store}>
-        <BrowserRouterProvider>
-          <App />
-        </BrowserRouterProvider>
-      </StoreProvider>
-    </ConfigProvider>
+    // <React.StrictMode>// 忽视执行两次
+    <StoreProvider store={store}>
+      <ConfigProvider locale={zhCN}>
+        <RouterProvider router={router} fallbackElement={<InitApp></InitApp>}></RouterProvider>
+      </ConfigProvider>
+    </StoreProvider>
     // </React.StrictMode>
   );
 }

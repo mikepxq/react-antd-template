@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 .eslintcache
 资料
+# 忽视 本地 watch sass 构建
+src/**/*.min.css

@@ -41,7 +41,7 @@ const useModalCreate = () => {
     return (
       <Modal
         title="添加角色"
-        visible={isShowRef.current}
+        open={isShowRef.current}
         confirmLoading={loading}
         onCancel={() => {
           setIsShow((isShowRef.current = false));

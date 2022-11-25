@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Tree, Form, FormProps } from 'antd';
 
-import { useRouteList } from '@/router/hooks';
+// import { useRouteList } from '@/router/hooks';
 import { generatorAuthTreeOptionFromRoutes } from '@/router/utils';
 
 interface FormOptionAuthTreeProps {
@@ -11,15 +11,15 @@ interface FormOptionAuthTreeProps {
 }
 const FormOptionAuthTree: React.FC<ViewProps<FormOptionAuthTreeProps>> = (props) => {
   const { className = '', value = { checkedKeys: [] }, onChange } = props;
-  const routeList = useRouteList();
-  const [treeOption] = useState(generatorAuthTreeOptionFromRoutes(routeList)); //不会每次只需
+  // const routeList = useRouteList();
+  // const [treeOption] = useState(generatorAuthTreeOptionFromRoutes(routeList)); //不会每次只需
 
   return (
     <Tree
       checkedKeys={value.checkedKeys}
       checkable
       className={className}
-      treeData={treeOption}
+      // treeData={treeOption}
       //  React.Key[] antd 不兼容
       onCheck={(checkedKeys: any = [], info: Antd.CheckInfo) => {
         //tip 什么时候不是数组
@@ -36,7 +36,7 @@ const FormItemAuthTree: React.FC<ViewProps<Props>> = (props) => {
   //render
   return (
     <Form.Item className={className} name={name} label="权限列表">
-      <FormOptionAuthTree />
+      {/* <FormOptionAuthTree /> */}
     </Form.Item>
   );
 };
