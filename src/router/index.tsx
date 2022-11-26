@@ -38,7 +38,7 @@ export const consoleRoute: RouteItem = {
     {
       path: '/console/doing',
       element: <ConsoleDoing></ConsoleDoing>,
-      handle: { isAuth: false, title: 'doing' },
+      handle: { isAuth: false, title: 'doing', iconName: 'icon-run' },
 
       // icon: Icons.Run,
     },

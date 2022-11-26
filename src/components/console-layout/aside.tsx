@@ -6,6 +6,7 @@ import Sider from 'antd/es/layout/Sider';
 import React, { useEffect, useState } from 'react';
 import { useLoaderData, useLocation, useMatches, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import SvgIcon from '@/icons/svg-icon';
 
 interface Props {
   collapsed: boolean;
@@ -25,27 +26,29 @@ const Aside: React.FC<ViewProps<Props>> = (props) => {
     return routes.filter(getIsShowAside).map((route) => {
       //子类是否有显示的
       const hasChildren = route.children && route.children.filter(getIsShowAside).length > 0;
-      if (hasChildren) {
-        return {
-          label: <div onClick={() => onClickSubmenu(route)}>{route.handle?.title}</div>,
-          key: route.path, //path作key
-          children: getSideMenuItemList(route.children),
-        };
-      }
-      return {
-        label: route.handle?.title,
+      const item: Antd.MenuItemType = {
         key: route.path, //path作key
+        icon: route.handle?.iconName ? <SvgIcon name={route.handle?.iconName}></SvgIcon> : undefined,
       };
+      if (hasChildren) {
+        item.label = <div onClick={() => onClickSubmenu(route)}>{route.handle?.title}</div>;
+        item.children = getSideMenuItemList(route.children);
+      } else {
+        console.log('[route.handle?.title]', route.handle?.title);
+        item.label = route.handle?.title;
+      }
+      return item;
     });
   };
+  console.log('[getSideMenuItemList]', getSideMenuItemList(l.sideRouteList));
   const navigate = useNavigate();
   const onClick: Antd.MenuClickEventHandler = (e) => {
-    console.log('[v]', e);
     //e.key ==path
     if (!e.key) return;
     e.key && navigate(e.key);
     setOpenKeysMap({ ...openKeysMap, [e.key]: !openKeysMap[e.key] });
   };
+
   //== 响应tag等外部路由更新，展开侧边栏
   const [openKeysMap, setOpenKeysMap] = useState<Record<string, boolean>>({});
   const [selectedKeyList, setSelectedKeyList] = useState<string[]>([]);
@@ -86,5 +89,8 @@ const AsideLayout = styled(Sider)`
   min-height: 100%;
   max-height: 100%;
   overflow-y: auto;
+  .svg-icon {
+    color: #fff;
+  }
 `;
 export default Aside;

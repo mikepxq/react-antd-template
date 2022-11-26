@@ -8,6 +8,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
   return defineConfig({
     server: {
       host: '0.0.0.0',
+      // port: 3000,
       proxy: {
         '/l/api': {
           target: 'http://localhost:3500/',
@@ -23,7 +24,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         localEnabled: command !== 'build',
       }),
       createSvgIconsPlugin({
-        iconDirs: [path.resolve(process.cwd(), 'src/icons')],
+        iconDirs: [path.resolve(process.cwd(), 'src/icons/svg')],
         symbolId: 'icon-[dir]-[name]',
         inject: 'body-first',
       }),

@@ -3,7 +3,8 @@ interface RouteItemHandle {
   isHidden?: boolean; //是否隐藏侧边栏
   /**子类默认是 */
   isAuth?: boolean; //是否参与权限
-  icon?: any;
+  // icon?: any;
+  iconName?: string;
   title?: string;
 }
 /**
