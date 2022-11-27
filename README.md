@@ -31,7 +31,7 @@ npm run build
 
 ```bash
 # 全局代码格式化
-npm run link:fix
+npm run lint-fix
 ```
 
 # 技术选型说明
