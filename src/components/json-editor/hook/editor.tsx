@@ -84,7 +84,7 @@ const JsonEditor: React.FC<ViewProps<Props>> = (props) => {
         if (!JsonEditorCode.current) return;
         //2.验证
         const isOk = JsonEditorCode.current.verify();
-        if (!isOk) return appNotification.warn({ message: '验证失败!' });
+        if (!isOk) return appNotification.warning({ message: '验证失败!' });
         //3.格式化
         const _jsonData = jsonParseNoThrow(jsonString);
         const _position = JsonEditorCode.current.getCursor();

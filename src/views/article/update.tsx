@@ -54,7 +54,7 @@ const ArticleUpdate: React.FC<ViewProps<Props>> = (props) => {
   };
   useEffect(() => {
     if (!article.id) {
-      appMessage.warn('请选择文章!');
+      appMessage.warning('请选择文章!');
       navigate('/console/article', { replace: true });
       return;
     }

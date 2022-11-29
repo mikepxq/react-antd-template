@@ -1,14 +1,11 @@
 /**对antd的封装 */
 import { sleep } from '@/utils';
-import { message, ModalFuncProps, notification, Modal, Space } from 'antd';
-import { ArgsProps } from 'node_modules/antd/lib/message/index.d';
-import { ArgsProps as NotificationArgsProps } from 'node_modules/antd/lib/notification/index.d';
+import { message, ModalFuncProps, notification, Modal } from 'antd';
+import { ArgsProps } from 'antd/es/message';
+import { ArgsProps as NotificationArgsProps } from 'antd/es/notification/interface';
 const { confirm } = Modal;
-type NotificationType = 'error' | 'info' | 'warning' | 'warn' | 'success';
-const messageFn = (type: MessageType, option?: JointContent) => {
-  message.destroy();
-  message[type](option);
-};
+type NotificationType = 'error' | 'info' | 'warning' | 'success';
+
 const notificationFn = (type: NotificationType, option: NotificationArgsProps) => {
   notification.destroy();
   notification[type](option);
@@ -17,20 +14,24 @@ const notificationFn = (type: NotificationType, option: NotificationArgsProps) =
 export const appNotification = {
   /**兼容antd 但主要为直接的文案 */
   success: (content: NotificationArgsProps) => notificationFn('success', content),
-  warn: (content: NotificationArgsProps) => notificationFn('warn', content),
+  warning: (content: NotificationArgsProps) => notificationFn('warning', content),
   error: (content: NotificationArgsProps) => notificationFn('error', content),
   info: (content: NotificationArgsProps) => notificationFn('info', content),
 };
 
 declare type ConfigContent = React.ReactNode | string;
 declare type JointContent = ConfigContent | ArgsProps;
-type MessageType = 'error' | 'info' | 'warning' | 'loading' | 'warn' | 'success';
+type MessageType = 'error' | 'info' | 'warning' | 'loading' | 'success';
+const messageFn = (type: MessageType, option?: JointContent) => {
+  message.destroy();
+  message[type](option);
+};
 /** 封装 antd message 去重提示 */
 export const appMessage = {
   /**兼容antd 但主要为直接的文案 */
   success: (content: ConfigContent) => messageFn('success', content),
-  warn: (content: ConfigContent) => messageFn('warn', content),
   error: (content: ConfigContent) => messageFn('error', content),
+  warning: (content: ConfigContent) => messageFn('warning', content),
   info: (content: ConfigContent) => messageFn('info', content),
 };
 

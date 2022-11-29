@@ -10,3 +10,4 @@ export const ArticleStatusMap: Record<TypeStatusKey, TypeStatusValue> = {
 
 export type TypeStatusKey = 'draft' | 'publish';
 export type TypeStatusValue = { text: string; color?: 'cyan' };
+export const basename = import.meta.env?.BASE_URL;

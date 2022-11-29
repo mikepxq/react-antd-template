@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "dev:github": "vite --mode github",
+    "build:github": "tsc && vite build --mode github",
     "preview": "vite preview",
     "lint-fix": "eslint --fix --ext  .vue,.ts,.tsx,.js,.d.ts --ignore-path .gitignore .",
     "prepare": "husky install"

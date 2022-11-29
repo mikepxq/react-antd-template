@@ -10,6 +10,7 @@ const Home = React.lazy(() => import('@/views/home'));
 //
 const ConsoleLayout = React.lazy(() => import('@/components/console-layout'));
 import { sleep } from '@/utils';
+import { basename } from '@/config';
 //
 const Dashboard = React.lazy(() => import('@/views/dashboard'));
 const ConsoleDoing = React.lazy(() => import('@/views/doing'));
@@ -124,4 +125,6 @@ const RouteList: RouteItem[] = [
 
 /** 自定义初始路由 */
 
-export const router = createBrowserRouter(RouteList);
+export const router = createBrowserRouter(RouteList, {
+  basename,
+});

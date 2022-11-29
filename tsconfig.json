@@ -4,7 +4,7 @@
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
-    "skipLibCheck": false,
+    "skipLibCheck": true, //跳过依赖库检查
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -32,6 +32,14 @@
     "src/typings/react-router-dom.d.ts",
     "src/typings/antd-icons.d.ts"
   ],
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "mock", "src/app.tsx", "index.html"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "mock",
+    "src/app.tsx",
+    "index.html",
+    "dist/**/index.html"
+  ],
   "exclude": ["node_modules"]
 }

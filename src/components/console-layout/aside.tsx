@@ -22,12 +22,12 @@ const Aside: React.FC<ViewProps<Props>> = (props) => {
     return !route.handle?.isHidden && !route.index && getIsOkAuth(route.path, user.authList);
   };
   //获得侧边栏
-  const getSideMenuItemList = (routes: RouteItem[] = []): Antd.MenuItemType[] => {
+  const getSideMenuItemList = (routes: RouteItem[] = []): Antd.ItemType[] => {
     return routes.filter(getIsShowAside).map((route) => {
       //子类是否有显示的
       const hasChildren = route.children && route.children.filter(getIsShowAside).length > 0;
       const item: Antd.MenuItemType = {
-        key: route.path, //path作key
+        key: route.path || '', //path作key
         icon: route.handle?.iconName ? <SvgIcon name={route.handle?.iconName}></SvgIcon> : undefined,
       };
       if (hasChildren) {
