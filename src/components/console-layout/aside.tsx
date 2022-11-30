@@ -34,7 +34,6 @@ const Aside: React.FC<ViewProps<Props>> = (props) => {
         item.label = <div onClick={() => onClickSubmenu(route)}>{route.handle?.title}</div>;
         item.children = getSideMenuItemList(route.children);
       } else {
-        console.log('[route.handle?.title]', route.handle?.title);
         item.label = route.handle?.title;
       }
       return item;

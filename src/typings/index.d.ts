@@ -26,6 +26,7 @@ export declare global {
    */
   declare interface ImportMetaEnv {
     VITE_BASE: string;
+    VITE_MODE?: 'github';
     // BASE_URL: string;
     // MODE: string;
     // DEV: boolean;
