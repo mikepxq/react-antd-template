@@ -125,6 +125,4 @@ const RouteList: RouteItem[] = [
 //
 const _createRouteFn = isGitHub ? createHashRouter : createBrowserRouter;
 /** 自定义初始路由 */
-export const router = _createRouteFn(RouteList, {
-  basename,
-});
+export const router = _createRouteFn(RouteList);
