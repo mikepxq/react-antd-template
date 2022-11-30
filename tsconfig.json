@@ -24,14 +24,7 @@
   },
 
   "references": [{ "path": "./tsconfig.node.json" }],
-  "files": [
-    "./src/typings/index.d.ts",
-    // "./typings/antd.d.ts",
-    // "src/store-hooks/react-redux.d.ts",
-    "src/router/index.d.ts",
-    "src/typings/react-router-dom.d.ts",
-    "src/typings/antd-icons.d.ts"
-  ],
+  "files": ["./src/typings/index.d.ts", "src/router/index.d.ts", "src/typings/react-router-dom.d.ts"],
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",

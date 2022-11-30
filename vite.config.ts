@@ -8,6 +8,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   const envDir = './env';
   const env = loadEnv(mode, path.resolve(envDir), '');
   const isBuild = command == 'build';
+  const isGithub = env.VITE_MODE == 'github';
   return defineConfig({
     envDir,
     // envPrefix: ['VITE_'],
@@ -27,7 +28,8 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       react(),
       viteMockServe({
         mockPath: 'mock',
-        localEnabled: command !== 'build',
+        //无法是否生产，只要isGithub 就使用
+        localEnabled: isGithub || command !== 'build',
       }),
       createSvgIconsPlugin({
         iconDirs: [path.resolve(process.cwd(), 'src/icons/svg')],
