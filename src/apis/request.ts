@@ -1,11 +1,11 @@
-import { PatternMap } from '@/config';
+import { PatternMap, basename } from '@/config';
 import { MockApiSleepTime } from '@/config';
 import { sleep, getToken } from '@/utils';
 import axios from 'axios';
 import { ErrorMiddleware } from './error';
 import Cookies from 'js-cookie';
 const axiosInstance = axios.create({
-  baseURL: '',
+  baseURL: basename,
   timeout: 10000,
   headers: { token: getToken() },
 });

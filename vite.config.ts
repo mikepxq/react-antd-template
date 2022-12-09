@@ -12,7 +12,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   return defineConfig({
     envDir,
     // envPrefix: ['VITE_'],
-    base: isBuild && env.VITE_BASE ? env.VITE_BASE : '/', //import.meta.env.BASE_URL
+    base: isGithub || (isBuild && env.VITE_BASE) ? env.VITE_BASE : '/', //import.meta.env.BASE_URL
     server: {
       host: '0.0.0.0',
       // port: 3000,
@@ -28,8 +28,15 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       react(),
       viteMockServe({
         mockPath: 'mock',
-        //无法是否生产，只要isGithub 就使用
         localEnabled: isGithub || command !== 'build',
+        //无论是否生产，只要isGithub 就使用
+        prodEnabled: isGithub,
+        injectFile: path.resolve(process.cwd(), './src/main.tsx'),
+        //  这样可以控制关闭mock的时候不让mock打包到最终代码内
+        injectCode: `import { setupProdMockServer } from '${path.resolve(
+          process.cwd(),
+          './mock/mockProdServer.ts'
+        )}';setupProdMockServer();`,
       }),
       createSvgIconsPlugin({
         iconDirs: [path.resolve(process.cwd(), 'src/icons/svg')],

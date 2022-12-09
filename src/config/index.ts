@@ -11,5 +11,5 @@ export const ArticleStatusMap: Record<TypeStatusKey, TypeStatusValue> = {
 export type TypeStatusKey = 'draft' | 'publish';
 export type TypeStatusValue = { text: string; color?: 'cyan' };
 // mock 插件不能直接使用 需要配合[?]符号使用
-export const basename = import.meta.env?.BASE_URL;
+export const basename = import.meta.env?.BASE_URL || '/';
 export const isGitHub = import.meta.env?.VITE_MODE == 'github';
