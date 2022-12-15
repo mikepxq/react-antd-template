@@ -39,7 +39,6 @@ const Aside: React.FC<ViewProps<Props>> = (props) => {
       return item;
     });
   };
-  console.log('[getSideMenuItemList]', getSideMenuItemList(l.sideRouteList));
   const navigate = useNavigate();
   const onClick: Antd.MenuClickEventHandler = (e) => {
     //e.key ==path
